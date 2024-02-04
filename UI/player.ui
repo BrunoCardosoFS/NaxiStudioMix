@@ -21,7 +21,7 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>800</width>
+    <width>1000</width>
     <height>600</height>
    </size>
   </property>
@@ -553,7 +553,7 @@ QPushButton:hover {
    </property>
    <property name="minimumSize">
     <size>
-     <width>800</width>
+     <width>1000</width>
      <height>600</height>
     </size>
    </property>
@@ -1366,8 +1366,8 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>424</width>
-                <height>242</height>
+                <width>418</width>
+                <height>233</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="cartScrollLayout">
@@ -1424,7 +1424,7 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
       <property name="flat">
        <bool>false</bool>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,1">
+      <layout class="QVBoxLayout" name="playersToolsAreaLayout" stretch="1,1">
        <property name="spacing">
         <number>10</number>
        </property>
@@ -1474,9 +1474,60 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
 background:#191D24;
 border-radius:10px;
 border:none;
+}
+
+QGroupBox#playersArea QPushButton{
+	background: #000;
+	border-radius: 30px;
+}
+
+QGroupBox#playersArea QPushButton:hover{
+	background: #111;
+	border-radius: 30px;
+}
+
+QGroupBox#playersArea QSlider::groove:horizontal {
+    border: 0px solid transparent;
+	border-radius: 10px;
+    height: 10px;
+    background: #eeeeee;
+    margin: 2px 0;
+}
+
+QGroupBox#playersArea QSlider::handle:horizontal {
+    background-color: #1f232c;
+    height: 10px;
+    width: 10px;
+    border: 0px solid transparent;
+	margin: -2px 0;
+}
+
+QGroupBox#playersArea QSlider::handle:horizontal:pressed {
+    background-color: #1f232c;
+    border: 0px solid transparent;
+    margin: -2px 0px;
+}
+
+QGroupBox#playersArea QSlider::handle:horizontal:disabled {
+    background-color: #bbbbbb;
+    height: 10px;
+    width: 10px;
+    border: 0px solid transparent;
+    margin: -1px -1px;
+    border-radius: 4px;
+}
+
+QGroupBox#playersArea QSlider::add-page:horizontal {
+    background: #2d3340; /* Cor inicial para a parte concluída */
+	border-radius: 10px;
+}
+
+QGroupBox#playersArea QSlider::sub-page:horizontal {
+    background: #ffa60a;  /* Cor para a parte ainda não concluída */
+	border-radius: 10px;
 }</string>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1,1">
+         <layout class="QHBoxLayout" name="playersAreaLayout" stretch="1,1,1">
           <property name="spacing">
            <number>10</number>
           </property>
@@ -1528,17 +1579,9 @@ border:none;
                 </size>
                </property>
                <property name="styleSheet">
-                <string notr="true">QPushButton{
-	background: #000;
-	border-radius: 30px;
-}
-
-QPushButton:hover{
-	background: #111;
-	border-radius: 30px;
-}</string>
+                <string notr="true"/>
                </property>
-               <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,1,1">
+               <layout class="QHBoxLayout" name="player1ControlsLayout" stretch="1,0,1">
                 <property name="spacing">
                  <number>0</number>
                 </property>
@@ -1674,7 +1717,7 @@ QPushButton:hover{
              </item>
              <item>
               <widget class="QWidget" name="player1TimeArea" native="true">
-               <layout class="QVBoxLayout" name="verticalLayout_6">
+               <layout class="QVBoxLayout" name="player1TimeAreaLayout">
                 <property name="spacing">
                  <number>0</number>
                 </property>
@@ -1692,6 +1735,9 @@ QPushButton:hover{
                 </property>
                 <item>
                  <widget class="QSlider" name="player1Slider">
+                  <property name="styleSheet">
+                   <string notr="true"/>
+                  </property>
                   <property name="orientation">
                    <enum>Qt::Horizontal</enum>
                   </property>
@@ -1699,7 +1745,7 @@ QPushButton:hover{
                 </item>
                 <item>
                  <widget class="QWidget" name="player1Times" native="true">
-                  <layout class="QHBoxLayout" name="horizontalLayout_2">
+                  <layout class="QHBoxLayout" name="player1TimesLayout">
                    <property name="spacing">
                     <number>5</number>
                    </property>
@@ -1716,7 +1762,7 @@ QPushButton:hover{
                     <number>0</number>
                    </property>
                    <item>
-                    <widget class="QLabel" name="label_2">
+                    <widget class="QLabel" name="player1Time">
                      <property name="text">
                       <string>00:00:00</string>
                      </property>
@@ -1726,7 +1772,7 @@ QPushButton:hover{
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="label_3">
+                    <widget class="QLabel" name="player1Duration">
                      <property name="text">
                       <string>00:00:00</string>
                      </property>
@@ -1749,7 +1795,243 @@ QPushButton:hover{
             <property name="styleSheet">
              <string notr="true"/>
             </property>
-            <layout class="QVBoxLayout" name="player2Layout"/>
+            <layout class="QVBoxLayout" name="player2Layout" stretch="0,1,0">
+             <property name="spacing">
+              <number>11</number>
+             </property>
+             <property name="leftMargin">
+              <number>10</number>
+             </property>
+             <property name="topMargin">
+              <number>10</number>
+             </property>
+             <property name="rightMargin">
+              <number>10</number>
+             </property>
+             <property name="bottomMargin">
+              <number>10</number>
+             </property>
+             <item>
+              <widget class="QWidget" name="player2Controls" native="true">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <layout class="QHBoxLayout" name="player2ControlsLayout" stretch="1,1,1">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="player2Play">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="forms/player.qrc">
+                    <normaloff>:/images/icons/play.svg</normaloff>:/images/icons/play.svg</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>65</width>
+                    <height>65</height>
+                   </size>
+                  </property>
+                  <property name="shortcut">
+                   <string>F1</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="player2Pause">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="forms/player.qrc">
+                    <normaloff>:/images/icons/pause.svg</normaloff>:/images/icons/pause.svg</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>65</width>
+                    <height>65</height>
+                   </size>
+                  </property>
+                  <property name="shortcut">
+                   <string>F2</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="player2Stop">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="forms/player.qrc">
+                    <normaloff>:/images/icons/stop.svg</normaloff>:/images/icons/stop.svg</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>65</width>
+                    <height>65</height>
+                   </size>
+                  </property>
+                  <property name="shortcut">
+                   <string>F3</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="player2Title">
+               <property name="text">
+                <string>Title Media</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="player2TimeArea" native="true">
+               <layout class="QVBoxLayout" name="player2TimeAreaLayout">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QSlider" name="player2Slider">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="player2Times" native="true">
+                  <layout class="QHBoxLayout" name="player2TimesLayout">
+                   <property name="spacing">
+                    <number>5</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="player2Time">
+                     <property name="text">
+                      <string>00:00:00</string>
+                     </property>
+                     <property name="textFormat">
+                      <enum>Qt::AutoText</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="player2Duration">
+                     <property name="text">
+                      <string>00:00:00</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
           <item>
@@ -1757,7 +2039,243 @@ QPushButton:hover{
             <property name="styleSheet">
              <string notr="true"/>
             </property>
-            <layout class="QVBoxLayout" name="player3Layout"/>
+            <layout class="QVBoxLayout" name="player3Layout" stretch="0,1,0">
+             <property name="spacing">
+              <number>11</number>
+             </property>
+             <property name="leftMargin">
+              <number>10</number>
+             </property>
+             <property name="topMargin">
+              <number>10</number>
+             </property>
+             <property name="rightMargin">
+              <number>10</number>
+             </property>
+             <property name="bottomMargin">
+              <number>10</number>
+             </property>
+             <item>
+              <widget class="QWidget" name="player3Controls" native="true">
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true"/>
+               </property>
+               <layout class="QHBoxLayout" name="player3ControlsLayout" stretch="1,1,1">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QPushButton" name="player3Play">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="forms/player.qrc">
+                    <normaloff>:/images/icons/play.svg</normaloff>:/images/icons/play.svg</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>65</width>
+                    <height>65</height>
+                   </size>
+                  </property>
+                  <property name="shortcut">
+                   <string>F1</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="player3Pause">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="forms/player.qrc">
+                    <normaloff>:/images/icons/pause.svg</normaloff>:/images/icons/pause.svg</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>65</width>
+                    <height>65</height>
+                   </size>
+                  </property>
+                  <property name="shortcut">
+                   <string>F2</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="player3Stop">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>60</height>
+                   </size>
+                  </property>
+                  <property name="cursor">
+                   <cursorShape>PointingHandCursor</cursorShape>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="forms/player.qrc">
+                    <normaloff>:/images/icons/stop.svg</normaloff>:/images/icons/stop.svg</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>65</width>
+                    <height>65</height>
+                   </size>
+                  </property>
+                  <property name="shortcut">
+                   <string>F3</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="player3Title">
+               <property name="text">
+                <string>Title Media</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="player3TimeArea" native="true">
+               <layout class="QVBoxLayout" name="player3TimeAreaLayout">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
+                <property name="leftMargin">
+                 <number>0</number>
+                </property>
+                <property name="topMargin">
+                 <number>0</number>
+                </property>
+                <property name="rightMargin">
+                 <number>0</number>
+                </property>
+                <property name="bottomMargin">
+                 <number>0</number>
+                </property>
+                <item>
+                 <widget class="QSlider" name="player3Slider">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QWidget" name="player3Times" native="true">
+                  <layout class="QHBoxLayout" name="player3TimesLayout">
+                   <property name="spacing">
+                    <number>5</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="player3Time">
+                     <property name="text">
+                      <string>00:00:00</string>
+                     </property>
+                     <property name="textFormat">
+                      <enum>Qt::AutoText</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="player3Duration">
+                     <property name="text">
+                      <string>00:00:00</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
