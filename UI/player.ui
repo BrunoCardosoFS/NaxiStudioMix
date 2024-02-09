@@ -1280,7 +1280,7 @@ QTabBar::tab {
     font-weight:  bold;
     color: #fff;
     border-radius: 7px;
-    margin-top: 10px;
+    margin-bottom: 10px;
     margin-right: 7px;
 }
 
@@ -1305,7 +1305,7 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
 }</string>
          </property>
          <property name="tabPosition">
-          <enum>QTabWidget::South</enum>
+          <enum>QTabWidget::North</enum>
          </property>
          <property name="tabShape">
           <enum>QTabWidget::Rounded</enum>
@@ -1340,6 +1340,27 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
           </attribute>
           <layout class="QVBoxLayout" name="filesLayout">
            <item>
+            <widget class="QPushButton" name="openMusic">
+             <property name="text">
+              <string>Open</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="openMusic1">
+             <property name="text">
+              <string>Open 1</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="openMusic2">
+             <property name="text">
+              <string>Open 2</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QListView" name="listView">
              <property name="whatsThis">
               <string/>
@@ -1366,8 +1387,8 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>418</width>
-                <height>233</height>
+                <width>424</width>
+                <height>242</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="cartScrollLayout">
@@ -1486,45 +1507,59 @@ QGroupBox#playersArea QPushButton:hover{
 	border-radius: 30px;
 }
 
+
+
+
 QGroupBox#playersArea QSlider::groove:horizontal {
-    border: 0px solid transparent;
-	border-radius: 10px;
-    height: 10px;
-    background: #eeeeee;
-    margin: 2px 0;
-}
-
-QGroupBox#playersArea QSlider::handle:horizontal {
-    background-color: #1f232c;
-    height: 10px;
-    width: 10px;
-    border: 0px solid transparent;
-	margin: -2px 0;
-}
-
-QGroupBox#playersArea QSlider::handle:horizontal:pressed {
-    background-color: #1f232c;
-    border: 0px solid transparent;
-    margin: -2px 0px;
-}
-
-QGroupBox#playersArea QSlider::handle:horizontal:disabled {
-    background-color: #bbbbbb;
-    height: 10px;
-    width: 10px;
-    border: 0px solid transparent;
-    margin: -1px -1px;
-    border-radius: 4px;
-}
-
-QGroupBox#playersArea QSlider::add-page:horizontal {
-    background: #2d3340; /* Cor inicial para a parte concluída */
-	border-radius: 10px;
+border: 1px solid #191d24;
+background: white;
+height: 12px;
+border-radius: 6px;
 }
 
 QGroupBox#playersArea QSlider::sub-page:horizontal {
-    background: #ffa60a;  /* Cor para a parte ainda não concluída */
-	border-radius: 10px;
+background: #ffa60a;
+border: 1px solid #191d24;
+height: 12px;
+border-radius: 6px;
+}
+
+QGroupBox#playersArea QSlider::add-page:horizontal {
+background: #2d3340;
+border: 1px solid #191d24;
+height: 12px;
+border-radius: 6px;
+}
+
+QGroupBox#playersArea QSlider::handle:horizontal {
+background: #1f232c;
+border: 1px solid #1f232c;
+width: 13px;
+margin-top: -2px;
+margin-bottom: -2px;
+border-radius: 6px;
+}
+
+QGroupBox#playersArea QSlider::handle:horizontal:hover {
+background: #1f232c;
+border: 1px solid #1f232c;
+border-radius: 6px;
+}
+
+QGroupBox#playersArea QSlider::sub-page:horizontal:disabled {
+background: #bbb;
+border-color: #999;
+}
+
+QGroupBox#playersArea QSlider::add-page:horizontal:disabled {
+background: #eee;
+border-color: #999;
+}
+
+QGroupBox#playersArea QSlider::handle:horizontal:disabled {
+background: #eee;
+border: 1px solid #191d24;
+border-radius: 6px;
 }</string>
          </property>
          <layout class="QHBoxLayout" name="playersAreaLayout" stretch="1,1,1">
@@ -1630,6 +1665,9 @@ QGroupBox#playersArea QSlider::sub-page:horizontal {
                   <property name="shortcut">
                    <string>F1</string>
                   </property>
+                  <property name="autoDefault">
+                   <bool>false</bool>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -1712,6 +1750,9 @@ QGroupBox#playersArea QSlider::sub-page:horizontal {
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -1875,7 +1916,7 @@ QGroupBox#playersArea QSlider::sub-page:horizontal {
                    </size>
                   </property>
                   <property name="shortcut">
-                   <string>F1</string>
+                   <string>F5</string>
                   </property>
                  </widget>
                 </item>
@@ -1910,7 +1951,7 @@ QGroupBox#playersArea QSlider::sub-page:horizontal {
                    </size>
                   </property>
                   <property name="shortcut">
-                   <string>F2</string>
+                   <string>F6</string>
                   </property>
                  </widget>
                 </item>
@@ -1945,7 +1986,7 @@ QGroupBox#playersArea QSlider::sub-page:horizontal {
                    </size>
                   </property>
                   <property name="shortcut">
-                   <string>F3</string>
+                   <string>F7</string>
                   </property>
                  </widget>
                 </item>
@@ -1959,6 +2000,9 @@ QGroupBox#playersArea QSlider::sub-page:horizontal {
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -2119,7 +2163,7 @@ QGroupBox#playersArea QSlider::sub-page:horizontal {
                    </size>
                   </property>
                   <property name="shortcut">
-                   <string>F1</string>
+                   <string>F9</string>
                   </property>
                  </widget>
                 </item>
@@ -2154,7 +2198,7 @@ QGroupBox#playersArea QSlider::sub-page:horizontal {
                    </size>
                   </property>
                   <property name="shortcut">
-                   <string>F2</string>
+                   <string>F10</string>
                   </property>
                  </widget>
                 </item>
@@ -2189,7 +2233,7 @@ QGroupBox#playersArea QSlider::sub-page:horizontal {
                    </size>
                   </property>
                   <property name="shortcut">
-                   <string>F3</string>
+                   <string>F11</string>
                   </property>
                  </widget>
                 </item>
@@ -2198,11 +2242,20 @@ QGroupBox#playersArea QSlider::sub-page:horizontal {
              </item>
              <item>
               <widget class="QLabel" name="player3Title">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
                <property name="text">
                 <string>Title Media</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
+               </property>
+               <property name="wordWrap">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
