@@ -680,9 +680,15 @@ QWidget#playlist, QWidget#playlistHours{
     border-radius: 10px;
     color: #000;
     background-color: #FFA60A;
-    border: 1px solid #000;
+    border: 1px solid  #000;
 	padding:0px;
 	padding-top:-2px;
+}
+
+QPushButton:hover{
+    color: #b2b2b2;
+	background-color: #2d333f;
+    /*background-color: #FFA60A;*/
 }</string>
          </property>
          <layout class="QHBoxLayout" name="playlistHoursLayout" stretch="1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1">
@@ -1311,7 +1317,7 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideNone</enum>
@@ -1331,12 +1337,12 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
          <property name="tabBarAutoHide">
           <bool>false</bool>
          </property>
-         <widget class="QWidget" name="files">
+         <widget class="QWidget" name="catalog">
           <property name="styleSheet">
            <string notr="true"/>
           </property>
           <attribute name="title">
-           <string>Arquivos</string>
+           <string>Catálogo</string>
           </attribute>
           <layout class="QVBoxLayout" name="filesLayout">
            <item>
@@ -1746,7 +1752,7 @@ border-radius: 6px;
              <item>
               <widget class="QLabel" name="player1Title">
                <property name="text">
-                <string>Title Media</string>
+                <string/>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -1996,7 +2002,7 @@ border-radius: 6px;
              <item>
               <widget class="QLabel" name="player2Title">
                <property name="text">
-                <string>Title Media</string>
+                <string/>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -2249,7 +2255,7 @@ border-radius: 6px;
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>Title Media</string>
+                <string/>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
@@ -2360,9 +2366,116 @@ background: #191D24;
 border-radius: 10px;
 border: none;
 margin-top:2px;
+}
+
+QGroupBox#toolsArea QPushButton, QGroupBox#toolsArea QWidget#timeArea{
+	background: #ffa60a;
+	border-radius: 10px;
+	border: 1px solid #000;
+	color: #000;
+	font-weight: bold;
+}
+
+QGroupBox#toolsArea QLabel{
+	color: #000;
+	font-weight: bold;
+	font-size: 14px;
+	border: none;
 }</string>
          </property>
-         <layout class="QHBoxLayout" name="horizontalLayout_4"/>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="spacing">
+           <number>5</number>
+          </property>
+          <property name="leftMargin">
+           <number>7</number>
+          </property>
+          <property name="topMargin">
+           <number>8</number>
+          </property>
+          <property name="rightMargin">
+           <number>7</number>
+          </property>
+          <property name="bottomMargin">
+           <number>7</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>32</width>
+              <height>32</height>
+             </size>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="forms/player.qrc">
+              <normaloff>:/images/icons/config.svg</normaloff>:/images/icons/config.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>23</width>
+              <height>23</height>
+             </size>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QWidget" name="timeArea" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>31</height>
+             </size>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QLabel" name="dateTime">
+               <property name="text">
+                <string>dd/mm/aaaa hh:mm:ss</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>

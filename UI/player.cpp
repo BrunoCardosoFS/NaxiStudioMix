@@ -2,6 +2,7 @@
 #include "./ui_player.h"
 
 #include <QFileInfo>
+#include <QDateTime>
 #include<QDebug>
 
 player::player(QWidget *parent)
@@ -10,25 +11,37 @@ player::player(QWidget *parent)
 {
     ui->setupUi(this);
 
+
+    // Creating date and time
+
+    dateTime = new QTimer(this);
+    updateClock();
+    connect(dateTime, SIGNAL(timeout()), this, SLOT(updateClock()));
+    dateTime->start(1000);
+
+
+    // Creating and configuring players
+
     MPlayer1 = new QMediaPlayer();
-    MPlayer2 = new QMediaPlayer();
-    MPlayer3 = new QMediaPlayer();
-
     MPlayer1AudioOutput = new QAudioOutput();
-    MPlayer2AudioOutput = new QAudioOutput();
-    MPlayer3AudioOutput = new QAudioOutput();
-
     MPlayer1AudioOutput->setVolume(100);
-    MPlayer2AudioOutput->setVolume(100);
-    MPlayer3AudioOutput->setVolume(100);
-
     MPlayer1->setAudioOutput(MPlayer1AudioOutput);
+
+    MPlayer2 = new QMediaPlayer();
+    MPlayer2AudioOutput = new QAudioOutput();
+    MPlayer2AudioOutput->setVolume(100);
     MPlayer2->setAudioOutput(MPlayer2AudioOutput);
+
+    MPlayer3 = new QMediaPlayer();
+    MPlayer3AudioOutput = new QAudioOutput();
+    MPlayer3AudioOutput->setVolume(100);
     MPlayer3->setAudioOutput(MPlayer3AudioOutput);
+
+
+    // Connect players
 
     connect(MPlayer1, &QMediaPlayer::durationChanged, this, [=](qint64 duration){updateDuration(duration, 0);});
     connect(MPlayer1, &QMediaPlayer::positionChanged, this, [=](qint64 progress){updateProgress(progress, 0);});
-
 
     connect(MPlayer2, &QMediaPlayer::durationChanged, this, [=](qint64 duration){updateDuration(duration, 1);});
     connect(MPlayer2, &QMediaPlayer::positionChanged, this, [=](qint64 progress){updateProgress(progress, 1);});
@@ -41,6 +54,15 @@ player::~player()
 {
     delete ui;
 }
+
+// Updating clock
+void player::updateClock(){
+    QDateTime currentTime = QDateTime::currentDateTime();
+    ui->dateTime->setText(currentTime.toString("dd/MM/yyyy  hh:mm:ss"));
+}
+
+
+// Updating player times
 
 void player::updateDuration(qint64 duration, qint8 player)
 {
@@ -74,6 +96,8 @@ void player::updateProgress(qint64 progress, qint8 player){
 }
 
 
+// Temporary buttons
+
 void player::on_openMusic_clicked()
 {
     QString FileName = QFileDialog::getOpenFileName(this, tr("Selecionar Audio"), "", tr("MP3 Files (*.mp3)"));
@@ -93,6 +117,8 @@ void player::on_openMusic2_clicked()
 }
 
 
+// Loading media in player
+
 void player::loadPlayer(qint8 player, QString path)
 {
     QList players = {MPlayer1, MPlayer2, MPlayer3};
@@ -107,8 +133,7 @@ void player::loadPlayer(qint8 player, QString path)
 }
 
 
-
-// Controles do Player 1
+// Player 1 controls
 
 void player::on_player1Play_clicked()
 {MPlayer1->play();}
@@ -123,7 +148,7 @@ void player::on_player1Slider_sliderMoved(int position)
 {MPlayer1->setPosition(position * 100);}
 
 
-// Controles do Player 2
+// Player 2 controls
 
 void player::on_player2Play_clicked()
 {MPlayer2->play();}
@@ -138,7 +163,7 @@ void player::on_player2Slider_sliderMoved(int position)
 {MPlayer2->setPosition(position * 100);}
 
 
-// Controles do Player 3
+// Player 3 controls
 
 void player::on_player3Play_clicked()
 {MPlayer3->play();}

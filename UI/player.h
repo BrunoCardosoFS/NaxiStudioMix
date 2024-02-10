@@ -5,6 +5,7 @@
 #include <QtCore>
 #include <QtWidgets>
 #include <QtMultimedia>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,6 +20,9 @@ class player : public QMainWindow
 public:
     player(QWidget *parent = nullptr);
     ~player();
+
+public slots:
+    void updateClock();
 
 private slots:
     void loadPlayer(qint8 player, QString path);
@@ -47,6 +51,9 @@ private:
     void updateProgress(qint64 progress, qint8 player);
 
     Ui::player *ui;
+
+    QTimer *dateTime;
+
     QMediaPlayer *MPlayer1;
     QMediaPlayer *MPlayer2;
     QMediaPlayer *MPlayer3;
@@ -54,10 +61,6 @@ private:
     QAudioOutput *MPlayer1AudioOutput;
     QAudioOutput *MPlayer2AudioOutput;
     QAudioOutput *MPlayer3AudioOutput;
-
-    qint64 M1Duration;
-    qint64 M2Duration;
-    qint64 M3Duration;
 
 };
 #endif // PLAYER_H
