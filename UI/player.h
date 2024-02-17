@@ -7,6 +7,8 @@
 #include <QtMultimedia>
 #include <QTimer>
 
+#include "configurations.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class player;
@@ -46,9 +48,19 @@ private slots:
     void on_openMusic1_clicked();
     void on_openMusic2_clicked();
 
+    void on_openConfig_clicked();
+
+    void on_openPlaylist_clicked();
+
 private:
+    void initApp();
+
+    void openCatalog(QString path);
+
     void updateDuration(qint64 duration, qint8 player);
     void updateProgress(qint64 progress, qint8 player);
+
+    void loadMediasCatalog(QListWidgetItem *item);
 
     Ui::player *ui;
 
@@ -61,6 +73,8 @@ private:
     QAudioOutput *MPlayer1AudioOutput;
     QAudioOutput *MPlayer2AudioOutput;
     QAudioOutput *MPlayer3AudioOutput;
+
+    Configurations *windowConfig;
 
 };
 #endif // PLAYER_H

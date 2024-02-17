@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    QApplication::setStyle("Fusion");
     QApplication::setWindowIcon(QIcon(":/icons/images/icons/icon.ico"));
 
     QTranslator translator;

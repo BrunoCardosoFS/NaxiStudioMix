@@ -1,0 +1,58 @@
+[
+    {
+        "title": "Principais",
+        "style": "",
+        "path": "C:/Arquivos/MEDIA/PLASTICA 30 ANOS ANIVERSARIO/Plastica Jacobina Parte 001/Verso¦âes Principais - Jacobina Fm",
+        "type": 0,
+        "id": "principais"
+    },
+    {
+        "title": "Desmembradas",
+        "style": "",
+        "path": "C:/Arquivos/MEDIA/PLASTICA 30 ANOS ANIVERSARIO/Plastica Jacobina Parte 001/Verso¦âes Desmebradas - Jacobina Fm",
+        "type": 0,
+        "id": "desmembradas"
+    },
+    {
+        "title": "Comerciais",
+        "style": "",
+        "path": "C:/Arquivos/MEDIA/PLASTICA 30 ANOS ANIVERSARIO/Plastica Jacobina Parte 001/Verso¦âes Principais - Jacobina Fm",
+        "type": 2,
+        "id": "comerciais"
+    },
+    {
+        "title": "Saídas de Bloco",
+        "style": "",
+        "path": "C:/Arquivos/MEDIA/PLASTICA 30 ANOS ANIVERSARIO/Plastica Jacobina Parte 002/Trilhas Com Assinaturas - Jacobina Fm",
+        "type": 0,
+        "id": "sb"
+    },
+    {
+        "title": "Acapella",
+        "style": "",
+        "path": "C:/Arquivos/MEDIA/PLASTICA 30 ANOS ANIVERSARIO/Plastica Jacobina Parte 002/Verso¦âes Acapela - Jacobina Fm",
+        "type": 0,
+        "id": "acapella"
+    },
+    {
+        "title": "Outros",
+        "style": "",
+        "path": "C:/Arquivos/MEDIA/OUTROS",
+        "type": 0,
+        "id": "outros"
+    },
+    {
+        "title": "Sertanejo",
+        "style": "",
+        "path": "C:/Arquivos/MEDIA/MÚSICAS/Sertanejo",
+        "type": 1,
+        "id": "sertanejo"
+    },
+    {
+        "title": "Pagode",
+        "style": "",
+        "path": "C:/Arquivos/MEDIA/MÚSICAS/Pagode",
+        "type": 1,
+        "id": "pagode"
+    }
+]
