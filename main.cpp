@@ -7,7 +7,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QApplication::setStyle("Fusion");
+    QApplication::setStyle(QStyleFactory::create("Fusion"));
     QApplication::setWindowIcon(QIcon(":/icons/images/icons/icon.ico"));
 
     QTranslator translator;
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    player w;
+    Player w;
     w.show();
     return a.exec();
 }

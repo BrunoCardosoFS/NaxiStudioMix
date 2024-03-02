@@ -6,6 +6,8 @@
 #include <QDateTime>
 #include <QSettings>
 
+#include "./widgets/listfolders.h"
+
 #include <QDir>
 
 #include<QDebug>
@@ -15,20 +17,25 @@ QSettings settings("NaxiStudio", "NaxiStudio Player");
 QString currentFolder;
 QString pathDB;
 
-QJsonArray foldersMusic;
-QJsonArray foldersJingle;
-QJsonArray foldersOther;
-QJsonArray foldersCommercial;
+//QJsonArray foldersMusic;
+//QJsonArray foldersJingle;
+//QJsonArray foldersOther;
+//QJsonArray foldersCommercial;
 
-player::player(QWidget *parent):QMainWindow(parent), ui(new Ui::player)
+Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::player)
 {
     ui->setupUi(this);
 
+    foldersMusic;
+    foldersJingle;
+    foldersOther;
+    foldersCommercial;
+
+    teste = "Olá Mundo!!";
 
     initApp();
 
-    connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &player::loadMediasCatalog);
-
+    // connect(ui->listWidget, &QListWidget::itemDoubleClicked, this, &player::loadMediasCatalog);
 
     // Creating date and time
 
@@ -61,8 +68,6 @@ player::player(QWidget *parent):QMainWindow(parent), ui(new Ui::player)
     connect(MPlayer1, &QMediaPlayer::durationChanged, this, [=](qint64 duration){updateDuration(duration, 0);});
     connect(MPlayer1, &QMediaPlayer::positionChanged, this, [=](qint64 progress){updateProgress(progress, 0);});
 
-    connect(MPlayer1AudioOutput, &QAudioOutput::volumeChanged, this, [=](qint64 vol){qInfo() << vol;});
-
     connect(MPlayer2, &QMediaPlayer::durationChanged, this, [=](qint64 duration){updateDuration(duration, 1);});
     connect(MPlayer2, &QMediaPlayer::positionChanged, this, [=](qint64 progress){updateProgress(progress, 1);});
 
@@ -70,25 +75,30 @@ player::player(QWidget *parent):QMainWindow(parent), ui(new Ui::player)
     connect(MPlayer3, &QMediaPlayer::positionChanged, this, [=](qint64 progress){updateProgress(progress, 2);});
 }
 
-player::~player()
+Player::~Player()
 {
     delete ui;
 }
 
-void player::initApp(){
-    qInfo() << "\n";
-    qInfo() << settings.value("db");
+void Player::initApp(){
 
     if(!settings.contains("db")){
         settings.setValue("db", QCoreApplication::applicationDirPath());
     }
 
     settings.setValue("db", "D:/Arquivos/Projetos/Qt/NaxiStudio/DB");
-
     pathDB = settings.value("db").toString();
 
-    openCatalog(pathDB + "/catalog.json");
-    on_openMusic2_clicked();
+    listFolders *folders = new listFolders(this);
+    folders->setObjectName("Folders");
+    folders->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    QScrollArea *scroll = new QScrollArea(this);
+    scroll->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    scroll->setWidgetResizable(true);
+    scroll->setWidget(folders);
+    ui->catalog->layout()->addWidget(scroll);
+
 
     ui->loadMediaPlayer1->hide();
     ui->loadMediaPlayer1->raise();
@@ -99,7 +109,7 @@ void player::initApp(){
 }
 
 // Updating clock
-void player::updateClock(){
+void Player::updateClock(){
     QDateTime currentTime = QDateTime::currentDateTime();
     ui->dateTime->setText(currentTime.toString("dd/MM/yyyy  hh:mm:ss"));
 }
@@ -107,7 +117,7 @@ void player::updateClock(){
 
 // Updating player times
 
-void player::updateDuration(qint64 duration, qint8 player)
+void Player::updateDuration(qint64 duration, qint8 player)
 {
     QList playerSlider = {ui->player1Slider, ui->player2Slider, ui->player3Slider};
     QList playerDuration = {ui->player1Duration, ui->player2Duration, ui->player3Duration};
@@ -123,7 +133,7 @@ void player::updateDuration(qint64 duration, qint8 player)
     playerDuration[player]->setText(totalTime.toString(timeMediaFormat));
 }
 
-void player::updateProgress(qint64 progress, qint8 player){
+void Player::updateProgress(qint64 progress, qint8 player){
     QList playerTime = {ui->player1Time, ui->player2Time, ui->player3Time};
     QList playerSlider = {ui->player1Slider, ui->player2Slider, ui->player3Slider};
 
@@ -141,122 +151,122 @@ void player::updateProgress(qint64 progress, qint8 player){
 
 // Temporary buttons
 
-void player::on_openMusic_clicked()
+void Player::on_openMusic_clicked()
 {
     QString FileName = QFileDialog::getOpenFileName(this, tr("Selecionar Audio"), "", tr("MP3 Files (*.mp3)"));
     loadPlayer(0, FileName);
 }
 
-void player::on_openMusic1_clicked()
+void Player::on_openMusic1_clicked()
 {
     ui->loadMediaPlayer1->setFixedSize(ui->player1->size());
     ui->loadMediaPlayer1->show();
 }
 
-void player::on_openMusic2_clicked()
+void Player::on_openMusic2_clicked()
 {
-    QListWidgetItem *itemJingle = new QListWidgetItem("Vinhetas");
-    QListWidgetItem *itemMusic = new QListWidgetItem("Músicas");
-    QListWidgetItem *itemCommercial = new QListWidgetItem("Comerciais");
-    QListWidgetItem *itemOther = new QListWidgetItem("Outros");
+    // QListWidgetItem *itemJingle = new QListWidgetItem("Vinhetas");
+    // QListWidgetItem *itemMusic = new QListWidgetItem("Músicas");
+    // QListWidgetItem *itemCommercial = new QListWidgetItem("Comerciais");
+    // QListWidgetItem *itemOther = new QListWidgetItem("Outros");
 
-    QFont font("Segoe UI", 10, QFont::Bold);
+    // QFont font("Segoe UI", 10, QFont::Bold);
 
-    itemJingle->setFont(font);
-    itemMusic->setFont(font);
-    itemCommercial->setFont(font);
-    itemOther->setFont(font);
+    // itemJingle->setFont(font);
+    // itemMusic->setFont(font);
+    // itemCommercial->setFont(font);
+    // itemOther->setFont(font);
 
-    itemJingle->setFlags(Qt::ItemIsEnabled);
-    itemMusic->setFlags(Qt::ItemIsEnabled);
-    itemCommercial->setFlags(Qt::ItemIsEnabled);
-    itemOther->setFlags(Qt::ItemIsEnabled);
+    // itemJingle->setFlags(Qt::ItemIsEnabled);
+    // itemMusic->setFlags(Qt::ItemIsEnabled);
+    // itemCommercial->setFlags(Qt::ItemIsEnabled);
+    // itemOther->setFlags(Qt::ItemIsEnabled);
 
-    itemJingle->setData(Qt::TextAlignmentRole, Qt::AlignHCenter);
-    itemMusic->setData(Qt::TextAlignmentRole, Qt::AlignHCenter);
-    itemCommercial->setData(Qt::TextAlignmentRole, Qt::AlignHCenter);
-    itemOther->setData(Qt::TextAlignmentRole, Qt::AlignHCenter);
+    // itemJingle->setData(Qt::TextAlignmentRole, Qt::AlignHCenter);
+    // itemMusic->setData(Qt::TextAlignmentRole, Qt::AlignHCenter);
+    // itemCommercial->setData(Qt::TextAlignmentRole, Qt::AlignHCenter);
+    // itemOther->setData(Qt::TextAlignmentRole, Qt::AlignHCenter);
 
-    ui->listWidget->clear();
+    // ui->listWidget->clear();
 
 
-    ui->listWidget->addItem(itemJingle);
-    foreach (QJsonValue jsonValue, foldersJingle) {
-        QJsonObject jsonObject = jsonValue.toObject();
+    // ui->listWidget->addItem(itemJingle);
+    // foreach (QJsonValue jsonValue, foldersJingle) {
+    //     QJsonObject jsonObject = jsonValue.toObject();
 
-        QListWidgetItem *item = new QListWidgetItem(jsonObject.value("title").toString());
+    //     QListWidgetItem *item = new QListWidgetItem(jsonObject.value("title").toString());
 
-        item->setData(Qt::UserRole + 1, "folder");
-        item->setData(Qt::UserRole + 2, jsonObject.value("type").toInt());
-        item->setData(Qt::UserRole + 3, jsonObject.value("path").toString());
+    //     item->setData(Qt::UserRole + 1, "folder");
+    //     item->setData(Qt::UserRole + 2, jsonObject.value("type").toInt());
+    //     item->setData(Qt::UserRole + 3, jsonObject.value("path").toString());
 
-        ui->listWidget->addItem(item);
-    }
+    //     ui->listWidget->addItem(item);
+    // }
 
-    ui->listWidget->addItem(itemMusic);
-    foreach (QJsonValue jsonValue, foldersMusic) {
-        QJsonObject jsonObject = jsonValue.toObject();
+    // ui->listWidget->addItem(itemMusic);
+    // foreach (QJsonValue jsonValue, foldersMusic) {
+    //     QJsonObject jsonObject = jsonValue.toObject();
 
-        QListWidgetItem *item = new QListWidgetItem(jsonObject.value("title").toString());
+    //     QListWidgetItem *item = new QListWidgetItem(jsonObject.value("title").toString());
 
-        item->setData(Qt::UserRole + 1, "folder");
-        item->setData(Qt::UserRole + 2, jsonObject.value("type").toInt());
-        item->setData(Qt::UserRole + 3, jsonObject.value("path").toString());
+    //     item->setData(Qt::UserRole + 1, "folder");
+    //     item->setData(Qt::UserRole + 2, jsonObject.value("type").toInt());
+    //     item->setData(Qt::UserRole + 3, jsonObject.value("path").toString());
 
-        ui->listWidget->addItem(item);
-    }
+    //     ui->listWidget->addItem(item);
+    // }
 
-    ui->listWidget->addItem(itemOther);
-    foreach (QJsonValue jsonValue, foldersOther) {
-        QJsonObject jsonObject = jsonValue.toObject();
+    // ui->listWidget->addItem(itemOther);
+    // foreach (QJsonValue jsonValue, foldersOther) {
+    //     QJsonObject jsonObject = jsonValue.toObject();
 
-        QListWidgetItem *item = new QListWidgetItem(jsonObject.value("title").toString());
+    //     QListWidgetItem *item = new QListWidgetItem(jsonObject.value("title").toString());
 
-        item->setData(Qt::UserRole + 1, "folder");
-        item->setData(Qt::UserRole + 2, jsonObject.value("type").toInt());
-        item->setData(Qt::UserRole + 3, jsonObject.value("path").toString());
+    //     item->setData(Qt::UserRole + 1, "folder");
+    //     item->setData(Qt::UserRole + 2, jsonObject.value("type").toInt());
+    //     item->setData(Qt::UserRole + 3, jsonObject.value("path").toString());
 
-        ui->listWidget->addItem(item);
-    }
+    //     ui->listWidget->addItem(item);
+    // }
 
-    ui->listWidget->addItem(itemCommercial);
-    foreach (QJsonValue jsonValue, foldersCommercial) {
-        QJsonObject jsonObject = jsonValue.toObject();
+    // ui->listWidget->addItem(itemCommercial);
+    // foreach (QJsonValue jsonValue, foldersCommercial) {
+    //     QJsonObject jsonObject = jsonValue.toObject();
 
-        QListWidgetItem *item = new QListWidgetItem(jsonObject.value("title").toString());
+    //     QListWidgetItem *item = new QListWidgetItem(jsonObject.value("title").toString());
 
-        item->setData(Qt::UserRole + 1, "folder");
-        item->setData(Qt::UserRole + 2, jsonObject.value("type").toInt());
-        item->setData(Qt::UserRole + 3, jsonObject.value("path").toString());
+    //     item->setData(Qt::UserRole + 1, "folder");
+    //     item->setData(Qt::UserRole + 2, jsonObject.value("type").toInt());
+    //     item->setData(Qt::UserRole + 3, jsonObject.value("path").toString());
 
-        ui->listWidget->addItem(item);
-    }
+    //     ui->listWidget->addItem(item);
+    // }
 }
 
-void player::loadMediasCatalog(QListWidgetItem *item){
+void Player::loadMediasCatalog(QListWidgetItem *item){
     if(item->data(Qt::UserRole + 1).toString() == "folder"){
         QDir files(item->data(Qt::UserRole + 3).toString());
 
-        ui->listWidget->clear();
+        // ui->listWidget->clear();
 
-        ui->listWidget->insertItem(0, "Voltar");
-        ui->listWidget->item(0)->setData(Qt::TextAlignmentRole, Qt::AlignHCenter);
-        ui->listWidget->item(0)->setFont(QFont("Segoe UI", 10, QFont::Bold));
+        // ui->listWidget->insertItem(0, "Voltar");
+        // ui->listWidget->item(0)->setData(Qt::TextAlignmentRole, Qt::AlignHCenter);
+        // ui->listWidget->item(0)->setFont(QFont("Segoe UI", 10, QFont::Bold));
 
-        foreach (QFileInfo qfi, files.entryInfoList()) {
-            QString suffix = qfi.completeSuffix();
-            if(qfi.isFile() && (suffix == "mp3" || suffix == "wav" || suffix == "opus" || suffix == "aac" || suffix == "flac")){
-                ui->listWidget->addItem(qfi.fileName());
-            }
-        }
+        // foreach (QFileInfo qfi, files.entryInfoList()) {
+        //     QString suffix = qfi.completeSuffix();
+        //     if(qfi.isFile() && (suffix == "mp3" || suffix == "wav" || suffix == "opus" || suffix == "aac" || suffix == "flac")){
+        //         ui->listWidget->addItem(qfi.fileName());
+        //     }
+        // }
 
-        ui->listWidget->verticalScrollBar()->setValue(0);
+        // ui->listWidget->verticalScrollBar()->setValue(0);
     }else if(item->text() == "Voltar"){
         on_openMusic2_clicked();
     }
 }
 
-void player::openCatalog(QString path){
+void Player::openCatalog(QString path){
     QFile catalog(path);
     catalog.open(QFile::ReadOnly | QFile::Text);
     QTextStream dataCatalog(&catalog);
@@ -286,7 +296,7 @@ void player::openCatalog(QString path){
     }
 }
 
-void player::on_openPlaylist_clicked()
+void Player::on_openPlaylist_clicked()
 {
     QString openDir = QFileDialog::getExistingDirectory(this, tr("Open Directory"), "", QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
@@ -296,7 +306,7 @@ void player::on_openPlaylist_clicked()
         foreach (QFileInfo qfi, files.entryInfoList()) {
             QString suffix = qfi.completeSuffix();
             if(qfi.isFile() && (suffix == "mp3" || suffix == "wav" || suffix == "opus" || suffix == "aac" || suffix == "flac")){
-                ui->listWidget->addItem(qfi.fileName());
+                // ui->listWidget->addItem(qfi.fileName());
             }
         }
     }
@@ -305,7 +315,7 @@ void player::on_openPlaylist_clicked()
 
 // Loading media in player
 
-void player::loadPlayer(qint8 player, QString path)
+void Player::loadPlayer(qint8 player, QString path)
 {
     QList players = {MPlayer1, MPlayer2, MPlayer3};
     QList playersTitle = {ui->player1Title, ui->player2Title, ui->player3Title};
@@ -321,51 +331,51 @@ void player::loadPlayer(qint8 player, QString path)
 
 // Player 1 controls
 
-void player::on_player1Play_clicked()
+void Player::on_player1Play_clicked()
 {MPlayer1->play();}
 
-void player::on_player1Pause_clicked()
+void Player::on_player1Pause_clicked()
 {MPlayer1->pause();}
 
-void player::on_player1Stop_clicked()
+void Player::on_player1Stop_clicked()
 {MPlayer1->stop();MPlayer1->setPosition(0);}
 
-void player::on_player1Slider_sliderMoved(int position)
+void Player::on_player1Slider_sliderMoved(int position)
 {MPlayer1->setPosition(position * 100);}
 
 
 // Player 2 controls
 
-void player::on_player2Play_clicked()
+void Player::on_player2Play_clicked()
 {MPlayer2->play();}
 
-void player::on_player2Pause_clicked()
+void Player::on_player2Pause_clicked()
 {MPlayer2->pause();}
 
-void player::on_player2Stop_clicked()
+void Player::on_player2Stop_clicked()
 {MPlayer2->stop();MPlayer2->setPosition(0);}
 
-void player::on_player2Slider_sliderMoved(int position)
+void Player::on_player2Slider_sliderMoved(int position)
 {MPlayer2->setPosition(position * 100);}
 
 
 // Player 3 controls
 
-void player::on_player3Play_clicked()
+void Player::on_player3Play_clicked()
 {MPlayer3->play();}
 
-void player::on_player3Pause_clicked()
+void Player::on_player3Pause_clicked()
 {MPlayer3->pause();}
 
-void player::on_player3Stop_clicked()
+void Player::on_player3Stop_clicked()
 {MPlayer3->stop();MPlayer3->setPosition(0);}
 
-void player::on_player3Slider_sliderMoved(int position)
+void Player::on_player3Slider_sliderMoved(int position)
 {MPlayer3->setPosition(position * 100);}
 
 
 
-void player::on_openConfig_clicked()
+void Player::on_openConfig_clicked()
 {
     windowConfig = new Configurations;
     windowConfig->show();

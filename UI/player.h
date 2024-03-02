@@ -8,6 +8,7 @@
 #include <QTimer>
 
 #include "configurations.h"
+#include "./widgets/listfolders.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -15,13 +16,16 @@ class player;
 }
 QT_END_NAMESPACE
 
-class player : public QMainWindow
+class Player : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    player(QWidget *parent = nullptr);
-    ~player();
+    Player(QWidget *parent = nullptr);
+
+    QString teste;
+
+    ~Player();
 
 public slots:
     void updateClock();
@@ -60,6 +64,7 @@ private:
     void updateDuration(qint64 duration, qint8 player);
     void updateProgress(qint64 progress, qint8 player);
 
+    void loadFoldersCatalog();
     void loadMediasCatalog(QListWidgetItem *item);
 
     Ui::player *ui;
@@ -74,7 +79,15 @@ private:
     QAudioOutput *MPlayer2AudioOutput;
     QAudioOutput *MPlayer3AudioOutput;
 
+    QJsonArray foldersMusic;
+    QJsonArray foldersJingle;
+    QJsonArray foldersOther;
+    QJsonArray foldersCommercial;
+
+    listFolders *folders;
+
     Configurations *windowConfig;
+
 
 };
 #endif // PLAYER_H

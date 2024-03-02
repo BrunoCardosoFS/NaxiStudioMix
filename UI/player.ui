@@ -1180,58 +1180,52 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
          </property>
          <widget class="QWidget" name="catalog">
           <property name="styleSheet">
-           <string notr="true">/* Estilo para QListWidget */
-QListWidget {
-    color: black;
+           <string notr="true">QScrollArea{
+background: transparent;
 }
 
-/* Estilo para QListWidgetItem */
-QListWidget::item {
+QWidget#Folders{
+background-color: #181c23;
+}
+
+QPushButton{
+	background: #232731;
     border: none;
-	color: #ffffff;
-    border-radius: 5px;
-    padding: 5px;
-    margin: 2px;
+    padding:  7px 15px;
+    font-weight:  bold;
+    color: #fff;
+    border-radius: 7px;
 }
 
-/* Estilo para itens selecionados em QListWidgetItem */
-QListWidget::item:selected {
-    background-color: #ffa60a;
-	color: #000000;
+QPushButton:hover {
+    /*background: #ffa60a;*/
+	background: #2D3340;
+}
+
+QLabel{
+	font-weight: bold;
+	margin-top: 10px;
 }</string>
           </property>
           <attribute name="title">
            <string>Catálogo</string>
           </attribute>
-          <layout class="QVBoxLayout" name="filesLayout">
+          <layout class="QHBoxLayout" name="filesLayout">
+           <property name="spacing">
+            <number>0</number>
+           </property>
            <property name="leftMargin">
-            <number>7</number>
+            <number>0</number>
            </property>
            <property name="topMargin">
-            <number>7</number>
+            <number>0</number>
            </property>
            <property name="rightMargin">
-            <number>7</number>
+            <number>0</number>
            </property>
            <property name="bottomMargin">
-            <number>7</number>
+            <number>0</number>
            </property>
-           <item>
-            <widget class="QListWidget" name="listWidget">
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="horizontalScrollBarPolicy">
-              <enum>Qt::ScrollBarAlwaysOff</enum>
-             </property>
-             <property name="sizeAdjustPolicy">
-              <enum>QAbstractScrollArea::AdjustToContents</enum>
-             </property>
-             <property name="autoScroll">
-              <bool>false</bool>
-             </property>
-            </widget>
-           </item>
           </layout>
          </widget>
          <widget class="QWidget" name="cart">
@@ -1252,8 +1246,8 @@ QListWidget::item:selected {
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>432</width>
-                <height>252</height>
+                <width>426</width>
+                <height>234</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="cartScrollLayout">
