@@ -93,6 +93,8 @@ void Player::initApp(){
     folders->setObjectName("Folders");
     folders->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
+    connect(folders, &listFolders::loadPlayer, this, &Player::receivePath);
+
     QScrollArea *scroll = new QScrollArea(this);
     scroll->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     scroll->setWidgetResizable(true);
@@ -112,6 +114,10 @@ void Player::initApp(){
 void Player::updateClock(){
     QDateTime currentTime = QDateTime::currentDateTime();
     ui->dateTime->setText(currentTime.toString("dd/MM/yyyy  hh:mm:ss"));
+}
+
+void Player::receivePath(const QString &path){
+    loadPlayer(2, path);
 }
 
 

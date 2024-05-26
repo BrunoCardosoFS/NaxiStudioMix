@@ -5,15 +5,18 @@
 QString pathFile;
 QLabel *titleFileLabel;
 
-itemlistfiles::itemlistfiles(QWidget *parent) {
+itemlistfiles::itemlistfiles(QWidget *parent):QGroupBox(parent) {
     QHBoxLayout *layout = new QHBoxLayout(this);
-    layout->setContentsMargins(0, 0, 0, 0);
-    this->setStyleSheet("background:red;");
-    this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    this->setFixedHeight(50);
+    layout->setContentsMargins(10, 7, 10, 7);
+    this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    this->setObjectName("itemList");
+    //this->setMaximumHeight(30);
+
+    this->setStyleSheet("QGroupBox{background: #232731; border-radius: 7px} QGroupBox:hover{background: #2D3340;} QLabel{font-weight:  bold; color: #fff;}");
+    //this->setStyleSheet("background: red;");
 
     QLabel *durationFileLabel = new QLabel("00:00:00");
-    durationFileLabel->setFixedWidth(50);
+    durationFileLabel->setFixedWidth(60);
 
     titleFileLabel = new QLabel();
 
@@ -30,11 +33,13 @@ void itemlistfiles::setTitleFile(QString title){
     titleFileLabel->setText(title);
 }
 
+
 void itemlistfiles::mousePressEvent(QMouseEvent *event){
-    qInfo() << pathFile;
+    emit loadPlayer(pathFile);
+    //qInfo() << pathFile;
 }
 
 void itemlistfiles::mouseReleaseEvent(QMouseEvent *event){
     //qInfo() << event->button();
-    qInfo() << titleFile;
+    //qInfo() << titleFile;
 }

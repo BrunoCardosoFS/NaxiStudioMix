@@ -1403,8 +1403,14 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
            </sizepolicy>
           </property>
           <property name="styleSheet">
-           <string notr="true">QScrollArea{
-background: transparent;
+           <string notr="true">#foldersList{
+background: #181c23;
+border-radius: 10px;
+}
+
+#filesList{
+background: #181c23;
+border-radius: 10px;
 }
 
 QWidget#Folders{
@@ -1423,11 +1429,6 @@ QPushButton{
 QPushButton:hover {
     /*background: #ffa60a;*/
 	background: #2D3340;
-}
-
-QLabel{
-	font-weight: bold;
-	margin-top: 10px;
 }</string>
           </property>
           <attribute name="title">

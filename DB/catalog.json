@@ -42,9 +42,16 @@
         "id": "outros"
     },
     {
-        "title": "Sertanejo",
+        "title": "Hits Sertanejo",
         "style": "",
-        "path": "C:/Arquivos/MEDIA/MÚSICAS/Sertanejo",
+        "path": "D:/MEDIA/MÚSICAS/Hits Sertanejo",
+        "type": 1,
+        "id": "sertanejo"
+    },
+    {
+        "title": "Dance",
+        "style": "",
+        "path": "D:/MEDIA/MÚSICAS/Dance",
         "type": 1,
         "id": "sertanejo"
     },

@@ -3,10 +3,14 @@
 
 #include <QtWidgets>
 
-class itemlistfiles : public QWidget
+class itemlistfiles : public QGroupBox
 {
+
+    Q_OBJECT
+
 public:
     itemlistfiles(QWidget *parent = nullptr);
+
     QString pathFile;
     QString titleFile;
 
@@ -15,6 +19,9 @@ public:
 
 private:
     QLabel *titleFileLabel;
+
+signals:
+    void loadPlayer(const QString &path);
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;

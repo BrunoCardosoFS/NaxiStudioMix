@@ -15,6 +15,11 @@ public:
     QJsonArray folders;
     QList<QWidget*> *typesWidgets;
 
+public slots:
+    void testeMessage(const QString &path);
+
+signals:
+    void loadPlayer(const QString &path);
 
 private:
     QGridLayout *jinglesLayout;

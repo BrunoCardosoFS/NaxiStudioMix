@@ -10,7 +10,7 @@
 QList<QWidget*> *typesWidgets;
 QWidget *filesList;
 
-listFolders::listFolders(QMainWindow *parent):QWidget() {
+listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
     call(parent);
 
     QHBoxLayout *layout = new QHBoxLayout(this);
@@ -21,7 +21,9 @@ listFolders::listFolders(QMainWindow *parent):QWidget() {
 
     //Criando o widget onde vão ser listadas as pastas
     QWidget *foldersList = new QWidget(this);
+    foldersList->setObjectName("foldersList");
     QVBoxLayout *foldersListLayout = new QVBoxLayout(foldersList);
+    foldersList->setStyleSheet("QLabel{font-weight: bold; margin-top: 10px;}");
 
     QScrollArea *scrollFolders = new QScrollArea(this);
     scrollFolders->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
@@ -48,7 +50,9 @@ listFolders::listFolders(QMainWindow *parent):QWidget() {
 
     // Criando o widget onde vão ser listados os arquivos
     filesList = new QWidget(this);
+    filesList->setObjectName("filesList");
     QVBoxLayout *filesListLayout = new QVBoxLayout(filesList);
+    filesList->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
 
     QScrollArea *scrollFiles = new QScrollArea(this);
     scrollFiles->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -122,6 +126,12 @@ void listFolders::openCatalog(QString path){
     }
 }
 
+void listFolders::testeMessage(const QString &path){
+    emit loadPlayer(path);
+
+    qInfo() << "Emitiu: " + path;
+}
+
 
 void listFolders::loadFilesList(QString path){
     QDir files(path);
@@ -138,6 +148,8 @@ void listFolders::loadFilesList(QString path){
             itemlistfiles *itemList = new itemlistfiles(this);
             itemList->setPathFile(qfi.absoluteFilePath());
             itemList->setTitleFile(qfi.fileName());
+
+            connect(itemList, &itemlistfiles::loadPlayer, this, &listFolders::testeMessage);
 
             filesList->layout()->addWidget(itemList);
         }

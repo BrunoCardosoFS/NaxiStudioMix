@@ -29,6 +29,7 @@ public:
 
 public slots:
     void updateClock();
+    void receivePath(const QString &path);
 
 private slots:
     void loadPlayer(qint8 player, QString path);
