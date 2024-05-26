@@ -5,8 +5,10 @@
 
 #include <QSettings>
 #include <QDebug>
+#include <QDir>
 
 QList<QWidget*> *typesWidgets;
+QWidget *filesList;
 
 listFolders::listFolders(QMainWindow *parent):QWidget() {
     call(parent);
@@ -45,7 +47,7 @@ listFolders::listFolders(QMainWindow *parent):QWidget() {
     }
 
     // Criando o widget onde vão ser listados os arquivos
-    QWidget *filesList = new QWidget(this);
+    filesList = new QWidget(this);
     QVBoxLayout *filesListLayout = new QVBoxLayout(filesList);
 
     QScrollArea *scrollFiles = new QScrollArea(this);
@@ -53,13 +55,7 @@ listFolders::listFolders(QMainWindow *parent):QWidget() {
     scrollFiles->setWidgetResizable(true);
     scrollFiles->setWidget(filesList);
 
-
-
-
-    for (int i=0; i < 10; i++) {
-        itemlistfiles *itemTeste = new itemlistfiles(this);
-        filesListLayout->addWidget(itemTeste);
-    }
+    //loadFilesList("D:/MEDIA/MÚSICAS/Dance");
 
 
     openCatalog((pathDB + "/catalog.json"));
@@ -96,8 +92,12 @@ void listFolders::openCatalog(QString path){
         item->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
         item->setText(jsonObject.value("title").toString());
-        item->setProperty("path", jsonObject.value("path").toString());
         item->setProperty("id", jsonObject.value("id").toString());
+
+        connect(item, &QPushButton::clicked, [this, jsonObject](){
+            loadFilesList(jsonObject.value("path").toString());
+        });
+
 
         int type = jsonObject.value("type").toInt();
 
@@ -121,3 +121,33 @@ void listFolders::openCatalog(QString path){
         }
     }
 }
+
+
+void listFolders::loadFilesList(QString path){
+    QDir files(path);
+
+    QLayoutItem *item;
+    while((item = filesList->layout()->takeAt(0)) != nullptr){
+        QWidget *widget = item->widget();
+        delete widget;
+    }
+
+    foreach (QFileInfo qfi, files.entryInfoList()) {
+        QString suffix = qfi.completeSuffix();
+        if(qfi.isFile() && (suffix == "mp3" || suffix == "wav" || suffix == "opus" || suffix == "aac" || suffix == "flac" || suffix == "webm")){
+            itemlistfiles *itemList = new itemlistfiles(this);
+            itemList->setPathFile(qfi.absoluteFilePath());
+            itemList->setTitleFile(qfi.fileName());
+
+            filesList->layout()->addWidget(itemList);
+        }
+    }
+}
+
+
+
+
+
+
+
+

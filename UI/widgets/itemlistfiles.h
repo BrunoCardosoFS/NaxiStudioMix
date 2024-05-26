@@ -7,6 +7,14 @@ class itemlistfiles : public QWidget
 {
 public:
     itemlistfiles(QWidget *parent = nullptr);
+    QString pathFile;
+    QString titleFile;
+
+    void setPathFile(QString path);
+    void setTitleFile(QString title);
+
+private:
+    QLabel *titleFileLabel;
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;

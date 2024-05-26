@@ -22,7 +22,11 @@ private:
     QGridLayout *othersLayout;
     QGridLayout *commercialsLayout;
 
+    QWidget *foldersList;
+    QWidget *filesList;
+
     void openCatalog(QString path);
+    void loadFilesList(QString path);
 };
 
 #endif // LISTFOLDERS_H
