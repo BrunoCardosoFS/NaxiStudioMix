@@ -7,6 +7,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    //QApplication::setStyle(QStyleFactory::create("Fusion"));
     QApplication::setStyle(QStyleFactory::create("Fusion"));
     QApplication::setWindowIcon(QIcon(":/icons/images/icons/icon.ico"));
 

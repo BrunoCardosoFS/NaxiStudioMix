@@ -1,57 +1,72 @@
 #include "../player.h"
 #include "listfolders.h"
 
+#include "itemlistfiles.h"
+
 #include <QSettings>
 #include <QDebug>
+
+QList<QWidget*> *typesWidgets;
 
 listFolders::listFolders(QMainWindow *parent):QWidget() {
     call(parent);
 
-    QVBoxLayout *layout = new QVBoxLayout(this);
-    this->setFixedWidth(150);
-
-    layout->setContentsMargins(0, 0, 0, 10);
+    QHBoxLayout *layout = new QHBoxLayout(this);
+    layout->setContentsMargins(0, 0, 0, 0);
 
     QSettings settings("NaxiStudio", "NaxiStudio Player");
     QString pathDB = settings.value("db").toString();
 
-    QLabel *jinglesLabel = new QLabel("Vinhetas:", this);
-    jinglesLabel->setAlignment(Qt::AlignCenter);
-    QWidget *jingles = new QWidget(this);
-    jinglesLayout = new QGridLayout(jingles);
-    jinglesLayout->setContentsMargins(0, 0, 0, 0);
+    //Criando o widget onde vão ser listadas as pastas
+    QWidget *foldersList = new QWidget(this);
+    QVBoxLayout *foldersListLayout = new QVBoxLayout(foldersList);
 
-    QLabel *musicsLabel = new QLabel("Músicas:", this);
-    musicsLabel->setAlignment(Qt::AlignCenter);
-    QWidget *musics = new QWidget(this);
-    musicsLayout = new QGridLayout(musics);
-    musicsLayout->setContentsMargins(0, 0, 0, 0);
+    QScrollArea *scrollFolders = new QScrollArea(this);
+    scrollFolders->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+    scrollFolders->setWidgetResizable(true);
+    scrollFolders->setFixedWidth(155);
+    scrollFolders->setWidget(foldersList);
 
-    QLabel *othersLabel = new QLabel("Outros:", this);
-    othersLabel->setAlignment(Qt::AlignCenter);
-    QWidget *others = new QWidget(this);
-    othersLayout = new QGridLayout(others);
-    othersLayout->setContentsMargins(0, 0, 0, 0);
+    typesWidgets = new QList<QWidget*>();
+    QList mediaTypes = {"Vinhetas", "Músicas", "Outros", "Comerciais"};
 
-    QLabel *commercialsLabel = new QLabel("Comerciais:", this);
-    commercialsLabel->setAlignment(Qt::AlignCenter);
-    QWidget *commercials = new QWidget(this);
-    commercialsLayout = new QGridLayout(commercials);
-    commercialsLayout->setContentsMargins(0, 0, 0, 0);
+    foreach (QString type, mediaTypes) {
+        QLabel *typeLabel = new QLabel((type + ":"), this);
+        typeLabel->setAlignment(Qt::AlignCenter);
 
-    openCatalog(pathDB + "/catalog.json");
+        QWidget *typeWidget = new QWidget(this);
+        QVBoxLayout *typeLayout = new QVBoxLayout(typeWidget);
+        typeLayout->setContentsMargins(0, 0, 0, 0);
+        typeLayout->addWidget(typeLabel);
 
-    layout->addWidget(jinglesLabel);
-    layout->addWidget(jingles);
+        foldersListLayout->addWidget(typeWidget);
 
-    layout->addWidget(musicsLabel);
-    layout->addWidget(musics);
+        typesWidgets->append(typeWidget);
+    }
 
-    layout->addWidget(othersLabel);
-    layout->addWidget(others);
+    // Criando o widget onde vão ser listados os arquivos
+    QWidget *filesList = new QWidget(this);
+    QVBoxLayout *filesListLayout = new QVBoxLayout(filesList);
 
-    layout->addWidget(commercialsLabel);
-    layout->addWidget(commercials);
+    QScrollArea *scrollFiles = new QScrollArea(this);
+    scrollFiles->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    scrollFiles->setWidgetResizable(true);
+    scrollFiles->setWidget(filesList);
+
+
+
+
+    for (int i=0; i < 10; i++) {
+        itemlistfiles *itemTeste = new itemlistfiles(this);
+        filesListLayout->addWidget(itemTeste);
+    }
+
+
+    openCatalog((pathDB + "/catalog.json"));
+
+
+    layout->addWidget(scrollFolders);
+    layout->addWidget(scrollFiles);
 }
 
 void listFolders::call(QMainWindow *w){
@@ -69,6 +84,8 @@ void listFolders::openCatalog(QString path){
     QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonString.toUtf8());
     QJsonArray jsonArray = jsonDocument.array();
 
+    qInfo() << typesWidgets->at(0);
+
     foreach (QJsonValue jsonValue, jsonArray) {
         QJsonObject jsonObject = jsonValue.toObject();
 
@@ -76,32 +93,31 @@ void listFolders::openCatalog(QString path){
         item->setToolTip(jsonObject.value("title").toString());
         item->setIconSize(QSize(20, 20));
         item->setMaximumWidth(120);
+        item->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
         item->setText(jsonObject.value("title").toString());
         item->setProperty("path", jsonObject.value("path").toString());
         item->setProperty("id", jsonObject.value("id").toString());
 
-        switch (jsonObject.value("type").toInt()) {
-        case 0:
+        int type = jsonObject.value("type").toInt();
+
+
+        if(type == 0){
             item->setProperty("type", "jingle");
             item->setIcon(QIcon(":/images/iconsCatalog/jingle.svg"));
-            jinglesLayout->addWidget(item);
-            break;
-        case 1:
+            typesWidgets->at(0)->layout()->addWidget(item);
+        }else if(type == 1){
             item->setProperty("type", "music");
             item->setIcon(QIcon(":/images/iconsCatalog/music.svg"));
-            musicsLayout->addWidget(item);
-            break;
-        case 2:
+            typesWidgets->at(1)->layout()->addWidget(item);
+        }else if(type == 2){
             item->setProperty("type", "commercial");
             item->setIcon(QIcon(":/images/iconsCatalog/commercial.svg"));
-            commercialsLayout->addWidget(item);
-            break;
-        default:
+            typesWidgets->at(3)->layout()->addWidget(item);
+        }else{
             item->setProperty("type", "other");
             item->setIcon(QIcon(":/images/iconsCatalog/other.svg"));
-            othersLayout->addWidget(item);
-            break;
+            typesWidgets->at(2)->layout()->addWidget(item);
         }
     }
 }

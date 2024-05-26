@@ -13,6 +13,7 @@ public:
     void call(QMainWindow *w);
 
     QJsonArray folders;
+    QList<QWidget*> *typesWidgets;
 
 
 private:

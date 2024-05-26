@@ -153,18 +153,22 @@ void Player::updateProgress(qint64 progress, qint8 player){
 
 void Player::on_openMusic_clicked()
 {
-    QString FileName = QFileDialog::getOpenFileName(this, tr("Selecionar Audio"), "", tr("MP3 Files (*.mp3)"));
+    QString FileName = QFileDialog::getOpenFileName(this, tr("Selecionar Audio"), "", tr("Audio Files (*.mp3 *.wav *.flac *.opus *.webm)"));
     loadPlayer(0, FileName);
 }
 
 void Player::on_openMusic1_clicked()
 {
-    ui->loadMediaPlayer1->setFixedSize(ui->player1->size());
-    ui->loadMediaPlayer1->show();
+    QString FileName = QFileDialog::getOpenFileName(this, tr("Selecionar Audio"), "", tr("Audio Files (*.mp3 *.wav *.flac *.opus *.webm)"));
+    loadPlayer(1, FileName);
+    //ui->loadMediaPlayer1->setFixedSize(ui->player1->size());
+    //ui->loadMediaPlayer1->show();
 }
 
 void Player::on_openMusic2_clicked()
 {
+    QString FileName = QFileDialog::getOpenFileName(this, tr("Selecionar Audio"), "", tr("Audio Files (*.mp3 *.wav *.flac *.opus *.webm)"));
+    loadPlayer(2, FileName);
     // QListWidgetItem *itemJingle = new QListWidgetItem("Vinhetas");
     // QListWidgetItem *itemMusic = new QListWidgetItem("Músicas");
     // QListWidgetItem *itemCommercial = new QListWidgetItem("Comerciais");
