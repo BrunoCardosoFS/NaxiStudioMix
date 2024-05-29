@@ -15,18 +15,17 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ******************************************************************************/
 
-
-#include "./UI/player.h"
-
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+
+#include "./UI/player.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     //QApplication::setStyle(QStyleFactory::create("Fusion"));
-    QApplication::setStyle(QStyleFactory::create("Fusion"));
+
     QApplication::setWindowIcon(QIcon(":/icons/images/icons/icon.ico"));
 
     QTranslator translator;

@@ -17,17 +17,20 @@ find_package(Qt6 REQUIRED COMPONENTS Multimedia Core)
 set(TS_FILES ./lang/NaxiStudio_pt_BR.ts)
 
 set(PROJECT_SOURCES
-        main.cpp
+        ./main.cpp
         ./UI/player.cpp
         ./UI/player.h
         ./UI/player.ui
         ${TS_FILES}
 )
 
+set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/UI/forms/icons/NaxiStudio.rc")
+
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(NaxiStudio
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        ${app_icon_resource_windows}
         UI/forms/player.qrc
         README.md
         UI/configurations.h UI/configurations.cpp UI/configurations.ui
@@ -65,7 +68,7 @@ target_link_libraries(NaxiStudio PRIVATE Qt6::Multimedia Qt6::Core)
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.NaxiStudio)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER dev.NaxiStudio.Player)
 endif()
 set_target_properties(NaxiStudio PROPERTIES
     ${BUNDLE_ID_OPTION}

@@ -1270,7 +1270,15 @@ QPushButton:hover{
        </item>
        <item>
         <widget class="QWidget" name="playlist" native="true">
-         <layout class="QVBoxLayout" name="playlistLayout"/>
+         <layout class="QVBoxLayout" name="playlistLayout">
+          <item>
+           <widget class="QPushButton" name="pushButton_2">
+            <property name="text">
+             <string>TODO</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>
@@ -1375,7 +1383,7 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideNone</enum>
@@ -1496,7 +1504,7 @@ QPushButton:hover {
                <item>
                 <widget class="QPushButton" name="pushButton">
                  <property name="text">
-                  <string>PushButton</string>
+                  <string>TODO</string>
                  </property>
                 </widget>
                </item>

@@ -10,12 +10,11 @@ itemlistfiles::itemlistfiles(QWidget *parent):QGroupBox(parent) {
     layout->setContentsMargins(10, 7, 10, 7);
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     this->setObjectName("itemList");
-    //this->setMaximumHeight(30);
+    this->setCursor(Qt::PointingHandCursor);
 
     this->setStyleSheet("QGroupBox{background: #232731; border-radius: 7px} QGroupBox:hover{background: #2D3340;} QLabel{font-weight:  bold; color: #fff;}");
-    //this->setStyleSheet("background: red;");
 
-    QLabel *durationFileLabel = new QLabel("00:00:00");
+    QLabel *durationFileLabel = new QLabel("TODO");
     durationFileLabel->setFixedWidth(60);
 
     titleFileLabel = new QLabel();

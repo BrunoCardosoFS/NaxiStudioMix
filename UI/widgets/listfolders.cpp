@@ -94,6 +94,7 @@ void listFolders::openCatalog(QString path){
         item->setIconSize(QSize(20, 20));
         item->setMaximumWidth(120);
         item->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        item->setCursor(Qt::PointingHandCursor);
 
         item->setText(jsonObject.value("title").toString());
         item->setProperty("id", jsonObject.value("id").toString());
@@ -128,8 +129,6 @@ void listFolders::openCatalog(QString path){
 
 void listFolders::testeMessage(const QString &path){
     emit loadPlayer(path);
-
-    qInfo() << "Emitiu: " + path;
 }
 
 
