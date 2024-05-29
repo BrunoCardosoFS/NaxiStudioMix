@@ -1,0 +1,4 @@
+[submodule "NaxiStudio-Control"]
+    path = NaxiStudio-Control
+    url = https://github.com/brunocardosofs/NaxiStudio-Control
+    branch = master
