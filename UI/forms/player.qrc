@@ -19,5 +19,6 @@
         <file>iconsCatalog/music.svg</file>
         <file>iconsCatalog/other.svg</file>
         <file>icons/search.svg</file>
+        <file>icons/close.svg</file>
     </qresource>
 </RCC>

@@ -119,6 +119,10 @@ void Player::updateClock(){
 void Player::receivePath(const QString &path){
     pathLoadMusic = path;
 
+    ui->player1Controls->hide();
+    ui->player2Controls->hide();
+    ui->player3Controls->hide();
+
     ui->loadMediaPlayer1->show();
     ui->loadMediaPlayer2->show();
     ui->loadMediaPlayer3->show();
@@ -181,6 +185,10 @@ void Player::on_loadMediaPlayer1_clicked()
 {
     loadPlayer(0, pathLoadMusic);
 
+    ui->player1Controls->show();
+    ui->player2Controls->show();
+    ui->player3Controls->show();
+
     ui->loadMediaPlayer1->hide();
     ui->loadMediaPlayer2->hide();
     ui->loadMediaPlayer3->hide();
@@ -190,6 +198,10 @@ void Player::on_loadMediaPlayer2_clicked()
 {
     loadPlayer(1, pathLoadMusic);
 
+    ui->player1Controls->show();
+    ui->player2Controls->show();
+    ui->player3Controls->show();
+
     ui->loadMediaPlayer1->hide();
     ui->loadMediaPlayer2->hide();
     ui->loadMediaPlayer3->hide();
@@ -198,6 +210,10 @@ void Player::on_loadMediaPlayer2_clicked()
 void Player::on_loadMediaPlayer3_clicked()
 {
     loadPlayer(2, pathLoadMusic);
+
+    ui->player1Controls->show();
+    ui->player2Controls->show();
+    ui->player3Controls->show();
 
     ui->loadMediaPlayer1->hide();
     ui->loadMediaPlayer2->hide();

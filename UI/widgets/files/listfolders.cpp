@@ -22,9 +22,11 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
 
     //Creating the widget where folders will be listed
     QWidget *foldersList = new QWidget(this);
-    foldersList->setObjectName("foldersList");
-    QVBoxLayout *foldersListLayout = new QVBoxLayout(foldersList);
     foldersList->setStyleSheet("QLabel{font-weight: bold; margin-top: 10px;}");
+    foldersList->setObjectName("foldersList");
+
+    QVBoxLayout *foldersListLayout = new QVBoxLayout(foldersList);
+    foldersListLayout->setContentsMargins(0, 0, 0, 0);
 
     QScrollArea *scrollFolders = new QScrollArea(this);
     scrollFolders->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
@@ -49,11 +51,15 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
         typesWidgets->append(typeWidget);
     }
 
+
+    // Creating the files area
+
     QGroupBox *filesArea = new QGroupBox(this);
+    filesArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     filesArea->setObjectName("filesArea");
 
     QVBoxLayout *filesAreaLayout = new QVBoxLayout(filesArea);
-    filesArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    filesAreaLayout->setContentsMargins(0, 0, 0, 0);
 
 
     // Creating the file search area
@@ -66,19 +72,33 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
     searchBarLayout->setContentsMargins(0, 0, 0, 0);
 
     QLineEdit *searchInput = new QLineEdit(searchBar);
+    searchInput->setPlaceholderText("Pesquisar");
     searchInput->setObjectName("searchInput");
     searchInput->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     searchInput->setFixedHeight(30);
 
+    QPushButton *clearSearch = new QPushButton(searchBar);
+    clearSearch->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    clearSearch->setFixedWidth(30);
+    clearSearch->setFixedHeight(30);
+    clearSearch->setIcon(QIcon(":/images/icons/close.svg"));
+    clearSearch->setCursor(Qt::PointingHandCursor);
+
     QPushButton *searchButton = new QPushButton(searchBar);
     searchButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    searchButton->setFixedWidth(40);
+    searchButton->setFixedWidth(30);
     searchButton->setFixedHeight(30);
     searchButton->setIcon(QIcon(":/images/icons/search.svg"));
     searchButton->setCursor(Qt::PointingHandCursor);
 
     searchBarLayout->addWidget(searchInput);
+    searchBarLayout->addWidget(clearSearch);
     searchBarLayout->addWidget(searchButton);
+
+    connect(clearSearch, &QPushButton::clicked, [this, searchInput](){
+        searchInput->clear();
+        loadFilesList(currentPath);
+    });
 
     connect(searchButton, &QPushButton::clicked, [this, searchInput](){
         searchFilesList(searchInput->text());
@@ -130,7 +150,6 @@ void listFolders::openCatalog(QString path){
         QPushButton *item = new QPushButton(jsonObject.value("title").toString());
         item->setToolTip(jsonObject.value("title").toString());
         item->setIconSize(QSize(20, 20));
-        item->setMaximumWidth(120);
         item->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         item->setCursor(Qt::PointingHandCursor);
 
@@ -180,12 +199,12 @@ void listFolders::loadFilesList(QString path){
         delete widget;
     }
 
-
     foreach (QFileInfo qfi, files.entryInfoList()) {
         QString suffix = qfi.completeSuffix();
         suffix = suffix.toLower();
         if(qfi.isFile() && (suffix == "mp3" || suffix == "wav" || suffix == "opus" || suffix == "aac" || suffix == "flac" || suffix == "webm")){
             itemlistfiles *itemList = new itemlistfiles(this);
+            itemList->setFixedHeight(30);
             itemList->setPathFile(qfi.absoluteFilePath());
             itemList->setTitleFile(qfi.fileName());
 
@@ -194,6 +213,9 @@ void listFolders::loadFilesList(QString path){
             filesList->layout()->addWidget(itemList);
         }
     }
+
+    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    filesList->layout()->addItem(spacer);
 }
 
 void listFolders::searchFilesList(QString search){

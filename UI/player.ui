@@ -1278,7 +1278,22 @@ QPushButton:hover{
        </item>
        <item>
         <widget class="QWidget" name="playlist" native="true">
-         <layout class="QVBoxLayout" name="playlistLayout">
+         <layout class="QVBoxLayout" name="playlistLayout" stretch="1">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetDefaultConstraint</enum>
+          </property>
+          <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>10</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
           <item>
            <widget class="QPushButton" name="pushButton_2">
             <property name="text">
@@ -1337,6 +1352,9 @@ border-radius: 10px;
        </property>
        <item>
         <widget class="QTabWidget" name="filesCartTab">
+         <property name="cursor">
+          <cursorShape>ArrowCursor</cursorShape>
+         </property>
          <property name="autoFillBackground">
           <bool>false</bool>
          </property>
@@ -1463,16 +1481,16 @@ QPushButton:hover {
             <enum>QLayout::SetMaximumSize</enum>
            </property>
            <property name="leftMargin">
-            <number>0</number>
+            <number>10</number>
            </property>
            <property name="topMargin">
-            <number>0</number>
+            <number>10</number>
            </property>
            <property name="rightMargin">
-            <number>0</number>
+            <number>10</number>
            </property>
            <property name="bottomMargin">
-            <number>0</number>
+            <number>10</number>
            </property>
           </layout>
          </widget>
@@ -1661,12 +1679,12 @@ QGroupBox#playersArea QPushButton{
 }
 
 QGroupBox#playersArea QPushButton#loadMediaPlayer1, QGroupBox#playersArea QPushButton#loadMediaPlayer2, QGroupBox#playersArea QPushButton#loadMediaPlayer3{
-	background-color: rgba(255,255,255,128);
+	background-color: #272A34;
 	border-radius:10px;
 }
 
 QGroupBox#playersArea QPushButton:hover{
-	background: #111;
+	background: #222;
 	border-radius: 30px;
 }
 
@@ -1746,7 +1764,7 @@ border-radius: 6px;
             <property name="styleSheet">
              <string notr="true"/>
             </property>
-            <layout class="QVBoxLayout" name="player1Layout" stretch="0,1,0,0">
+            <layout class="QVBoxLayout" name="player1Layout" stretch="0,0,1,0">
              <property name="spacing">
               <number>11</number>
              </property>
@@ -1762,6 +1780,40 @@ border-radius: 6px;
              <property name="bottomMargin">
               <number>10</number>
              </property>
+             <item>
+              <widget class="QPushButton" name="loadMediaPlayer1">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>OpenHandCursor</cursorShape>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border-radius:10px;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
              <item>
               <widget class="QWidget" name="player1Controls" native="true">
                <property name="minimumSize">
@@ -1991,25 +2043,6 @@ border-radius: 6px;
                </layout>
               </widget>
              </item>
-             <item>
-              <widget class="QPushButton" name="loadMediaPlayer1">
-               <property name="enabled">
-                <bool>true</bool>
-               </property>
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">border-radius:10px;</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
             </layout>
            </widget>
           </item>
@@ -2034,7 +2067,7 @@ border-radius: 6px;
             <property name="styleSheet">
              <string notr="true"/>
             </property>
-            <layout class="QVBoxLayout" name="player2Layout" stretch="0,1,0,0">
+            <layout class="QVBoxLayout" name="player2Layout" stretch="0,0,1,0">
              <property name="spacing">
               <number>11</number>
              </property>
@@ -2050,6 +2083,37 @@ border-radius: 6px;
              <property name="bottomMargin">
               <number>10</number>
              </property>
+             <item>
+              <widget class="QPushButton" name="loadMediaPlayer2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>OpenHandCursor</cursorShape>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border-radius:10px;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
              <item>
               <widget class="QWidget" name="player2Controls" native="true">
                <property name="minimumSize">
@@ -2273,22 +2337,6 @@ border-radius: 6px;
                </layout>
               </widget>
              </item>
-             <item>
-              <widget class="QPushButton" name="loadMediaPlayer2">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">border-radius:10px;</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
-              </widget>
-             </item>
             </layout>
            </widget>
           </item>
@@ -2313,7 +2361,7 @@ border-radius: 6px;
             <property name="styleSheet">
              <string notr="true"/>
             </property>
-            <layout class="QVBoxLayout" name="player3Layout" stretch="0,1,0,0">
+            <layout class="QVBoxLayout" name="player3Layout" stretch="0,0,1,0">
              <property name="spacing">
               <number>10</number>
              </property>
@@ -2329,6 +2377,37 @@ border-radius: 6px;
              <property name="bottomMargin">
               <number>10</number>
              </property>
+             <item>
+              <widget class="QPushButton" name="loadMediaPlayer3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>60</height>
+                </size>
+               </property>
+               <property name="cursor">
+                <cursorShape>OpenHandCursor</cursorShape>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border-radius:10px;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
              <item>
               <widget class="QWidget" name="player3Controls" native="true">
                <property name="minimumSize">
@@ -2556,22 +2635,6 @@ border-radius: 6px;
                  </widget>
                 </item>
                </layout>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="loadMediaPlayer3">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">border-radius:10px;</string>
-               </property>
-               <property name="text">
-                <string/>
-               </property>
               </widget>
              </item>
             </layout>
