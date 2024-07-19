@@ -18,5 +18,6 @@
         <file>iconsCatalog/jingle.svg</file>
         <file>iconsCatalog/music.svg</file>
         <file>iconsCatalog/other.svg</file>
+        <file>icons/search.svg</file>
     </qresource>
 </RCC>

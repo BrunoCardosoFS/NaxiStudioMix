@@ -9,14 +9,13 @@ class listFolders : public QWidget
     Q_OBJECT
 public:
     listFolders(QMainWindow *parent = nullptr);
-
-    void call(QMainWindow *w);
+    void searchFilesList(QString search);
 
     QJsonArray folders;
     QList<QWidget*> *typesWidgets;
 
 public slots:
-    void testeMessage(const QString &path);
+    void emitLoadPlayer(const QString &path);
 
 signals:
     void loadPlayer(const QString &path);
@@ -29,6 +28,8 @@ private:
 
     QWidget *foldersList;
     QWidget *filesList;
+
+    QString currentPath;
 
     void openCatalog(QString path);
     void loadFilesList(QString path);

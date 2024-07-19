@@ -34,8 +34,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         UI/forms/player.qrc
         README.md
         UI/configurations.h UI/configurations.cpp UI/configurations.ui
-        UI/widgets/listfolders.h UI/widgets/listfolders.cpp
-        UI/widgets/itemlistfiles.h UI/widgets/itemlistfiles.cpp
+        UI/widgets/files/listfolders.h UI/widgets/files/listfolders.cpp
+        UI/widgets/files/itemlistfiles.h UI/widgets/files/itemlistfiles.cpp
 
 
     )

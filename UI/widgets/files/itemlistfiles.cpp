@@ -34,11 +34,19 @@ void itemlistfiles::setTitleFile(QString title){
 
 
 void itemlistfiles::mousePressEvent(QMouseEvent *event){
-    emit loadPlayer(pathFile);
-    //qInfo() << pathFile;
+
 }
 
 void itemlistfiles::mouseReleaseEvent(QMouseEvent *event){
-    //qInfo() << event->button();
-    //qInfo() << titleFile;
+    switch (event->button()) {
+    case Qt::LeftButton:
+        emit loadPlayer(pathFile);
+        break;
+    case Qt::MiddleButton:
+        break;
+    case Qt::RightButton:
+        break;
+    default:
+        break;
+    }
 }

@@ -1,4 +1,3 @@
-#include "../player.h"
 #include "listfolders.h"
 
 #include "itemlistfiles.h"
@@ -10,8 +9,10 @@
 QList<QWidget*> *typesWidgets;
 QWidget *filesList;
 
+QString currentPath;
+
 listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
-    call(parent);
+    //call(parent);
 
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -19,7 +20,7 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
     QSettings settings("NaxiStudio", "NaxiStudio Player");
     QString pathDB = settings.value("db").toString();
 
-    //Criando o widget onde vão ser listadas as pastas
+    //Creating the widget where folders will be listed
     QWidget *foldersList = new QWidget(this);
     foldersList->setObjectName("foldersList");
     QVBoxLayout *foldersListLayout = new QVBoxLayout(foldersList);
@@ -48,30 +49,69 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
         typesWidgets->append(typeWidget);
     }
 
-    // Criando o widget onde vão ser listados os arquivos
+    QGroupBox *filesArea = new QGroupBox(this);
+    filesArea->setObjectName("filesArea");
+
+    QVBoxLayout *filesAreaLayout = new QVBoxLayout(filesArea);
+    filesArea->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+
+    // Creating the file search area
+
+    QWidget *searchBar = new QWidget(this);
+    searchBar->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    searchBar->setFixedHeight(30);
+
+    QHBoxLayout *searchBarLayout = new QHBoxLayout(searchBar);
+    searchBarLayout->setContentsMargins(0, 0, 0, 0);
+
+    QLineEdit *searchInput = new QLineEdit(searchBar);
+    searchInput->setObjectName("searchInput");
+    searchInput->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    searchInput->setFixedHeight(30);
+
+    QPushButton *searchButton = new QPushButton(searchBar);
+    searchButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    searchButton->setFixedWidth(40);
+    searchButton->setFixedHeight(30);
+    searchButton->setIcon(QIcon(":/images/icons/search.svg"));
+    searchButton->setCursor(Qt::PointingHandCursor);
+
+    searchBarLayout->addWidget(searchInput);
+    searchBarLayout->addWidget(searchButton);
+
+    connect(searchButton, &QPushButton::clicked, [this, searchInput](){
+        searchFilesList(searchInput->text());
+    });
+
+    connect(searchInput, &QLineEdit::returnPressed, [this, searchInput](){
+        searchFilesList(searchInput->text());
+    });
+
+    filesAreaLayout->addWidget(searchBar);
+
+
+
+    //Creating the widget where the files will be listed
+
     filesList = new QWidget(this);
     filesList->setObjectName("filesList");
     QVBoxLayout *filesListLayout = new QVBoxLayout(filesList);
     filesList->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    filesListLayout->setContentsMargins(0, 0, 0, 0);
 
-    QScrollArea *scrollFiles = new QScrollArea(this);
+    QScrollArea *scrollFiles = new QScrollArea(filesArea);
     scrollFiles->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     scrollFiles->setWidgetResizable(true);
     scrollFiles->setWidget(filesList);
 
-    //loadFilesList("D:/MEDIA/MÚSICAS/Dance");
+    filesAreaLayout->addWidget(scrollFiles);
 
 
     openCatalog((pathDB + "/catalog.json"));
 
-
     layout->addWidget(scrollFolders);
-    layout->addWidget(scrollFiles);
-}
-
-void listFolders::call(QMainWindow *w){
-    Player *player = qobject_cast<Player*>(w);
-    qInfo() << player->teste;
+    layout->addWidget(filesArea);
 }
 
 void listFolders::openCatalog(QString path){
@@ -83,8 +123,6 @@ void listFolders::openCatalog(QString path){
 
     QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonString.toUtf8());
     QJsonArray jsonArray = jsonDocument.array();
-
-    qInfo() << typesWidgets->at(0);
 
     foreach (QJsonValue jsonValue, jsonArray) {
         QJsonObject jsonObject = jsonValue.toObject();
@@ -127,13 +165,39 @@ void listFolders::openCatalog(QString path){
     }
 }
 
-void listFolders::testeMessage(const QString &path){
+void listFolders::emitLoadPlayer(const QString &path){
     emit loadPlayer(path);
 }
 
 
 void listFolders::loadFilesList(QString path){
     QDir files(path);
+    currentPath = path;
+
+    QLayoutItem *item;
+    while((item = filesList->layout()->takeAt(0)) != nullptr){
+        QWidget *widget = item->widget();
+        delete widget;
+    }
+
+
+    foreach (QFileInfo qfi, files.entryInfoList()) {
+        QString suffix = qfi.completeSuffix();
+        suffix = suffix.toLower();
+        if(qfi.isFile() && (suffix == "mp3" || suffix == "wav" || suffix == "opus" || suffix == "aac" || suffix == "flac" || suffix == "webm")){
+            itemlistfiles *itemList = new itemlistfiles(this);
+            itemList->setPathFile(qfi.absoluteFilePath());
+            itemList->setTitleFile(qfi.fileName());
+
+            connect(itemList, &itemlistfiles::loadPlayer, this, &listFolders::emitLoadPlayer);
+
+            filesList->layout()->addWidget(itemList);
+        }
+    }
+}
+
+void listFolders::searchFilesList(QString search){
+    QDir files(currentPath);
 
     QLayoutItem *item;
     while((item = filesList->layout()->takeAt(0)) != nullptr){
@@ -143,12 +207,16 @@ void listFolders::loadFilesList(QString path){
 
     foreach (QFileInfo qfi, files.entryInfoList()) {
         QString suffix = qfi.completeSuffix();
-        if(qfi.isFile() && (suffix == "mp3" || suffix == "wav" || suffix == "opus" || suffix == "aac" || suffix == "flac" || suffix == "webm")){
+        suffix = suffix.toLower();
+
+        QString fileName = qfi.fileName();
+
+        if(qfi.isFile() && (fileName.contains(search, Qt::CaseInsensitive)) && (suffix == "mp3" || suffix == "wav" || suffix == "opus" || suffix == "aac" || suffix == "flac" || suffix == "webm")){
             itemlistfiles *itemList = new itemlistfiles(this);
             itemList->setPathFile(qfi.absoluteFilePath());
             itemList->setTitleFile(qfi.fileName());
 
-            connect(itemList, &itemlistfiles::loadPlayer, this, &listFolders::testeMessage);
+            connect(itemList, &itemlistfiles::loadPlayer, this, &listFolders::emitLoadPlayer);
 
             filesList->layout()->addWidget(itemList);
         }

@@ -46,9 +46,9 @@
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>45</red>
-        <green>51</green>
-        <blue>64</blue>
+        <red>38</red>
+        <green>43</green>
+        <blue>54</blue>
        </color>
       </brush>
      </colorrole>
@@ -73,18 +73,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>45</red>
-        <green>51</green>
-        <blue>64</blue>
+        <red>38</red>
+        <green>43</green>
+        <blue>54</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>45</red>
-        <green>51</green>
-        <blue>64</blue>
+        <red>38</red>
+        <green>43</green>
+        <blue>54</blue>
        </color>
       </brush>
      </colorrole>
@@ -120,9 +120,9 @@
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>45</red>
-        <green>51</green>
-        <blue>64</blue>
+        <red>38</red>
+        <green>43</green>
+        <blue>54</blue>
        </color>
       </brush>
      </colorrole>
@@ -147,18 +147,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>45</red>
-        <green>51</green>
-        <blue>64</blue>
+        <red>38</red>
+        <green>43</green>
+        <blue>54</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>45</red>
-        <green>51</green>
-        <blue>64</blue>
+        <red>38</red>
+        <green>43</green>
+        <blue>54</blue>
        </color>
       </brush>
      </colorrole>
@@ -194,9 +194,9 @@
      <colorrole role="Button">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>45</red>
-        <green>51</green>
-        <blue>64</blue>
+        <red>38</red>
+        <green>43</green>
+        <blue>54</blue>
        </color>
       </brush>
      </colorrole>
@@ -221,18 +221,18 @@
      <colorrole role="Base">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>45</red>
-        <green>51</green>
-        <blue>64</blue>
+        <red>38</red>
+        <green>43</green>
+        <blue>54</blue>
        </color>
       </brush>
      </colorrole>
      <colorrole role="Window">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>45</red>
-        <green>51</green>
-        <blue>64</blue>
+        <red>38</red>
+        <green>43</green>
+        <blue>54</blue>
        </color>
       </brush>
      </colorrole>
@@ -267,7 +267,7 @@
 }
 
 QWidget#player, QWidget#centralwidget{
-	background: #2D3340;
+	background: #262B36;
 }
 
 QPushButton{
@@ -281,6 +281,14 @@ QPushButton{
 
 QPushButton:hover {
     background: #2D3340;
+}
+
+QLineEdit{
+	background: #232731;
+    border: none;
+    padding:  7px 10px;
+    color: #fff;
+    border-radius: 7px;
 }</string>
   </property>
   <property name="documentMode">
@@ -375,7 +383,7 @@ QWidget#playlist, QWidget#playlistHours{
         <number>7</number>
        </property>
        <property name="topMargin">
-        <number>5</number>
+        <number>7</number>
        </property>
        <property name="rightMargin">
         <number>7</number>
@@ -1319,7 +1327,7 @@ border-radius: 10px;
         <number>7</number>
        </property>
        <property name="topMargin">
-        <number>5</number>
+        <number>7</number>
        </property>
        <property name="rightMargin">
         <number>7</number>
@@ -1383,7 +1391,7 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
           <enum>QTabWidget::Rounded</enum>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <property name="elideMode">
           <enum>Qt::ElideNone</enum>
@@ -1412,8 +1420,13 @@ QScrollArea, QListView, QWidget#cartScrollWidgetContents{
           </property>
           <property name="styleSheet">
            <string notr="true">#foldersList{
+border-radius: 10px;
+}
+
+#filesArea{
 background: #181c23;
 border-radius: 10px;
+border:none;
 }
 
 #filesList{
@@ -1482,7 +1495,7 @@ QPushButton:hover {
                 <x>0</x>
                 <y>0</y>
                 <width>432</width>
-                <height>252</height>
+                <height>250</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="cartScrollLayout">
@@ -1541,33 +1554,12 @@ border-radius: 10px;
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QPushButton" name="openMusic">
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
+        <widget class="QLabel" name="label">
          <property name="text">
-          <string>Open</string>
+          <string>TODO</string>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="openMusic1">
-         <property name="text">
-          <string>Open 1</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="openMusic2">
-         <property name="text">
-          <string>Open 2</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="openPlaylist">
-         <property name="text">
-          <string>Open Playlist</string>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
          </property>
         </widget>
        </item>
@@ -1754,7 +1746,7 @@ border-radius: 6px;
             <property name="styleSheet">
              <string notr="true"/>
             </property>
-            <layout class="QVBoxLayout" name="player1Layout" stretch="0,1,0">
+            <layout class="QVBoxLayout" name="player1Layout" stretch="0,1,0,0">
              <property name="spacing">
               <number>11</number>
              </property>
@@ -1999,32 +1991,26 @@ border-radius: 6px;
                </layout>
               </widget>
              </item>
+             <item>
+              <widget class="QPushButton" name="loadMediaPlayer1">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border-radius:10px;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
             </layout>
-            <widget class="QPushButton" name="loadMediaPlayer1">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>221</width>
-               <height>184</height>
-              </rect>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius:10px;</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
            </widget>
           </item>
           <item>
@@ -2048,7 +2034,7 @@ border-radius: 6px;
             <property name="styleSheet">
              <string notr="true"/>
             </property>
-            <layout class="QVBoxLayout" name="player2Layout" stretch="0,1,0">
+            <layout class="QVBoxLayout" name="player2Layout" stretch="0,1,0,0">
              <property name="spacing">
               <number>11</number>
              </property>
@@ -2287,29 +2273,23 @@ border-radius: 6px;
                </layout>
               </widget>
              </item>
+             <item>
+              <widget class="QPushButton" name="loadMediaPlayer2">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border-radius:10px;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
             </layout>
-            <widget class="QPushButton" name="loadMediaPlayer2">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>221</width>
-               <height>184</height>
-              </rect>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius:10px;</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
            </widget>
           </item>
           <item>
@@ -2333,9 +2313,9 @@ border-radius: 6px;
             <property name="styleSheet">
              <string notr="true"/>
             </property>
-            <layout class="QVBoxLayout" name="player3Layout" stretch="0,1,0">
+            <layout class="QVBoxLayout" name="player3Layout" stretch="0,1,0,0">
              <property name="spacing">
-              <number>11</number>
+              <number>10</number>
              </property>
              <property name="leftMargin">
               <number>10</number>
@@ -2578,29 +2558,23 @@ border-radius: 6px;
                </layout>
               </widget>
              </item>
+             <item>
+              <widget class="QPushButton" name="loadMediaPlayer3">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border-radius:10px;</string>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
             </layout>
-            <widget class="QPushButton" name="loadMediaPlayer3">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>221</width>
-               <height>184</height>
-              </rect>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius:10px;</string>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-            </widget>
            </widget>
           </item>
          </layout>
@@ -2617,7 +2591,7 @@ border-radius: 6px;
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>11</height>
+           <height>10</height>
           </size>
          </property>
         </spacer>
