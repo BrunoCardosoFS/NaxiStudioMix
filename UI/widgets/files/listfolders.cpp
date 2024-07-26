@@ -6,11 +6,6 @@
 #include <QDebug>
 #include <QDir>
 
-QList<QWidget*> *typesWidgets;
-QWidget *filesList;
-
-QString currentPath;
-
 listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -32,7 +27,7 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
     scrollFolders->setFixedWidth(155);
     scrollFolders->setWidget(foldersList);
 
-    typesWidgets = new QList<QWidget*>();
+    this->typesWidgets = new QList<QWidget*>();
     QList mediaTypes = {"Vinhetas", "Músicas", "Outros", "Comerciais"};
 
     foreach (QString type, mediaTypes) {
@@ -46,7 +41,7 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
 
         foldersListLayout->addWidget(typeWidget);
 
-        typesWidgets->append(typeWidget);
+        this->typesWidgets->append(typeWidget);
     }
 
 
@@ -95,7 +90,7 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
 
     connect(clearSearch, &QPushButton::clicked, [this, searchInput](){
         searchInput->clear();
-        loadFilesList(currentPath);
+        loadFilesList(this->currentPath);
     });
 
     connect(searchButton, &QPushButton::clicked, [this, searchInput](){
@@ -112,16 +107,16 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
 
     //Creating the widget where the files will be listed
 
-    filesList = new QWidget(this);
-    filesList->setObjectName("filesList");
-    QVBoxLayout *filesListLayout = new QVBoxLayout(filesList);
-    filesList->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    this->filesList = new QWidget(this);
+    this->filesList->setObjectName("filesList");
+    this->filesList->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    QVBoxLayout *filesListLayout = new QVBoxLayout(this->filesList);
     filesListLayout->setContentsMargins(0, 0, 0, 0);
 
     QScrollArea *scrollFiles = new QScrollArea(filesArea);
     scrollFiles->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     scrollFiles->setWidgetResizable(true);
-    scrollFiles->setWidget(filesList);
+    scrollFiles->setWidget(this->filesList);
 
     filesAreaLayout->addWidget(scrollFiles);
 
@@ -165,19 +160,19 @@ void listFolders::openCatalog(QString path){
         if(type == 0){
             item->setProperty("type", "jingle");
             item->setIcon(QIcon(":/images/iconsCatalog/jingle.svg"));
-            typesWidgets->at(0)->layout()->addWidget(item);
+            this->typesWidgets->at(0)->layout()->addWidget(item);
         }else if(type == 1){
             item->setProperty("type", "music");
             item->setIcon(QIcon(":/images/iconsCatalog/music.svg"));
-            typesWidgets->at(1)->layout()->addWidget(item);
+            this->typesWidgets->at(1)->layout()->addWidget(item);
         }else if(type == 2){
             item->setProperty("type", "commercial");
             item->setIcon(QIcon(":/images/iconsCatalog/commercial.svg"));
-            typesWidgets->at(3)->layout()->addWidget(item);
+            this->typesWidgets->at(3)->layout()->addWidget(item);
         }else{
             item->setProperty("type", "other");
             item->setIcon(QIcon(":/images/iconsCatalog/other.svg"));
-            typesWidgets->at(2)->layout()->addWidget(item);
+            this->typesWidgets->at(2)->layout()->addWidget(item);
         }
     }
 }
@@ -189,10 +184,10 @@ void listFolders::emitLoadPlayer(const QString &path){
 
 void listFolders::loadFilesList(QString path){
     QDir files(path);
-    currentPath = path;
+    this->currentPath = path;
 
     QLayoutItem *item;
-    while((item = filesList->layout()->takeAt(0)) != nullptr){
+    while((item = this->filesList->layout()->takeAt(0)) != nullptr){
         QWidget *widget = item->widget();
         delete widget;
     }
@@ -208,19 +203,19 @@ void listFolders::loadFilesList(QString path){
 
             connect(itemList, &itemlistfiles::loadPlayer, this, &listFolders::emitLoadPlayer);
 
-            filesList->layout()->addWidget(itemList);
+            this->filesList->layout()->addWidget(itemList);
         }
     }
 
     QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    filesList->layout()->addItem(spacer);
+    this->filesList->layout()->addItem(spacer);
 }
 
 void listFolders::searchFilesList(QString search){
-    QDir files(currentPath);
+    QDir files(this->currentPath);
 
     QLayoutItem *item;
-    while((item = filesList->layout()->takeAt(0)) != nullptr){
+    while((item = this->filesList->layout()->takeAt(0)) != nullptr){
         QWidget *widget = item->widget();
         delete widget;
     }
@@ -238,12 +233,12 @@ void listFolders::searchFilesList(QString search){
 
             connect(itemList, &itemlistfiles::loadPlayer, this, &listFolders::emitLoadPlayer);
 
-            filesList->layout()->addWidget(itemList);
+            this->filesList->layout()->addWidget(itemList);
         }
     }
 
     QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    filesList->layout()->addItem(spacer);
+    this->filesList->layout()->addItem(spacer);
 }
 
 

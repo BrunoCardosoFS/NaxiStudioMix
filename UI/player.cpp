@@ -34,12 +34,6 @@
 
 QSettings settings("NaxiStudio", "NaxiStudio Player");
 
-QString currentFolder;
-QString pathDB;
-QString pathLoadMusic;
-
-Playlist *playlist;
-
 Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::player)
 {
     ui->setupUi(this);
@@ -55,31 +49,31 @@ Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::player)
 
     // Creating and configuring players
 
-    MPlayer1 = new QMediaPlayer();
-    MPlayer1AudioOutput = new QAudioOutput();
-    MPlayer1AudioOutput->setVolume(100);
-    MPlayer1->setAudioOutput(MPlayer1AudioOutput);
+    this->MPlayer1 = new QMediaPlayer();
+    this->MPlayer1AudioOutput = new QAudioOutput();
+    this->MPlayer1AudioOutput->setVolume(100);
+    this->MPlayer1->setAudioOutput(this->MPlayer1AudioOutput);
 
-    MPlayer2 = new QMediaPlayer();
-    MPlayer2AudioOutput = new QAudioOutput();
-    MPlayer2AudioOutput->setVolume(100);
-    MPlayer2->setAudioOutput(MPlayer2AudioOutput);
+    this->MPlayer2 = new QMediaPlayer();
+    this->MPlayer2AudioOutput = new QAudioOutput();
+    this->MPlayer2AudioOutput->setVolume(100);
+    this->MPlayer2->setAudioOutput(this->MPlayer2AudioOutput);
 
-    MPlayer3 = new QMediaPlayer();
-    MPlayer3AudioOutput = new QAudioOutput();
-    MPlayer3AudioOutput->setVolume(100);
-    MPlayer3->setAudioOutput(MPlayer3AudioOutput);
+    this->MPlayer3 = new QMediaPlayer();
+    this->MPlayer3AudioOutput = new QAudioOutput();
+    this->MPlayer3AudioOutput->setVolume(100);
+    this->MPlayer3->setAudioOutput(this->MPlayer3AudioOutput);
 
 
     // Connect players
-    connect(MPlayer1, &QMediaPlayer::durationChanged, this, [=](qint64 duration){updateDuration(duration, 0);});
-    connect(MPlayer1, &QMediaPlayer::positionChanged, this, [=](qint64 progress){updateProgress(progress, 0);});
+    connect(this->MPlayer1, &QMediaPlayer::durationChanged, this, [=](qint64 duration){updateDuration(duration, 0);});
+    connect(this->MPlayer1, &QMediaPlayer::positionChanged, this, [=](qint64 progress){updateProgress(progress, 0);});
 
-    connect(MPlayer2, &QMediaPlayer::durationChanged, this, [=](qint64 duration){updateDuration(duration, 1);});
-    connect(MPlayer2, &QMediaPlayer::positionChanged, this, [=](qint64 progress){updateProgress(progress, 1);});
+    connect(this->MPlayer2, &QMediaPlayer::durationChanged, this, [=](qint64 duration){updateDuration(duration, 1);});
+    connect(this->MPlayer2, &QMediaPlayer::positionChanged, this, [=](qint64 progress){updateProgress(progress, 1);});
 
-    connect(MPlayer3, &QMediaPlayer::durationChanged, this, [=](qint64 duration){updateDuration(duration, 2);});
-    connect(MPlayer3, &QMediaPlayer::positionChanged, this, [=](qint64 progress){updateProgress(progress, 2);});
+    connect(this->MPlayer3, &QMediaPlayer::durationChanged, this, [=](qint64 duration){updateDuration(duration, 2);});
+    connect(this->MPlayer3, &QMediaPlayer::positionChanged, this, [=](qint64 progress){updateProgress(progress, 2);});
 }
 
 Player::~Player()
@@ -93,7 +87,7 @@ void Player::initApp(){
         settings.setValue("db", QCoreApplication::applicationDirPath() + "/../DB");
     }
 
-    pathDB = settings.value("db").toString();
+    this->pathDB = settings.value("db").toString();
 
     listFolders *folders = new listFolders(this);
     folders->setObjectName("Folders");
@@ -107,9 +101,9 @@ void Player::initApp(){
     scroll->setWidget(folders);
     ui->catalog->layout()->addWidget(scroll);
 
-    playlist = new Playlist(this);
-    playlist->setObjectName("scrollPlaylistWidget");
-    ui->scrollPlaylist->setWidget(playlist);
+    this->playlist = new Playlist(this);
+    this->playlist->setObjectName("scrollPlaylistWidget");
+    ui->scrollPlaylist->setWidget(this->playlist);
 
 
     ui->loadMediaPlayer1->hide();
@@ -124,7 +118,7 @@ void Player::updateClock(){
 }
 
 void Player::receivePath(const QString &path){
-    pathLoadMusic = path;
+    this->pathLoadMusic = path;
 
     ui->player1Controls->hide();
     ui->player2Controls->hide();
@@ -174,7 +168,7 @@ void Player::updateProgress(qint64 progress, qint8 player){
 
 void Player::loadPlayer(qint8 player, QString path)
 {
-    QList players = {MPlayer1, MPlayer2, MPlayer3};
+    QList players = {this->MPlayer1, this->MPlayer2, this->MPlayer3};
     QList playersTitle = {ui->player1Title, ui->player2Title, ui->player3Title};
 
     if(path != ""){
@@ -190,7 +184,7 @@ void Player::loadPlayer(qint8 player, QString path)
 
 void Player::on_loadMediaPlayer1_clicked()
 {
-    loadPlayer(0, pathLoadMusic);
+    loadPlayer(0, this->pathLoadMusic);
 
     ui->player1Controls->show();
     ui->player2Controls->show();
@@ -203,7 +197,7 @@ void Player::on_loadMediaPlayer1_clicked()
 
 void Player::on_loadMediaPlayer2_clicked()
 {
-    loadPlayer(1, pathLoadMusic);
+    loadPlayer(1, this->pathLoadMusic);
 
     ui->player1Controls->show();
     ui->player2Controls->show();
@@ -216,7 +210,7 @@ void Player::on_loadMediaPlayer2_clicked()
 
 void Player::on_loadMediaPlayer3_clicked()
 {
-    loadPlayer(2, pathLoadMusic);
+    loadPlayer(2, this->pathLoadMusic);
 
     ui->player1Controls->show();
     ui->player2Controls->show();
@@ -231,46 +225,46 @@ void Player::on_loadMediaPlayer3_clicked()
 // Player 1 controls
 
 void Player::on_player1Play_clicked()
-{MPlayer1->play();}
+{this->MPlayer1->play();}
 
 void Player::on_player1Pause_clicked()
-{MPlayer1->pause();}
+{this->MPlayer1->pause();}
 
 void Player::on_player1Stop_clicked()
-{MPlayer1->stop();MPlayer1->setPosition(0);}
+{this->MPlayer1->stop();this->MPlayer1->setPosition(0);}
 
 void Player::on_player1Slider_sliderMoved(int position)
-{MPlayer1->setPosition(position * 100);}
+{this->MPlayer1->setPosition(position * 100);}
 
 
 // Player 2 controls
 
 void Player::on_player2Play_clicked()
-{MPlayer2->play();}
+{this->MPlayer2->play();}
 
 void Player::on_player2Pause_clicked()
-{MPlayer2->pause();}
+{this->MPlayer2->pause();}
 
 void Player::on_player2Stop_clicked()
-{MPlayer2->stop();MPlayer2->setPosition(0);}
+{this->MPlayer2->stop();this->MPlayer2->setPosition(0);}
 
 void Player::on_player2Slider_sliderMoved(int position)
-{MPlayer2->setPosition(position * 100);}
+{this->MPlayer2->setPosition(position * 100);}
 
 
 // Player 3 controls
 
 void Player::on_player3Play_clicked()
-{MPlayer3->play();}
+{this->MPlayer3->play();}
 
 void Player::on_player3Pause_clicked()
-{MPlayer3->pause();}
+{this->MPlayer3->pause();}
 
 void Player::on_player3Stop_clicked()
-{MPlayer3->stop();MPlayer3->setPosition(0);}
+{this->MPlayer3->stop();this->MPlayer3->setPosition(0);}
 
 void Player::on_player3Slider_sliderMoved(int position)
-{MPlayer3->setPosition(position * 100);}
+{this->MPlayer3->setPosition(position * 100);}
 
 
 
@@ -282,7 +276,7 @@ void Player::on_openConfig_clicked()
 
 void Player::on_playlistOpen_clicked()
 {
-    if(!(playlist->loadPlaylist(ui->playlistDate->date().toString("yyyy-MM-dd")))){
+    if(!(this->playlist->loadPlaylist(ui->playlistDate->date().toString("yyyy-MM-dd")))){
         // ui->playlistDate->setStyleSheet("QDateEdit{background-color : #C70909;}");
         qInfo() << "O arquivo não existe";
     }
@@ -291,6 +285,6 @@ void Player::on_playlistOpen_clicked()
 
 void Player::on_hour00_clicked()
 {
-    playlist->loadHour("00");
+    this->playlist->loadHour("00");
 }
 

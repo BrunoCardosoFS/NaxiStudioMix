@@ -11,7 +11,7 @@ Playlist::Playlist(QWidget *parent):QWidget{parent}{
     this->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     Playlist::boxLayout = new QVBoxLayout(this);
 
-    this->boxLayout->setContentsMargins(7, 7, 2, 7);
+    this->boxLayout->setContentsMargins(10, 10, 5, 10);
     this->boxLayout->setSpacing(5);
 
     QSettings settings("NaxiStudio", "NaxiStudio Player");
@@ -33,7 +33,12 @@ bool Playlist::loadPlaylist(QString date){
     this->jsonPlaylist = QJsonDocument::fromJson(jsonString.toUtf8());
 
     QDateTime currentTime = QDateTime::currentDateTime();
-    loadHour(currentTime.toString("hh"));
+
+    if(currentTime.toString("yyyy-MM-dd") == date){
+        loadHour(currentTime.toString("hh"));
+    }else {
+        loadHour("00");
+    }
 
     return true;
 }
@@ -53,6 +58,7 @@ bool Playlist::loadHour(QString hour){
 
     if(jsonArray.isEmpty()){
         QLabel *clean = new QLabel("Nenhum arquivo encontrado");
+        clean->setAlignment(Qt::AlignCenter);
         this->boxLayout->addWidget(clean);
         return true;
     }

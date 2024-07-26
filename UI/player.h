@@ -70,6 +70,7 @@ private:
     QTimer *dateTime;
 
     QString pathLoadMusic;
+    QString pathDB;
 
     QMediaPlayer *MPlayer1;
     QMediaPlayer *MPlayer2;

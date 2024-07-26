@@ -16,6 +16,7 @@ private:
     QHBoxLayout *layout;
     QString pathFile;
     QLabel *played;
+    QLabel *duration;
     QLabel *titleFile;
 
 signals:

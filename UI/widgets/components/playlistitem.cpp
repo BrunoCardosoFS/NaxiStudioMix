@@ -3,7 +3,7 @@
 PlaylistItem::PlaylistItem(QWidget *parent):QGroupBox{parent}{
 
     this->layout = new QHBoxLayout(this);
-    this->layout->setContentsMargins(0, 0, 0, 3);
+    this->layout->setContentsMargins(0, 0, 0, 0);
 
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     this->setFixedHeight(30);
@@ -13,17 +13,23 @@ PlaylistItem::PlaylistItem(QWidget *parent):QGroupBox{parent}{
 
     this->pathFile = "";
 
-   this->played = new QLabel(this);
-
+    this->played = new QLabel(this);
     this->played->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     this->played->setFixedWidth(30);
-    this->played->setFixedHeight(30);
-    this->played->setText("x");
+    this->played->setText("TD");
+    this->played->setAlignment(Qt::AlignHCenter);
+
+    this->duration = new QLabel(this);
+    this->duration->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    this->duration->setFixedWidth(52);
+    this->duration->setText("TODO");
+    this->duration->setAlignment(Qt::AlignHCenter);
 
     this->titleFile = new QLabel(this);
-    this->titleFile->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
+    this->titleFile->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
 
     this->layout->addWidget(this->played);
+    this->layout->addWidget(this->duration);
     this->layout->addWidget(this->titleFile);
 }
 
