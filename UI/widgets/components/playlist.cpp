@@ -1,0 +1,76 @@
+#include "playlist.h"
+
+#include <QSettings>
+#include <QDir>
+
+#include "./playlistitem.h"
+
+#include<QDebug>
+
+Playlist::Playlist(QWidget *parent):QWidget{parent}{
+    this->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+    Playlist::boxLayout = new QVBoxLayout(this);
+
+    this->boxLayout->setContentsMargins(7, 7, 2, 7);
+    this->boxLayout->setSpacing(5);
+
+    QSettings settings("NaxiStudio", "NaxiStudio Player");
+    this->playlistDB = (settings.value("db").toString() + "/musical/grid/");
+}
+
+bool Playlist::loadPlaylist(QString date){
+    QString path = (this->playlistDB + date + ".json");
+
+    QFile catalog(path);
+    if(!catalog.open(QFile::ReadOnly | QFile::Text)){
+        return false;
+    }
+
+    QTextStream dataCatalog(&catalog);
+    QString jsonString = dataCatalog.readAll();
+    catalog.close();
+
+    this->jsonPlaylist = QJsonDocument::fromJson(jsonString.toUtf8());
+
+    QDateTime currentTime = QDateTime::currentDateTime();
+    loadHour(currentTime.toString("hh"));
+
+    return true;
+}
+
+bool Playlist::loadHour(QString hour){
+    if(this->jsonPlaylist.isNull()){
+        return false;
+    }
+
+    QLayoutItem *item;
+    while((item = this->boxLayout->takeAt(0)) != nullptr){
+        QWidget *widget = item->widget();
+        delete widget;
+    }
+
+    QJsonArray jsonArray = this->jsonPlaylist[hour].toArray();
+
+    if(jsonArray.isEmpty()){
+        QLabel *clean = new QLabel("Nenhum arquivo encontrado");
+        this->boxLayout->addWidget(clean);
+        return true;
+    }
+
+    foreach (QJsonValue value, jsonArray) {
+        QJsonArray valueArray = value.toArray();
+
+        PlaylistItem *item = new PlaylistItem(this);
+
+        item->setPath(valueArray[1].toString());
+        item->setTitle(valueArray[0].toString());
+
+        this->boxLayout->addWidget(item);
+    }
+
+    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    this->boxLayout->addItem(spacer);
+
+    return true;
+}
+

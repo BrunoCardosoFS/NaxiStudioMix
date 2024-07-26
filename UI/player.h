@@ -9,6 +9,7 @@
 
 #include "configurations.h"
 #include "./widgets/files/listfolders.h"
+#include "./widgets/components/playlist.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -52,6 +53,9 @@ private slots:
     void on_player3Slider_sliderMoved(int position);
 
     void on_openConfig_clicked();
+    void on_playlistOpen_clicked();
+
+    void on_hour00_clicked();
 
 private:
     void initApp();
@@ -76,6 +80,8 @@ private:
     QAudioOutput *MPlayer3AudioOutput;
 
     listFolders *folders;
+
+    Playlist *playlist;
 
     Configurations *windowConfig;
 };

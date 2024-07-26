@@ -12,8 +12,6 @@ QWidget *filesList;
 QString currentPath;
 
 listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
-    //call(parent);
-
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
@@ -243,6 +241,9 @@ void listFolders::searchFilesList(QString search){
             filesList->layout()->addWidget(itemList);
         }
     }
+
+    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    filesList->layout()->addItem(spacer);
 }
 
 

@@ -1,3 +1,17 @@
-<svg width="26" height="19" viewBox="0 0 26 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M25.8508 11.1848L22.5816 16.789C22.3272 17.2251 21.963 17.5869 21.5251 17.8384C21.0873 18.0899 20.5912 18.2222 20.0863 18.2222H2.03238C1.19627 18.2222 0.675323 17.3152 1.0966 16.593L4.36574 10.9888C4.62016 10.5527 4.98443 10.1908 5.42227 9.93936C5.8601 9.68788 6.3562 9.55555 6.86111 9.55555H24.915C25.7512 9.55555 26.2721 10.4625 25.8508 11.1848ZM6.86111 8.11111H21.6667V5.94444C21.6667 4.74781 20.6966 3.77777 19.5 3.77777H12.2778L9.38889 0.888885H2.16667C0.970035 0.888885 0 1.85892 0 3.05555V15.6062L3.11806 10.261C3.8916 8.93489 5.32589 8.11111 6.86111 8.11111Z" fill="black"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+<svg width="800px" height="800px" viewBox="0 -0.5 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    
+    <title>open</title>
+    <desc>Created with Sketch Beta.</desc>
+    <defs>
+
+</defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-154.000000, -621.000000)" fill="#000000">
+            <path d="M168,624.695 L179.2,641.99 L156.8,641.99 L168,624.695 L168,624.695 Z M156.014,643.995 L180.018,643.995 C182.375,643.995 182.296,642.608 181.628,641.574 L169.44,622.555 C168.882,621.771 167.22,621.703 166.56,622.555 L154.372,641.574 C153.768,642.703 153.687,643.995 156.014,643.995 L156.014,643.995 Z M181,645.998 L155,645.998 C154.448,645.998 154,646.446 154,646.999 C154,647.552 154.448,648 155,648 L181,648 C181.552,648 182,647.552 182,646.999 C182,646.446 181.552,645.998 181,645.998 L181,645.998 Z" id="open" sketch:type="MSShapeGroup">
+
+</path>
+        </g>
+    </g>
 </svg>

@@ -26,6 +26,7 @@
 #include <QSettings>
 
 #include "./widgets/files/listfolders.h"
+#include "./widgets/components/playlist.h"
 
 #include <QDir>
 
@@ -36,6 +37,8 @@ QSettings settings("NaxiStudio", "NaxiStudio Player");
 QString currentFolder;
 QString pathDB;
 QString pathLoadMusic;
+
+Playlist *playlist;
 
 Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::player)
 {
@@ -103,6 +106,10 @@ void Player::initApp(){
     scroll->setWidgetResizable(true);
     scroll->setWidget(folders);
     ui->catalog->layout()->addWidget(scroll);
+
+    playlist = new Playlist(this);
+    playlist->setObjectName("scrollPlaylistWidget");
+    ui->scrollPlaylist->setWidget(playlist);
 
 
     ui->loadMediaPlayer1->hide();
@@ -271,5 +278,19 @@ void Player::on_openConfig_clicked()
 {
     windowConfig = new Configurations;
     windowConfig->show();
+}
+
+void Player::on_playlistOpen_clicked()
+{
+    if(!(playlist->loadPlaylist(ui->playlistDate->date().toString("yyyy-MM-dd")))){
+        // ui->playlistDate->setStyleSheet("QDateEdit{background-color : #C70909;}");
+        qInfo() << "O arquivo não existe";
+    }
+}
+
+
+void Player::on_hour00_clicked()
+{
+    playlist->loadHour("00");
 }
 
