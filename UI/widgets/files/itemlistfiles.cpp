@@ -2,7 +2,6 @@
 
 #include <QDebug>
 
-QString pathFile;
 QLabel *titleFileLabel;
 
 itemlistfiles::itemlistfiles(QWidget *parent):QGroupBox(parent) {
@@ -14,22 +13,33 @@ itemlistfiles::itemlistfiles(QWidget *parent):QGroupBox(parent) {
 
     this->setStyleSheet("QGroupBox{background: #232731; border-radius: 7px} QGroupBox:hover{background: #2D3340;} QLabel{font-weight:  bold; color: #fff;}");
 
-    QLabel *durationFileLabel = new QLabel("TODO");
-    durationFileLabel->setFixedWidth(60);
+    this->durationFileLabel = new QLabel("--");
+    this->durationFileLabel->setFixedWidth(60);
+    this->durationFileLabel->setAlignment(Qt::AlignHCenter);
 
-    titleFileLabel = new QLabel();
+    this->titleFileLabel = new QLabel();
 
-    layout->addWidget(durationFileLabel);
-    layout->addWidget(titleFileLabel);
+    layout->addWidget(this->durationFileLabel);
+    layout->addWidget(this->titleFileLabel);
 }
 
 void itemlistfiles::setPathFile(QString path){
-    pathFile = path;
+    this->pathFile = path;
 }
 
 void itemlistfiles::setTitleFile(QString title){
     titleFile = title;
-    titleFileLabel->setText(title);
+    this->titleFileLabel->setText(title);
+}
+
+void itemlistfiles::setDuration(qint64 duration){
+    QTime CurrentTime((duration / 3600000) % 60, (duration / 60000) % 60, (duration / 1000) % 60, (duration) % 1000);
+
+    QString timeMediaFormat = "mm:ss:zzz";
+    if(duration > 3600000){
+        timeMediaFormat = "hh:mm:ss";
+    }
+    this->durationFileLabel->setText(CurrentTime.toString(timeMediaFormat));
 }
 
 
@@ -40,7 +50,7 @@ void itemlistfiles::mousePressEvent(QMouseEvent *event){
 void itemlistfiles::mouseReleaseEvent(QMouseEvent *event){
     switch (event->button()) {
     case Qt::LeftButton:
-        emit loadPlayer(pathFile);
+        emit loadPlayer(this->pathFile);
         break;
     case Qt::MiddleButton:
         break;

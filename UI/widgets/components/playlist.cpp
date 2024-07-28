@@ -2,6 +2,7 @@
 
 #include <QSettings>
 #include <QDir>
+#include <QAudioDecoder>
 
 #include "./playlistitem.h"
 
@@ -63,11 +64,17 @@ bool Playlist::loadHour(QString hour){
         return true;
     }
 
+    QAudioDecoder decoder;
+
     foreach (QJsonValue value, jsonArray) {
         QJsonArray valueArray = value.toArray();
 
+        decoder.setSource(QUrl::fromLocalFile(valueArray[1].toString()));
+        decoder.start();
+
         PlaylistItem *item = new PlaylistItem(this);
 
+        item->setDuration(decoder.duration());
         item->setPath(valueArray[1].toString());
         item->setTitle(valueArray[0].toString());
 

@@ -3,6 +3,7 @@
 #include "itemlistfiles.h"
 
 #include <QSettings>
+#include <QAudioDecoder>
 #include <QDebug>
 #include <QDir>
 
@@ -15,6 +16,7 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
 
     //Creating the widget where folders will be listed
     QWidget *foldersList = new QWidget(this);
+    foldersList->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     foldersList->setStyleSheet("QLabel{font-weight: bold; margin-top: 10px;}");
     foldersList->setObjectName("foldersList");
 
@@ -192,6 +194,8 @@ void listFolders::loadFilesList(QString path){
         delete widget;
     }
 
+    QAudioDecoder decoder;
+
     foreach (QFileInfo qfi, files.entryInfoList()) {
         QString suffix = qfi.completeSuffix();
         suffix = suffix.toLower();
@@ -199,7 +203,12 @@ void listFolders::loadFilesList(QString path){
             itemlistfiles *itemList = new itemlistfiles(this);
             itemList->setFixedHeight(30);
             itemList->setPathFile(qfi.absoluteFilePath());
+
+            decoder.setSource(QUrl::fromLocalFile(qfi.absoluteFilePath()));
+            decoder.start();
+
             itemList->setTitleFile(qfi.fileName());
+            itemList->setDuration(decoder.duration());
 
             connect(itemList, &itemlistfiles::loadPlayer, this, &listFolders::emitLoadPlayer);
 
@@ -240,11 +249,5 @@ void listFolders::searchFilesList(QString search){
     QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     this->filesList->layout()->addItem(spacer);
 }
-
-
-
-
-
-
 
 

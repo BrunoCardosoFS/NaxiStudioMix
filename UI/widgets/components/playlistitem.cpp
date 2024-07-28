@@ -21,7 +21,7 @@ PlaylistItem::PlaylistItem(QWidget *parent):QGroupBox{parent}{
 
     this->duration = new QLabel(this);
     this->duration->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    this->duration->setFixedWidth(52);
+    this->duration->setFixedWidth(60);
     this->duration->setText("TODO");
     this->duration->setAlignment(Qt::AlignHCenter);
 
@@ -31,6 +31,16 @@ PlaylistItem::PlaylistItem(QWidget *parent):QGroupBox{parent}{
     this->layout->addWidget(this->played);
     this->layout->addWidget(this->duration);
     this->layout->addWidget(this->titleFile);
+}
+
+void PlaylistItem::setDuration(qint64 duration){
+    QTime CurrentTime((duration / 3600000) % 60, (duration / 60000) % 60, (duration / 1000) % 60, (duration) % 1000);
+
+    QString timeMediaFormat = "mm:ss:zzz";
+    if(duration > 3600000){
+        timeMediaFormat = "hh:mm:ss";
+    }
+    this->duration->setText(CurrentTime.toString(timeMediaFormat));
 }
 
 void PlaylistItem::setTitle(QString title){

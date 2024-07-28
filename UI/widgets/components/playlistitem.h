@@ -9,6 +9,7 @@ class PlaylistItem : public QGroupBox
 public:
     explicit PlaylistItem(QWidget *parent = nullptr);
 
+    void setDuration(qint64 duration);
     void setTitle(QString title);
     void setPath(QString path);
 

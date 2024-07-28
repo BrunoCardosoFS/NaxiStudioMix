@@ -15,10 +15,12 @@ public:
     QString titleFile;
 
     void setPathFile(QString path);
+    void setDuration(qint64 duration);
     void setTitleFile(QString title);
 
 private:
     QLabel *titleFileLabel;
+    QLabel *durationFileLabel;
 
 signals:
     void loadPlayer(const QString &path);

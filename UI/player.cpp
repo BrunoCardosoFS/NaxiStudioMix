@@ -120,13 +120,42 @@ void Player::updateClock(){
 void Player::receivePath(const QString &path){
     this->pathLoadMusic = path;
 
-    ui->player1Controls->hide();
-    ui->player2Controls->hide();
-    ui->player3Controls->hide();
+    preLoad();
+}
 
+void Player::preLoad(){
+    ui->player1Controls->hide();
     ui->loadMediaPlayer1->show();
+
+    ui->player2Controls->hide();
     ui->loadMediaPlayer2->show();
+
+    ui->player3Controls->hide();
     ui->loadMediaPlayer3->show();
+
+    if(this->MPlayer1->isPlaying()){
+        ui->loadMediaPlayer1->hide();
+        ui->player1Controls->show();
+    }
+    if(this->MPlayer2->isPlaying()){
+        ui->loadMediaPlayer2->hide();
+        ui->player2Controls->show();
+    }
+    if(this->MPlayer3->isPlaying()){
+        ui->loadMediaPlayer3->hide();
+        ui->player3Controls->show();
+    }
+}
+
+void Player::posLoad(){
+    ui->loadMediaPlayer1->hide();
+    ui->player1Controls->show();
+
+    ui->loadMediaPlayer2->hide();
+    ui->player2Controls->show();
+
+    ui->loadMediaPlayer3->hide();
+    ui->player3Controls->show();
 }
 
 
@@ -186,39 +215,21 @@ void Player::on_loadMediaPlayer1_clicked()
 {
     loadPlayer(0, this->pathLoadMusic);
 
-    ui->player1Controls->show();
-    ui->player2Controls->show();
-    ui->player3Controls->show();
-
-    ui->loadMediaPlayer1->hide();
-    ui->loadMediaPlayer2->hide();
-    ui->loadMediaPlayer3->hide();
+    posLoad();
 }
 
 void Player::on_loadMediaPlayer2_clicked()
 {
     loadPlayer(1, this->pathLoadMusic);
 
-    ui->player1Controls->show();
-    ui->player2Controls->show();
-    ui->player3Controls->show();
-
-    ui->loadMediaPlayer1->hide();
-    ui->loadMediaPlayer2->hide();
-    ui->loadMediaPlayer3->hide();
+    posLoad();
 }
 
 void Player::on_loadMediaPlayer3_clicked()
 {
     loadPlayer(2, this->pathLoadMusic);
 
-    ui->player1Controls->show();
-    ui->player2Controls->show();
-    ui->player3Controls->show();
-
-    ui->loadMediaPlayer1->hide();
-    ui->loadMediaPlayer2->hide();
-    ui->loadMediaPlayer3->hide();
+    posLoad();
 }
 
 
@@ -286,5 +297,121 @@ void Player::on_playlistOpen_clicked()
 void Player::on_hour00_clicked()
 {
     this->playlist->loadHour("00");
+}
+
+
+void Player::on_hour01_clicked()
+{
+    this->playlist->loadHour("01");
+}
+
+void Player::on_hour02_clicked()
+{
+    this->playlist->loadHour("02");
+}
+
+void Player::on_hour03_clicked()
+{
+    this->playlist->loadHour("03");
+}
+
+void Player::on_hour04_clicked()
+{
+    this->playlist->loadHour("04");
+}
+
+void Player::on_hour05_clicked()
+{
+    this->playlist->loadHour("05");
+}
+
+void Player::on_hour06_clicked()
+{
+    this->playlist->loadHour("06");
+}
+
+void Player::on_hour07_clicked()
+{
+    this->playlist->loadHour("07");
+}
+
+void Player::on_hour08_clicked()
+{
+    this->playlist->loadHour("08");
+}
+
+void Player::on_hour09_clicked()
+{
+    this->playlist->loadHour("09");
+}
+
+void Player::on_hour10_clicked()
+{
+    this->playlist->loadHour("10");
+}
+
+void Player::on_hour11_clicked()
+{
+    this->playlist->loadHour("11");
+}
+
+void Player::on_hour12_clicked()
+{
+    this->playlist->loadHour("12");
+}
+
+void Player::on_hour13_clicked()
+{
+    this->playlist->loadHour("13");
+}
+
+void Player::on_hour14_clicked()
+{
+    this->playlist->loadHour("14");
+}
+
+void Player::on_hour15_clicked()
+{
+    this->playlist->loadHour("15");
+}
+
+void Player::on_hour16_clicked()
+{
+    this->playlist->loadHour("16");
+}
+
+void Player::on_hour17_clicked()
+{
+    this->playlist->loadHour("17");
+}
+
+void Player::on_hour18_clicked()
+{
+    this->playlist->loadHour("18");
+}
+
+void Player::on_hour19_clicked()
+{
+    this->playlist->loadHour("19");
+}
+
+void Player::on_hour20_clicked()
+{
+    this->playlist->loadHour("20");
+}
+
+void Player::on_hour21_clicked()
+{
+    this->playlist->loadHour("21");
+}
+
+void Player::on_hour22_clicked()
+{
+    this->playlist->loadHour("22");
+}
+
+void Player::on_hour23_clicked()
+{
+    this->playlist->loadHour("23");
 }
 

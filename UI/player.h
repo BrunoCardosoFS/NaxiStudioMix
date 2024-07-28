@@ -56,6 +56,29 @@ private slots:
     void on_playlistOpen_clicked();
 
     void on_hour00_clicked();
+    void on_hour01_clicked();
+    void on_hour02_clicked();
+    void on_hour03_clicked();
+    void on_hour04_clicked();
+    void on_hour05_clicked();
+    void on_hour06_clicked();
+    void on_hour07_clicked();
+    void on_hour08_clicked();
+    void on_hour09_clicked();
+    void on_hour10_clicked();
+    void on_hour11_clicked();
+    void on_hour12_clicked();
+    void on_hour13_clicked();
+    void on_hour14_clicked();
+    void on_hour15_clicked();
+    void on_hour16_clicked();
+    void on_hour17_clicked();
+    void on_hour18_clicked();
+    void on_hour19_clicked();
+    void on_hour20_clicked();
+    void on_hour21_clicked();
+    void on_hour22_clicked();
+    void on_hour23_clicked();
 
 private:
     void initApp();
@@ -64,6 +87,9 @@ private:
 
     void updateDuration(qint64 duration, qint8 player);
     void updateProgress(qint64 progress, qint8 player);
+
+    void preLoad();
+    void posLoad();
 
     Ui::player *ui;
 
