@@ -38,6 +38,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         UI/widgets/files/itemlistfiles.h UI/widgets/files/itemlistfiles.cpp
         UI/widgets/components/playlist.h UI/widgets/components/playlist.cpp
         UI/widgets/components/playlistitem.h UI/widgets/components/playlistitem.cpp
+        UI/widgets/files/itemlistthread.h UI/widgets/files/itemlistthread.cpp
 
 
 

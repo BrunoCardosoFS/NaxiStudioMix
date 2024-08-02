@@ -109,6 +109,8 @@ void Player::initApp(){
     ui->loadMediaPlayer1->hide();
     ui->loadMediaPlayer2->hide();
     ui->loadMediaPlayer3->hide();
+
+    windowConfig = new Configurations;
 }
 
 // Updating clock
@@ -281,7 +283,6 @@ void Player::on_player3Slider_sliderMoved(int position)
 
 void Player::on_openConfig_clicked()
 {
-    windowConfig = new Configurations;
     windowConfig->show();
 }
 

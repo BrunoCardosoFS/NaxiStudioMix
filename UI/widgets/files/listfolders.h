@@ -3,6 +3,8 @@
 
 #include <QtWidgets>
 
+#include "itemlistthread.h"
+
 
 class listFolders : public QWidget
 {
@@ -16,6 +18,7 @@ public:
 
 public slots:
     void emitLoadPlayer(const QString &path);
+    void finishedLoad(const QJsonArray list);
 
 signals:
     void loadPlayer(const QString &path);
@@ -26,10 +29,14 @@ private:
     QGridLayout *othersLayout;
     QGridLayout *commercialsLayout;
 
+    itemListThread *thread;
+
     QWidget *foldersList;
     QWidget *filesList;
 
     QString currentPath;
+
+    void initThread(QString pathThread);
 
     void openCatalog(QString path);
     void loadFilesList(QString path);

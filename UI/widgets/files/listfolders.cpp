@@ -2,10 +2,12 @@
 
 #include "itemlistfiles.h"
 
+
 #include <QSettings>
 #include <QAudioDecoder>
 #include <QDebug>
 #include <QDir>
+
 
 listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
     QHBoxLayout *layout = new QHBoxLayout(this);
@@ -90,9 +92,12 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
     searchBarLayout->addWidget(clearSearch);
     searchBarLayout->addWidget(searchButton);
 
+    this->thread = new itemListThread(this);
+    connect(this->thread, &itemListThread::finishedLoad, this, &listFolders::finishedLoad);
+
     connect(clearSearch, &QPushButton::clicked, [this, searchInput](){
         searchInput->clear();
-        loadFilesList(this->currentPath);
+        searchFilesList("");
     });
 
     connect(searchButton, &QPushButton::clicked, [this, searchInput](){
@@ -104,7 +109,6 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
     });
 
     filesAreaLayout->addWidget(searchBar);
-
 
 
     //Creating the widget where the files will be listed
@@ -183,71 +187,57 @@ void listFolders::emitLoadPlayer(const QString &path){
     emit loadPlayer(path);
 }
 
-
-void listFolders::loadFilesList(QString path){
-    QDir files(path);
-    this->currentPath = path;
-
+void listFolders::finishedLoad(const QJsonArray list){
     QLayoutItem *item;
     while((item = this->filesList->layout()->takeAt(0)) != nullptr){
         QWidget *widget = item->widget();
         delete widget;
     }
 
-    QAudioDecoder decoder;
+    foreach (QJsonValue item, list) {
+        QJsonArray itemArray = item.toArray();
 
-    foreach (QFileInfo qfi, files.entryInfoList()) {
-        QString suffix = qfi.completeSuffix();
-        suffix = suffix.toLower();
-        if(qfi.isFile() && (suffix == "mp3" || suffix == "wav" || suffix == "opus" || suffix == "aac" || suffix == "flac" || suffix == "webm")){
-            itemlistfiles *itemList = new itemlistfiles(this);
-            itemList->setFixedHeight(30);
-            itemList->setPathFile(qfi.absoluteFilePath());
+        itemlistfiles *itemList = new itemlistfiles(this);
+        itemList->setFixedHeight(30);
+        itemList->setTitleFile(itemArray[0].toString());
+        itemList->setPathFile(itemArray[1].toString());
+        itemList->setDuration(itemArray[2].toInt());
 
-            decoder.setSource(QUrl::fromLocalFile(qfi.absoluteFilePath()));
-            decoder.start();
+        connect(itemList, &itemlistfiles::loadPlayer, this, &listFolders::emitLoadPlayer);
 
-            itemList->setTitleFile(qfi.fileName());
-            itemList->setDuration(decoder.duration());
-
-            connect(itemList, &itemlistfiles::loadPlayer, this, &listFolders::emitLoadPlayer);
-
-            this->filesList->layout()->addWidget(itemList);
-        }
+        this->filesList->layout()->addWidget(itemList);
     }
 
     QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     this->filesList->layout()->addItem(spacer);
 }
 
-void listFolders::searchFilesList(QString search){
-    QDir files(this->currentPath);
-
+void listFolders::loadFilesList(QString path){
     QLayoutItem *item;
     while((item = this->filesList->layout()->takeAt(0)) != nullptr){
         QWidget *widget = item->widget();
         delete widget;
     }
 
-    foreach (QFileInfo qfi, files.entryInfoList()) {
-        QString suffix = qfi.completeSuffix();
-        suffix = suffix.toLower();
+    QLabel *loading = new QLabel("Carregando...");
+    loading->setAlignment(Qt::AlignCenter);
+    this->filesList->layout()->addWidget(loading);
 
-        QString fileName = qfi.fileName();
+    this->thread->init(path, "");
+    this->currentPath = path;
+}
 
-        if(qfi.isFile() && (fileName.contains(search, Qt::CaseInsensitive)) && (suffix == "mp3" || suffix == "wav" || suffix == "opus" || suffix == "aac" || suffix == "flac" || suffix == "webm")){
-            itemlistfiles *itemList = new itemlistfiles(this);
-            itemList->setPathFile(qfi.absoluteFilePath());
-            itemList->setTitleFile(qfi.fileName());
-
-            connect(itemList, &itemlistfiles::loadPlayer, this, &listFolders::emitLoadPlayer);
-
-            this->filesList->layout()->addWidget(itemList);
-        }
+void listFolders::searchFilesList(QString search){
+    QLayoutItem *item;
+    while((item = this->filesList->layout()->takeAt(0)) != nullptr){
+        QWidget *widget = item->widget();
+        delete widget;
     }
 
-    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    this->filesList->layout()->addItem(spacer);
+    QLabel *loading = new QLabel("Carregando...");
+    loading->setAlignment(Qt::AlignCenter);
+    this->filesList->layout()->addWidget(loading);
+    this->thread->init(this->currentPath, search);
 }
 
 
