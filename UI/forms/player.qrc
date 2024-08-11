@@ -20,5 +20,7 @@
         <file>iconsCatalog/other.svg</file>
         <file>icons/search.svg</file>
         <file>icons/close.svg</file>
+        <file>icons/repeat.svg</file>
+        <file>icons/not-repeat.svg</file>
     </qresource>
 </RCC>

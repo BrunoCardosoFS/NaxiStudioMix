@@ -9,7 +9,7 @@
 
 #include "configurations.h"
 #include "./widgets/files/listfolders.h"
-#include "./widgets/components/playlist.h"
+#include "./widgets/playlist/playlist.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -41,16 +41,22 @@ private slots:
     void on_player1Pause_clicked();
     void on_player1Stop_clicked();
     void on_player1Slider_sliderMoved(int position);
+    void on_player1Slider_sliderPressed();
+    void on_player1Slider_sliderReleased();
 
     void on_player2Play_clicked();
     void on_player2Pause_clicked();
     void on_player2Stop_clicked();
     void on_player2Slider_sliderMoved(int position);
+    void on_player2Slider_sliderPressed();
+    void on_player2Slider_sliderReleased();
 
     void on_player3Play_clicked();
     void on_player3Pause_clicked();
     void on_player3Stop_clicked();
     void on_player3Slider_sliderMoved(int position);
+    void on_player3Slider_sliderPressed();
+    void on_player3Slider_sliderReleased();
 
     void on_openConfig_clicked();
     void on_playlistOpen_clicked();
@@ -90,6 +96,8 @@ private:
 
     void preLoad();
     void posLoad();
+
+    void clearHours();
 
     Ui::player *ui;
 

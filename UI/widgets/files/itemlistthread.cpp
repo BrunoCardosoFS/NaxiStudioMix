@@ -5,7 +5,7 @@
 #include <QDir>
 #include <QAudioDecoder>
 
-itemListThread::itemListThread(QObject *parent):QThread{parent}{
+itemListThread::itemListThread(QWidget *parent):QThread{parent}{
 
 }
 

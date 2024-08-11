@@ -36,11 +36,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         UI/configurations.h UI/configurations.cpp UI/configurations.ui
         UI/widgets/files/listfolders.h UI/widgets/files/listfolders.cpp
         UI/widgets/files/itemlistfiles.h UI/widgets/files/itemlistfiles.cpp
-        UI/widgets/components/playlist.h UI/widgets/components/playlist.cpp
-        UI/widgets/components/playlistitem.h UI/widgets/components/playlistitem.cpp
+        UI/widgets/playlist/playlist.h UI/widgets/playlist/playlist.cpp
+        UI/widgets/playlist/playlistitem.h UI/widgets/playlist/playlistitem.cpp
         UI/widgets/files/itemlistthread.h UI/widgets/files/itemlistthread.cpp
-
-
+        UI/widgets/miniplayer/miniplayer.h UI/widgets/miniplayer/miniplayer.cpp UI/widgets/miniplayer/miniplayer.ui
 
     )
 # Define target properties for Android with Qt 6 as:

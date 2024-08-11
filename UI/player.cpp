@@ -26,7 +26,7 @@
 #include <QSettings>
 
 #include "./widgets/files/listfolders.h"
-#include "./widgets/components/playlist.h"
+#include "./widgets/playlist/playlist.h"
 
 #include <QDir>
 
@@ -249,6 +249,13 @@ void Player::on_player1Stop_clicked()
 void Player::on_player1Slider_sliderMoved(int position)
 {this->MPlayer1->setPosition(position * 100);}
 
+void Player::on_player1Slider_sliderPressed()
+{/*this->MPlayer1->pause();*/}
+
+void Player::on_player1Slider_sliderReleased()
+{/*this->MPlayer1->play();*/}
+
+
 
 // Player 2 controls
 
@@ -263,6 +270,12 @@ void Player::on_player2Stop_clicked()
 
 void Player::on_player2Slider_sliderMoved(int position)
 {this->MPlayer2->setPosition(position * 100);}
+
+void Player::on_player2Slider_sliderPressed()
+{/*this->MPlayer2->pause();*/}
+
+void Player::on_player2Slider_sliderReleased()
+{/*this->MPlayer2->play();*/}
 
 
 // Player 3 controls
@@ -279,6 +292,12 @@ void Player::on_player3Stop_clicked()
 void Player::on_player3Slider_sliderMoved(int position)
 {this->MPlayer3->setPosition(position * 100);}
 
+void Player::on_player3Slider_sliderPressed()
+{/*this->MPlayer3->pause();*/}
+
+void Player::on_player3Slider_sliderReleased()
+{/*this->MPlayer3->play();*/}
+
 
 
 void Player::on_openConfig_clicked()
@@ -294,125 +313,202 @@ void Player::on_playlistOpen_clicked()
     }
 }
 
+void Player::clearHours(){
+    QString style = "QPushButton{background-color: #2b303d;}";
+
+    ui->hour00->setStyleSheet(style);
+    ui->hour01->setStyleSheet(style);
+    ui->hour02->setStyleSheet(style);
+    ui->hour03->setStyleSheet(style);
+    ui->hour04->setStyleSheet(style);
+    ui->hour05->setStyleSheet(style);
+    ui->hour06->setStyleSheet(style);
+    ui->hour07->setStyleSheet(style);
+    ui->hour08->setStyleSheet(style);
+    ui->hour09->setStyleSheet(style);
+    ui->hour10->setStyleSheet(style);
+    ui->hour11->setStyleSheet(style);
+    ui->hour12->setStyleSheet(style);
+    ui->hour13->setStyleSheet(style);
+    ui->hour14->setStyleSheet(style);
+    ui->hour15->setStyleSheet(style);
+    ui->hour16->setStyleSheet(style);
+    ui->hour17->setStyleSheet(style);
+    ui->hour18->setStyleSheet(style);
+    ui->hour19->setStyleSheet(style);
+    ui->hour20->setStyleSheet(style);
+    ui->hour21->setStyleSheet(style);
+    ui->hour22->setStyleSheet(style);
+    ui->hour23->setStyleSheet(style);
+}
+
 
 void Player::on_hour00_clicked()
 {
     this->playlist->loadHour("00");
+    clearHours();
+    ui->hour00->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 
 void Player::on_hour01_clicked()
 {
     this->playlist->loadHour("01");
+    clearHours();
+    ui->hour01->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour02_clicked()
 {
     this->playlist->loadHour("02");
+    clearHours();
+    ui->hour02->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour03_clicked()
 {
     this->playlist->loadHour("03");
+    clearHours();
+    ui->hour03->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour04_clicked()
 {
     this->playlist->loadHour("04");
+    clearHours();
+    ui->hour04->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour05_clicked()
 {
     this->playlist->loadHour("05");
+    clearHours();
+    ui->hour05->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour06_clicked()
 {
     this->playlist->loadHour("06");
+    clearHours();
+    ui->hour06->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour07_clicked()
 {
     this->playlist->loadHour("07");
+    clearHours();
+    ui->hour07->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour08_clicked()
 {
     this->playlist->loadHour("08");
+    clearHours();
+    ui->hour08->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour09_clicked()
 {
     this->playlist->loadHour("09");
+    clearHours();
+    ui->hour09->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour10_clicked()
 {
     this->playlist->loadHour("10");
+    clearHours();
+    ui->hour10->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour11_clicked()
 {
     this->playlist->loadHour("11");
+    clearHours();
+    ui->hour11->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour12_clicked()
 {
     this->playlist->loadHour("12");
+    clearHours();
+    ui->hour12->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour13_clicked()
 {
     this->playlist->loadHour("13");
+    clearHours();
+    ui->hour13->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour14_clicked()
 {
     this->playlist->loadHour("14");
+    clearHours();
+    ui->hour14->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour15_clicked()
 {
     this->playlist->loadHour("15");
+    clearHours();
+    ui->hour15->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour16_clicked()
 {
     this->playlist->loadHour("16");
+    clearHours();
+    ui->hour16->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour17_clicked()
 {
     this->playlist->loadHour("17");
+    clearHours();
+    ui->hour17->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour18_clicked()
 {
     this->playlist->loadHour("18");
+    clearHours();
+    ui->hour18->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour19_clicked()
 {
     this->playlist->loadHour("19");
+    clearHours();
+    ui->hour19->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour20_clicked()
 {
     this->playlist->loadHour("20");
+    clearHours();
+    ui->hour20->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour21_clicked()
 {
     this->playlist->loadHour("21");
+    clearHours();
+    ui->hour21->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour22_clicked()
 {
     this->playlist->loadHour("22");
+    clearHours();
+    ui->hour22->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 
 void Player::on_hour23_clicked()
 {
     this->playlist->loadHour("23");
+    clearHours();
+    ui->hour23->setStyleSheet("QPushButton{background-color: #FFA60A;}");
 }
 

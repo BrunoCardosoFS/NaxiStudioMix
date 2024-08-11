@@ -9,7 +9,7 @@ class itemListThread : public QThread
 {
     Q_OBJECT
 public:
-    itemListThread(QObject *parent = nullptr);
+    itemListThread(QWidget *parent = nullptr);
 
     void init(QString pathList, QString search);
 

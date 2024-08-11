@@ -92,9 +92,6 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
     searchBarLayout->addWidget(clearSearch);
     searchBarLayout->addWidget(searchButton);
 
-    this->thread = new itemListThread(this);
-    connect(this->thread, &itemListThread::finishedLoad, this, &listFolders::finishedLoad);
-
     connect(clearSearch, &QPushButton::clicked, [this, searchInput](){
         searchInput->clear();
         searchFilesList("");
@@ -125,6 +122,9 @@ listFolders::listFolders(QMainWindow *parent):QWidget(parent) {
     scrollFiles->setWidget(this->filesList);
 
     filesAreaLayout->addWidget(scrollFiles);
+
+    this->thread = new itemListThread(this->filesList);
+    connect(this->thread, &itemListThread::finishedLoad, this, &listFolders::finishedLoad);
 
 
     openCatalog((pathDB + "/catalog.json"));
@@ -189,7 +189,7 @@ void listFolders::emitLoadPlayer(const QString &path){
 
 void listFolders::finishedLoad(const QJsonArray list){
     QLayoutItem *item;
-    while((item = this->filesList->layout()->takeAt(0)) != nullptr){
+    while ((item = this->filesList->layout()->takeAt(0)) != nullptr) {
         QWidget *widget = item->widget();
         delete widget;
     }
@@ -203,12 +203,14 @@ void listFolders::finishedLoad(const QJsonArray list){
         itemList->setPathFile(itemArray[1].toString());
         itemList->setDuration(itemArray[2].toInt());
 
-        connect(itemList, &itemlistfiles::loadPlayer, this, &listFolders::emitLoadPlayer);
+        connect(itemList, &itemlistfiles::loadPlayer, this,
+                &listFolders::emitLoadPlayer);
 
         this->filesList->layout()->addWidget(itemList);
     }
 
-    QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    QSpacerItem *spacer =
+        new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     this->filesList->layout()->addItem(spacer);
 }
 

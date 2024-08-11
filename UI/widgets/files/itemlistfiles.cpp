@@ -55,6 +55,9 @@ void itemlistfiles::mouseReleaseEvent(QMouseEvent *event){
     case Qt::MiddleButton:
         break;
     case Qt::RightButton:
+        player = new MiniPlayer(nullptr, this->pathFile);
+        player->show();
+
         break;
     default:
         break;

@@ -3,6 +3,8 @@
 
 #include <QtWidgets>
 
+#include "../miniplayer/miniplayer.h"
+
 class itemlistfiles : public QGroupBox
 {
 
@@ -17,6 +19,8 @@ public:
     void setPathFile(QString path);
     void setDuration(qint64 duration);
     void setTitleFile(QString title);
+
+    MiniPlayer *player;
 
 private:
     QLabel *titleFileLabel;

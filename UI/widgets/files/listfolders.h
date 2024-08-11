@@ -36,8 +36,6 @@ private:
 
     QString currentPath;
 
-    void initThread(QString pathThread);
-
     void openCatalog(QString path);
     void loadFilesList(QString path);
 };
