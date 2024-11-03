@@ -10,6 +10,8 @@ class AudioPlayer : public QWidget
 public:
     explicit AudioPlayer(QWidget *parent = nullptr);
 
+    bool isPlaying;
+
 private:
     QMediaPlayer *Player;
     QAudioOutput *AudioOutput;

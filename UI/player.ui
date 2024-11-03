@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>NaxiStudio Player</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources/player.qrc">
+    <normaloff>:/icons/logo.ico</normaloff>:/icons/logo.ico</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true">QWidget#Player, QWidget#centralwidget{
 	background: #262B36;
@@ -249,7 +253,7 @@ QTabBar::tab:selected {
                    <x>0</x>
                    <y>0</y>
                    <width>133</width>
-                   <height>247</height>
+                   <height>250</height>
                   </rect>
                  </property>
                  <property name="sizePolicy">
@@ -406,7 +410,7 @@ QTabBar::tab:selected {
                       <x>0</x>
                       <y>0</y>
                       <width>182</width>
-                      <height>212</height>
+                      <height>215</height>
                      </rect>
                     </property>
                     <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -468,7 +472,7 @@ QTabBar::tab:selected {
                    <x>0</x>
                    <y>0</y>
                    <width>337</width>
-                   <height>247</height>
+                   <height>250</height>
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_2">
@@ -1016,6 +1020,13 @@ QDateEdit::down-arrow, QDateEdit::up-arraow {
              <property name="bottomMargin">
               <number>7</number>
              </property>
+             <item>
+              <widget class="QPushButton" name="buttonTeste">
+               <property name="text">
+                <string>PushButton</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>

@@ -30,6 +30,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         UI/resources/player.qrc
         UI/widgets/playerwidget.h UI/widgets/playerwidget.cpp UI/widgets/playerwidget.ui
         backend/audio/audioplayer.h backend/audio/audioplayer.cpp
+        UI/widgets/folderswidget.h UI/widgets/folderswidget.cpp
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET NaxiStudio APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

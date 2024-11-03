@@ -18,29 +18,62 @@
 #include "player.h"
 #include "./ui_player.h"
 
-#include "./widgets/playerwidget.h"
-
 Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
 {
     ui->setupUi(this);
 
-    PlayerWidget *Player1 = new PlayerWidget(this);
-    PlayerWidget *Player2 = new PlayerWidget(this);
-    PlayerWidget *Player3 = new PlayerWidget(this);
+    this->settings = new QSettings("NaxiStudio", "NaxiStudio Player");
 
-    Player1->setObjectName("Player1");
-    Player2->setObjectName("Player2");
-    Player3->setObjectName("Player3");
+    if(!settings->contains("db")){
+        settings->setValue("db", QCoreApplication::applicationDirPath() + "/../DB");
+    }
 
-    ui->players_area->layout()->addWidget(Player1);
-    ui->players_area->layout()->addWidget(Player2);
-    ui->players_area->layout()->addWidget(Player3);
+    this->Player1 = new PlayerWidget(this);
+    this->Player2 = new PlayerWidget(this);
+    this->Player3 = new PlayerWidget(this);
 
+    this->Player1->setObjectName("Player1");
+    this->Player2->setObjectName("Player2");
+    this->Player3->setObjectName("Player3");
 
+    this->Player1->setPlayShortcut("F1");
+    this->Player2->setPlayShortcut("F5");
+    this->Player3->setPlayShortcut("F9");
 
+    this->Player1->setPauseShortcut("F2");
+    this->Player2->setPauseShortcut("F6");
+    this->Player3->setPauseShortcut("F10");
+
+    this->Player1->setStopShortcut("F3");
+    this->Player2->setStopShortcut("F7");
+    this->Player3->setStopShortcut("F11");
+
+    connect(this->Player1, &PlayerWidget::loaded, this, &Player::playerLoaded);
+    connect(this->Player2, &PlayerWidget::loaded, this, &Player::playerLoaded);
+    connect(this->Player3, &PlayerWidget::loaded, this, &Player::playerLoaded);
+
+    ui->players_area->layout()->addWidget(this->Player1);
+    ui->players_area->layout()->addWidget(this->Player2);
+    ui->players_area->layout()->addWidget(this->Player3);
+
+    this->Folders = new FoldersWidget(ui->folders_scroll_widget);
 }
 
 Player::~Player()
 {
     delete ui;
 }
+
+void Player::on_buttonTeste_clicked()
+{
+    this->Player1->loadPlayer("D:/MEDIA/MÚSICAS/Hits Sertanejo/Luan Santana, Luísa Sonza - Coração Cigano.mp3");
+    this->Player2->loadPlayer("D:/MEDIA/MÚSICAS/Hits Sertanejo/Marília Mendonça - Morango do Nordeste.mp3");
+    this->Player3->loadPlayer("D:/MEDIA/MÚSICAS/Hits Sertanejo/Maiara & Maraisa - Ai, Que Vontade (Ao Vivo).webm");
+}
+
+void Player::playerLoaded(bool loaded){
+    this->Player1->unloadPlayer();
+    this->Player2->unloadPlayer();
+    this->Player3->unloadPlayer();
+}
+

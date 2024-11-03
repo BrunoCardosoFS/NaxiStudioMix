@@ -19,6 +19,11 @@
 #define PLAYER_H
 
 #include <QMainWindow>
+#include <QtWidgets>
+#include <QSettings>
+
+#include "./widgets/playerwidget.h"
+#include "./widgets/folderswidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -34,7 +39,19 @@ public:
     Player(QWidget *parent = nullptr);
     ~Player();
 
+private slots:
+    void on_buttonTeste_clicked();
+    void playerLoaded(bool loaded);
+
 private:
     Ui::Player *ui;
+    QSettings *settings;
+
+    PlayerWidget *Player1;
+    PlayerWidget *Player2;
+    PlayerWidget *Player3;
+
+    FoldersWidget *Folders;
+
 };
 #endif // PLAYER_H

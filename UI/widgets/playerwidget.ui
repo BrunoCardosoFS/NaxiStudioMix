@@ -119,6 +119,45 @@ border-radius: 6px;
     <number>7</number>
    </property>
    <item>
+    <widget class="QPushButton" name="load_media">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>60</height>
+      </size>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#load_media{
+	border-radius: 10px;
+	background-color: #272A34;
+}
+
+#load_media::hover{
+	border-radius: 10px;
+	background-color: #2d303b;
+}</string>
+     </property>
+     <property name="text">
+      <string>Carregar</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QWidget" name="control_area" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">

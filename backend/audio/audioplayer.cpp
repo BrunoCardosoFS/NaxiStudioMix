@@ -46,13 +46,16 @@ void AudioPlayer::setPosition(qint64 position){
 
 void AudioPlayer::play(){
     this->Player->play();
+    this->isPlaying = this->Player->isPlaying();
 }
 
 void AudioPlayer::pause(){
     this->Player->pause();
+    this->isPlaying = this->Player->isPlaying();
 }
 
 void AudioPlayer::stop(){
     this->Player->pause();
     this->Player->setPosition(0);
+    this->isPlaying = this->Player->isPlaying();
 }
