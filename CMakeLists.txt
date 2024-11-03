@@ -27,6 +27,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(NaxiStudio
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        UI/resources/player.qrc
+        UI/widgets/playerwidget.h UI/widgets/playerwidget.cpp UI/widgets/playerwidget.ui
+        backend/audio/audioplayer.h backend/audio/audioplayer.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET NaxiStudio APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
