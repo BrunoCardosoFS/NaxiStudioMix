@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 
 project(NaxiStudio VERSION 0.1 LANGUAGES CXX)
 
@@ -11,36 +11,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
-
 find_package(Qt6 REQUIRED COMPONENTS Multimedia Core)
 
 set(TS_FILES ./lang/NaxiStudio_pt_BR.ts)
 
 set(PROJECT_SOURCES
-        ./main.cpp
+        main.cpp
         ./UI/player.cpp
         ./UI/player.h
         ./UI/player.ui
         ${TS_FILES}
 )
 
-set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/UI/forms/icons/NaxiStudio.rc")
-
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(NaxiStudio
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
-        ${app_icon_resource_windows}
-        UI/forms/player.qrc
-        README.md
-        UI/configurations.h UI/configurations.cpp UI/configurations.ui
-        UI/widgets/files/listfolders.h UI/widgets/files/listfolders.cpp
-        UI/widgets/files/itemlistfiles.h UI/widgets/files/itemlistfiles.cpp
-        UI/widgets/playlist/playlist.h UI/widgets/playlist/playlist.cpp
-        UI/widgets/playlist/playlistitem.h UI/widgets/playlist/playlistitem.cpp
-        UI/widgets/files/itemlistthread.h UI/widgets/files/itemlistthread.cpp
-        UI/widgets/miniplayer/miniplayer.h UI/widgets/miniplayer/miniplayer.cpp UI/widgets/miniplayer/miniplayer.ui
-
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET NaxiStudio APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -71,7 +57,7 @@ target_link_libraries(NaxiStudio PRIVATE Qt6::Multimedia Qt6::Core)
 # If you are developing for iOS or macOS you should consider setting an
 # explicit, fixed bundle identifier manually though.
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER dev.NaxiStudio.Player)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.example.NaxiStudio)
 endif()
 set_target_properties(NaxiStudio PROPERTIES
     ${BUNDLE_ID_OPTION}
