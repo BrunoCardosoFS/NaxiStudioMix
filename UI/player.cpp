@@ -18,6 +18,8 @@
 #include "player.h"
 #include "./ui_player.h"
 
+#include <QDebug>
+
 Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
 {
     ui->setupUi(this);
@@ -57,6 +59,8 @@ Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
     ui->players_area->layout()->addWidget(this->Player3);
 
     this->Folders = new FoldersWidget(ui->folders_scroll_widget);
+    connect(this->Folders, &FoldersWidget::loadFiles, this, &Player::loadFiles);
+    this->Folders->loadFolders();
 }
 
 Player::~Player()
@@ -67,13 +71,41 @@ Player::~Player()
 void Player::on_buttonTeste_clicked()
 {
     this->Player1->loadPlayer("D:/MEDIA/MÚSICAS/Hits Sertanejo/Luan Santana, Luísa Sonza - Coração Cigano.mp3");
-    this->Player2->loadPlayer("D:/MEDIA/MÚSICAS/Hits Sertanejo/Marília Mendonça - Morango do Nordeste.mp3");
-    this->Player3->loadPlayer("D:/MEDIA/MÚSICAS/Hits Sertanejo/Maiara & Maraisa - Ai, Que Vontade (Ao Vivo).webm");
+    this->Player2->loadPlayer("D:/MEDIA/MÚSICAS/Hits Sertanejo/Marília Mendonça, Maiara & Maraisa - Todo Mundo Menos Você.mp3");
+    this->Player3->loadPlayer("D:/MEDIA/MÚSICAS/Internacionais/63 - Luis Fonsi, Demi Lovato - Échame La Culpa.mp3");
+}
+
+void Player::loadMediaInPlayers(QString path){
+    this->Player1->loadPlayer(path);
+    this->Player2->loadPlayer(path);
+    this->Player3->loadPlayer(path);
 }
 
 void Player::playerLoaded(bool loaded){
     this->Player1->unloadPlayer();
     this->Player2->unloadPlayer();
     this->Player3->unloadPlayer();
+}
+
+void Player::loadFiles(QString folder, QString search){
+    this->currentFolder = folder;
+    qInfo() << folder;
+    qInfo() << search;
+}
+
+void Player::on_search_button_clicked()
+{
+    loadFiles(this->currentFolder, ui->search_line->text());
+}
+
+void Player::on_search_clear_clicked()
+{
+    ui->search_line->clear();
+    loadFiles(this->currentFolder, "");
+}
+
+void Player::on_search_line_returnPressed()
+{
+    loadFiles(this->currentFolder, ui->search_line->text());
 }
 

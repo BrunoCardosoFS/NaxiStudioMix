@@ -41,11 +41,19 @@ public:
 
 private slots:
     void on_buttonTeste_clicked();
+    void loadMediaInPlayers(QString path);
     void playerLoaded(bool loaded);
+    void loadFiles(QString folder, QString search);
+
+    void on_search_button_clicked();
+    void on_search_clear_clicked();
+    void on_search_line_returnPressed();
 
 private:
     Ui::Player *ui;
     QSettings *settings;
+
+    QString currentFolder;
 
     PlayerWidget *Player1;
     PlayerWidget *Player2;

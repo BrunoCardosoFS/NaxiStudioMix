@@ -1,65 +1,52 @@
 [
     {
         "title": "Principais",
-        "style": "",
         "path": "D:/MEDIA/PLASTICA 30 ANOS ANIVERSARIO/Plastica Jacobina Parte 001/Verso¦âes Principais - Jacobina Fm",
-        "type": 0,
-        "id": "principais"
+        "type": 0
     },
     {
         "title": "Desmembradas",
-        "style": "",
         "path": "D:/MEDIA/PLASTICA 30 ANOS ANIVERSARIO/Plastica Jacobina Parte 001/Verso¦âes Desmebradas - Jacobina Fm",
-        "type": 0,
-        "id": "desmembradas"
+        "type": 0
     },
     {
         "title": "Comerciais",
-        "style": "",
         "path": "D:/MEDIA/COMERCIAIS",
-        "type": 2,
-        "id": "comerciais"
+        "type": 2
     },
     {
         "title": "Saídas de Bloco",
-        "style": "",
         "path": "D:/MEDIA/PLASTICA 30 ANOS ANIVERSARIO/Plastica Jacobina Parte 002/Trilhas Com Assinaturas - Jacobina Fm",
-        "type": 0,
-        "id": "sb"
+        "type": 0
     },
     {
         "title": "Acapella",
-        "style": "",
         "path": "D:/MEDIA/PLASTICA 30 ANOS ANIVERSARIO/Plastica Jacobina Parte 002/Verso¦âes Acapela - Jacobina Fm",
-        "type": 0,
-        "id": "acapella"
+        "type": 0
     },
     {
         "title": "Outros",
-        "style": "",
         "path": "D:/MEDIA/OUTROS",
-        "type": 0,
-        "id": "outros"
+        "type": 0
     },
     {
         "title": "Hits Sertanejo",
-        "style": "",
         "path": "D:/MEDIA/MÚSICAS/Hits Sertanejo",
-        "type": 1,
-        "id": "sertanejo"
+        "type": 1
+    },
+    {
+        "title": "Internacional",
+        "path": "D:/MEDIA/MÚSICAS/Internacionais",
+        "type": 1
     },
     {
         "title": "Dance",
-        "style": "",
         "path": "D:/MEDIA/MÚSICAS/Dance",
-        "type": 1,
-        "id": "sertanejo"
+        "type": 1
     },
     {
         "title": "Pagode",
-        "style": "",
         "path": "D:/MEDIA/MÚSICAS/Pagode",
-        "type": 1,
-        "id": "pagode"
+        "type": 1
     }
 ]

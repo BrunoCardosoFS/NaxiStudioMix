@@ -1,7 +1,11 @@
 #ifndef FOLDERSWIDGET_H
 #define FOLDERSWIDGET_H
 
-#include <QWidget>
+#include <QtWidgets>
+#include <QJsonArray>
+#include <QJsonObject>
+
+#include "../../backend/files/folderslist.h"
 
 class FoldersWidget : public QWidget
 {
@@ -9,7 +13,14 @@ class FoldersWidget : public QWidget
 public:
     explicit FoldersWidget(QWidget *parent = nullptr);
 
+    void loadFolders();
+
+private:
+    QWidget *parent;
+    FoldersList *folders;
+
 signals:
+    void loadFiles(QString folder, QString search);
 };
 
 #endif // FOLDERSWIDGET_H
