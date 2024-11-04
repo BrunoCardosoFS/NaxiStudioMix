@@ -30,6 +30,12 @@ Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
         settings->setValue("db", QCoreApplication::applicationDirPath() + "/../DB");
     }
 
+    QTimer *clockTimer = new QTimer(this);
+    updateClock();
+    connect(clockTimer, &QTimer::timeout, this, &Player::updateClock);
+    clockTimer->start(1000);
+
+
     this->Player1 = new PlayerWidget(this);
     this->Player2 = new PlayerWidget(this);
     this->Player3 = new PlayerWidget(this);
@@ -66,6 +72,11 @@ Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
 Player::~Player()
 {
     delete ui;
+}
+
+void Player::updateClock(){
+    QDateTime currentTime = QDateTime::currentDateTime();
+    ui->clock_label->setText(currentTime.toString("dd/MM/yyyy  hh:mm:ss"));
 }
 
 void Player::on_buttonTeste_clicked()

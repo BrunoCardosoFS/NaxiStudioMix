@@ -40,6 +40,8 @@ public:
     ~Player();
 
 private slots:
+    void updateClock();
+
     void on_buttonTeste_clicked();
     void loadMediaInPlayers(QString path);
     void playerLoaded(bool loaded);

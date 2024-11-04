@@ -707,7 +707,7 @@ QLabel{
 	border: none;
 }
 
-QPushButton, #time_area, #openplaylist_area{
+QPushButton, #clock_area, #openplaylist_area{
 	background: #ffa60a;
 	border-radius: 10px;
 	border: 1px solid #000;
@@ -925,7 +925,7 @@ QDateEdit::down-arrow, QDateEdit::up-arraow {
            </spacer>
           </item>
           <item>
-           <widget class="QWidget" name="time_area" native="true">
+           <widget class="QWidget" name="clock_area" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -958,7 +958,7 @@ QDateEdit::down-arrow, QDateEdit::up-arraow {
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="time_label">
+              <widget class="QLabel" name="clock_label">
                <property name="text">
                 <string>dd/mm/aaaa hh:mm:ss</string>
                </property>
