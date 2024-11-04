@@ -25,7 +25,6 @@ Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
     ui->setupUi(this);
 
     this->settings = new QSettings("NaxiStudio", "NaxiStudio Player");
-
     if(!settings->contains("db")){
         settings->setValue("db", QCoreApplication::applicationDirPath() + "/../DB");
     }
@@ -34,7 +33,6 @@ Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
     updateClock();
     connect(clockTimer, &QTimer::timeout, this, &Player::updateClock);
     clockTimer->start(1000);
-
 
     this->Player1 = new PlayerWidget(this);
     this->Player2 = new PlayerWidget(this);
