@@ -71,6 +71,9 @@ Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
     this->Folders = new FoldersWidget(ui->folders_scroll_widget);
     connect(this->Folders, &FoldersWidget::loadFiles, this, &Player::loadFiles);
     this->Folders->loadFolders();
+
+    this->Files = new FilesListWidget(ui->fileslist_scroll_widget);
+    connect(this->Files, &FilesListWidget::loadPlayerSignal, this, &Player::loadMediaInPlayers);
 }
 
 Player::~Player()
@@ -81,13 +84,6 @@ Player::~Player()
 void Player::updateClock(){
     QDateTime currentTime = QDateTime::currentDateTime();
     ui->clock_label->setText(currentTime.toString("dd/MM/yyyy  hh:mm:ss"));
-}
-
-void Player::on_buttonTeste_clicked()
-{
-    this->Player1->loadPlayer("D:/MEDIA/MÚSICAS/Hits Sertanejo/Luan Santana, Luísa Sonza - Coração Cigano.mp3");
-    this->Player2->loadPlayer("D:/MEDIA/MÚSICAS/Hits Sertanejo/Marília Mendonça, Maiara & Maraisa - Todo Mundo Menos Você.mp3");
-    this->Player3->loadPlayer("D:/MEDIA/MÚSICAS/Dance/Dua Lipa - Levitating.webm");
 }
 
 void Player::loadMediaInPlayers(QString path){
@@ -104,8 +100,7 @@ void Player::playerLoaded(bool loaded){
 
 void Player::loadFiles(QString folder, QString search){
     this->currentFolder = folder;
-    qInfo() << folder;
-    qInfo() << search;
+    this->Files->loadFiles(folder, search);
 }
 
 void Player::on_search_button_clicked()

@@ -32,6 +32,7 @@ public slots:
 private slots:
     void updateDuration(qint64 duration);
     void updatePosition(qint64 position);
+    void updatePlaying(bool playing);
 };
 
 #endif // AUDIOPLAYER_H

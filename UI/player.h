@@ -24,6 +24,7 @@
 
 #include "./widgets/playerwidget.h"
 #include "./widgets/folderswidget.h"
+#include "./widgets/fileslistwidget.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -42,7 +43,6 @@ public:
 private slots:
     void updateClock();
 
-    void on_buttonTeste_clicked();
     void loadMediaInPlayers(QString path);
     void playerLoaded(bool loaded);
     void loadFiles(QString folder, QString search);
@@ -62,6 +62,7 @@ private:
     PlayerWidget *Player3;
 
     FoldersWidget *Folders;
+    FilesListWidget *Files;
 
 };
 #endif // PLAYER_H

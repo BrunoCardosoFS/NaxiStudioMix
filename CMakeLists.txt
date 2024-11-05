@@ -33,6 +33,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         UI/widgets/folderswidget.h UI/widgets/folderswidget.cpp
         backend/files/folderslist.h backend/files/folderslist.cpp
         backend/files/fileslist.h backend/files/fileslist.cpp
+        UI/widgets/fileslistwidget.h UI/widgets/fileslistwidget.cpp
+        UI/widgets/filewidget.h UI/widgets/filewidget.cpp
 
     )
     qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

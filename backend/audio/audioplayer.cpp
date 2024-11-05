@@ -11,6 +11,7 @@ AudioPlayer::AudioPlayer(QWidget *parent):QWidget{parent}
 
     connect(this->Player, &QMediaPlayer::durationChanged, this, &AudioPlayer::updateDuration);
     connect(this->Player, &QMediaPlayer::positionChanged, this, &AudioPlayer::updatePosition);
+    connect(this->Player, &QMediaPlayer::playingChanged, this, &AudioPlayer::updatePlaying);
 }
 
 bool AudioPlayer::setDevice(QString id){
@@ -47,6 +48,10 @@ void AudioPlayer::updatePosition(qint64 position){
     emit positionChanged(position, time.toString(format));
 }
 
+void AudioPlayer::updatePlaying(bool playing){
+    this->isPlaying = playing;
+}
+
 void AudioPlayer::setSource(QString path){
     this->Player->setSource(QUrl::fromLocalFile(path));
 
@@ -60,16 +65,13 @@ void AudioPlayer::setPosition(qint64 position){
 
 void AudioPlayer::play(){
     this->Player->play();
-    this->isPlaying = this->Player->isPlaying();
 }
 
 void AudioPlayer::pause(){
     this->Player->pause();
-    this->isPlaying = this->Player->isPlaying();
 }
 
 void AudioPlayer::stop(){
     this->Player->pause();
     this->Player->setPosition(0);
-    this->isPlaying = this->Player->isPlaying();
 }
