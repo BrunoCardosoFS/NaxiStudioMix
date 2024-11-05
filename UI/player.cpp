@@ -54,6 +54,12 @@ Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
     this->Player2->setStopShortcut("F7");
     this->Player3->setStopShortcut("F11");
 
+    if(settings->contains("OutputDevicePlayer1") || settings->contains("OutputDevicePlayer2") || settings->contains("OutputDevicePlayer3")){
+        this->Player1->setDevice(settings->value("OutputDevicePlayer1").toString());
+        this->Player2->setDevice(settings->value("OutputDevicePlayer2").toString());
+        this->Player3->setDevice(settings->value("OutputDevicePlayer3").toString());
+    }
+
     connect(this->Player1, &PlayerWidget::loaded, this, &Player::playerLoaded);
     connect(this->Player2, &PlayerWidget::loaded, this, &Player::playerLoaded);
     connect(this->Player3, &PlayerWidget::loaded, this, &Player::playerLoaded);
@@ -81,7 +87,7 @@ void Player::on_buttonTeste_clicked()
 {
     this->Player1->loadPlayer("D:/MEDIA/MÚSICAS/Hits Sertanejo/Luan Santana, Luísa Sonza - Coração Cigano.mp3");
     this->Player2->loadPlayer("D:/MEDIA/MÚSICAS/Hits Sertanejo/Marília Mendonça, Maiara & Maraisa - Todo Mundo Menos Você.mp3");
-    this->Player3->loadPlayer("D:/MEDIA/MÚSICAS/Internacionais/63 - Luis Fonsi, Demi Lovato - Échame La Culpa.mp3");
+    this->Player3->loadPlayer("D:/MEDIA/MÚSICAS/Dance/Dua Lipa - Levitating.webm");
 }
 
 void Player::loadMediaInPlayers(QString path){
