@@ -23,6 +23,10 @@ PlayerWidget::~PlayerWidget()
     delete ui;
 }
 
+bool PlayerWidget::setDevice(QString key){
+    return this->Player->setDevice(key);
+}
+
 void PlayerWidget::on_play_clicked()
 {
     this->Player->play();
@@ -82,10 +86,28 @@ void PlayerWidget::on_slider_sliderMoved(int position)
     this->Player->setPosition(position*100);
 }
 
+void PlayerWidget::on_slider_sliderPressed()
+{
+    if(this->Player->isPlaying){
+        this->isPlaying = true;
+        this->Player->pause();
+    }else{
+        this->isPlaying = false;
+    }
+}
+
+void PlayerWidget::on_slider_sliderReleased()
+{
+    if(this->isPlaying){
+        this->Player->play();
+    }
+}
+
 void PlayerWidget::on_load_media_clicked()
 {
     this->Player->setSource(this->loadPath);
     emit loaded(true);
     unloadPlayer();
 }
+
 
