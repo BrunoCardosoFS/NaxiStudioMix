@@ -22,6 +22,7 @@ signals:
     void titleChanged(QString title);
 
 public slots:
+    bool setDevice(QString id);
     void setSource(QString path);
     void setPosition(qint64 position);
     void play();

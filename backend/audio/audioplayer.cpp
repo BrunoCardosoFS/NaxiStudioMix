@@ -1,5 +1,7 @@
 #include "audioplayer.h"
 
+#include <QDebug>
+
 AudioPlayer::AudioPlayer(QWidget *parent):QWidget{parent}
 {
     this->Player = new QMediaPlayer(this);
@@ -9,6 +11,18 @@ AudioPlayer::AudioPlayer(QWidget *parent):QWidget{parent}
 
     connect(this->Player, &QMediaPlayer::durationChanged, this, &AudioPlayer::updateDuration);
     connect(this->Player, &QMediaPlayer::positionChanged, this, &AudioPlayer::updatePosition);
+}
+
+bool AudioPlayer::setDevice(QString id){
+    const QList<QAudioDevice> audioDevices = QMediaDevices::audioOutputs();
+
+    for (const QAudioDevice &device : audioDevices){
+        if(device.id() == id){
+            this->AudioOutput->setDevice(device);
+            return true;
+        }
+    }
+    return false;
 }
 
 void AudioPlayer::updateDuration(qint64 duration){
