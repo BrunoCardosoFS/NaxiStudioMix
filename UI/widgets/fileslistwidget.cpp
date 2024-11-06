@@ -6,6 +6,9 @@ FilesListWidget::FilesListWidget(QWidget *parent):QWidget{parent}
 {
     this->parent = parent;
 
+    this->setFixedWidth(0);
+    this->setFixedHeight(0);
+
     this->FilesListThread = new FilesList(this);
     connect(this->FilesListThread, &FilesList::finish, this, &FilesListWidget::finishedLoad);
 }

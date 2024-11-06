@@ -44,7 +44,7 @@ private slots:
     void updateClock();
 
     void loadMediaInPlayers(QString path);
-    void playerLoaded(bool loaded);
+    void playerLoaded();
     void loadFiles(QString folder, QString search);
 
     void on_search_button_clicked();

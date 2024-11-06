@@ -4,7 +4,7 @@
 #include <QtCore>
 #include <QtMultimedia>
 
-class AudioPlayer : public QWidget
+class AudioPlayer : public QObject
 {
     Q_OBJECT
 public:

@@ -27,6 +27,7 @@ void FileWidget::setInfo(QString title, QString path, QString duration){
     this->TimeLabel->setText(duration);
     this->TitleLabel->setText(title);
     this->path = path;
+    this->setToolTip(title);
 }
 
 void FileWidget::mousePressEvent(QMouseEvent *event){

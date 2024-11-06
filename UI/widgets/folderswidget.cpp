@@ -38,7 +38,10 @@ void FoldersWidget::loadFolders(){
         item->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         item->setCursor(Qt::PointingHandCursor);
 
-        item->setText(jsonObject.value("title").toString());
+        QString title = jsonObject.value("title").toString();
+
+        item->setText(title);
+        item->setToolTip(title);
         item->setProperty("id", jsonObject.value("id").toString());
 
         connect(item, &QPushButton::clicked, [this, jsonObject](){

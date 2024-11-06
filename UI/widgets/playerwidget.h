@@ -16,6 +16,8 @@ public:
     explicit PlayerWidget(QWidget *parent = nullptr);
     ~PlayerWidget();
 
+    bool readyLoad;
+
 private:
     Ui::PlayerWidget *ui;
 
@@ -25,7 +27,7 @@ private:
     bool isPlaying;
 
 signals:
-    void loaded(bool loaded);
+    void loaded();
 
 public slots:
     void updateDuration(qint64 durationms, QString duration);

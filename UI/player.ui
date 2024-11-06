@@ -112,10 +112,139 @@ QLineEdit{
          </property>
          <property name="styleSheet">
           <string notr="true">#commercial_area{
-	background: #191D24;
+	background-color: #1F232C;
 	border-radius: 10px;
-}</string>
+}
+
+#list_break_scroll, #list_media_scroll, #list_break_widget, #list_media_widget{
+	background-color: #191D24;
+	border-radius: 10px;
+}
+</string>
          </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <property name="leftMargin">
+           <number>10</number>
+          </property>
+          <property name="topMargin">
+           <number>10</number>
+          </property>
+          <property name="rightMargin">
+           <number>10</number>
+          </property>
+          <property name="bottomMargin">
+           <number>10</number>
+          </property>
+          <item>
+           <widget class="QScrollArea" name="list_break_scroll">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>150</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>150</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <widget class="QWidget" name="list_break_widget">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>150</width>
+               <height>220</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <property name="spacing">
+               <number>5</number>
+              </property>
+              <property name="leftMargin">
+               <number>7</number>
+              </property>
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="rightMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>ToDo</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QScrollArea" name="list_media_scroll">
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <widget class="QWidget" name="list_media_widget">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>210</width>
+               <height>220</height>
+              </rect>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_10">
+              <property name="spacing">
+               <number>5</number>
+              </property>
+              <property name="leftMargin">
+               <number>7</number>
+              </property>
+              <property name="topMargin">
+               <number>7</number>
+              </property>
+              <property name="rightMargin">
+               <number>7</number>
+              </property>
+              <property name="bottomMargin">
+               <number>7</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>ToDo</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>
@@ -190,7 +319,7 @@ QTabBar::tab:selected {
 }</string>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="files_tab">
              <property name="styleSheet">
@@ -788,7 +917,16 @@ QPushButton:hover {
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">QDateEdit{
+             <string notr="true">QPushButton{
+	background-color : #ffa60a;
+	border: none;
+}
+
+QPushButton:hover {
+    background-color: #E5950B;
+}
+
+QDateEdit{
 	background-color : #ffa60a;
 	font-size: 14px;
 	font-weight: bold;
@@ -828,13 +966,13 @@ QDateEdit::down-arrow, QDateEdit::up-arraow {
               <number>1</number>
              </property>
              <property name="topMargin">
-              <number>0</number>
+              <number>1</number>
              </property>
              <property name="rightMargin">
-              <number>0</number>
+              <number>1</number>
              </property>
              <property name="bottomMargin">
-              <number>0</number>
+              <number>1</number>
              </property>
              <item>
               <widget class="QDateEdit" name="openplaylist_date">
@@ -877,14 +1015,14 @@ QDateEdit::down-arrow, QDateEdit::up-arraow {
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>31</width>
-                 <height>31</height>
+                 <width>29</width>
+                 <height>29</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>31</width>
-                 <height>31</height>
+                 <width>29</width>
+                 <height>29</height>
                 </size>
                </property>
                <property name="cursor">
@@ -902,8 +1040,8 @@ QDateEdit::down-arrow, QDateEdit::up-arraow {
                </property>
                <property name="iconSize">
                 <size>
-                 <width>20</width>
-                 <height>20</height>
+                 <width>18</width>
+                 <height>18</height>
                 </size>
                </property>
               </widget>
@@ -959,6 +1097,12 @@ QDateEdit::down-arrow, QDateEdit::up-arraow {
              </property>
              <item>
               <widget class="QLabel" name="clock_label">
+               <property name="toolTip">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
+               <property name="whatsThis">
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               </property>
                <property name="text">
                 <string>dd/mm/aaaa hh:mm:ss</string>
                </property>
@@ -1012,6 +1156,9 @@ QDateEdit::down-arrow, QDateEdit::up-arraow {
           </property>
           <item>
            <widget class="QWidget" name="playlist_hours" native="true">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -1052,13 +1199,6 @@ QDateEdit::down-arrow, QDateEdit::up-arraow {
              <property name="bottomMargin">
               <number>7</number>
              </property>
-             <item>
-              <widget class="QPushButton" name="buttonTeste">
-               <property name="text">
-                <string>PushButton</string>
-               </property>
-              </widget>
-             </item>
             </layout>
            </widget>
           </item>
@@ -1110,6 +1250,16 @@ QDateEdit::down-arrow, QDateEdit::up-arraow {
               <property name="bottomMargin">
                <number>7</number>
               </property>
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string>ToDo</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
            </widget>

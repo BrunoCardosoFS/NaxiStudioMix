@@ -2,7 +2,7 @@
 
 #include <QDebug>
 
-AudioPlayer::AudioPlayer(QWidget *parent):QWidget{parent}
+AudioPlayer::AudioPlayer(QWidget *parent):QObject{parent}
 {
     this->Player = new QMediaPlayer(this);
     this->AudioOutput = new QAudioOutput(this->Player);

@@ -14,8 +14,7 @@ PlayerWidget::PlayerWidget(QWidget *parent):QGroupBox(parent), ui(new Ui::Player
     connect(this->Player, &AudioPlayer::titleChanged, this, &PlayerWidget::updateTitle);
 
     ui->load_media->hide();
-
-    // this->Player->setSource("D:/MEDIA/MÚSICAS/Hits Sertanejo/Luan Santana, Luísa Sonza - Coração Cigano.mp3");
+    this->readyLoad = false;
 }
 
 PlayerWidget::~PlayerWidget()
@@ -69,14 +68,16 @@ void PlayerWidget::setStopShortcut(QString key){
 }
 
 void PlayerWidget::loadPlayer(QString path){
-    this->loadPath = path;
     if(!this->Player->isPlaying){
+        this->loadPath = path;
+        this->readyLoad = true;
         ui->control_area->hide();
         ui->load_media->show();
     }
 }
 
 void PlayerWidget::unloadPlayer(){
+    this->readyLoad = false;
     ui->control_area->show();
     ui->load_media->hide();
 }
@@ -106,7 +107,7 @@ void PlayerWidget::on_slider_sliderReleased()
 void PlayerWidget::on_load_media_clicked()
 {
     this->Player->setSource(this->loadPath);
-    emit loaded(true);
+    emit loaded();
     unloadPlayer();
 }
 
