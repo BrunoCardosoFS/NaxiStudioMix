@@ -87,13 +87,14 @@ void Player::updateClock(){
 }
 
 void Player::loadMediaInPlayers(QString path){
-    if(this->Player1->readyLoad || this->Player2->readyLoad || this->Player3->readyLoad){
-        playerLoaded();
-    }else{
-        this->Player1->loadPlayer(path);
-        this->Player2->loadPlayer(path);
-        this->Player3->loadPlayer(path);
-    }
+    // if(this->Player1->readyLoad || this->Player2->readyLoad || this->Player3->readyLoad){
+    //     playerLoaded();
+    // }else{
+
+    // }
+    this->Player1->loadPlayer(path);
+    this->Player2->loadPlayer(path);
+    this->Player3->loadPlayer(path);
 }
 
 void Player::playerLoaded(){

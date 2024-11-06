@@ -8,6 +8,7 @@ AudioPlayer::AudioPlayer(QWidget *parent):QObject{parent}
     this->AudioOutput = new QAudioOutput(this->Player);
     this->AudioOutput->setVolume(100);
     this->Player->setAudioOutput(this->AudioOutput);
+    this->isPlaying = false;
 
     connect(this->Player, &QMediaPlayer::durationChanged, this, &AudioPlayer::updateDuration);
     connect(this->Player, &QMediaPlayer::positionChanged, this, &AudioPlayer::updatePosition);

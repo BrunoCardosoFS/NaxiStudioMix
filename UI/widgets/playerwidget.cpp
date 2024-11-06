@@ -1,6 +1,8 @@
 #include "playerwidget.h"
 #include "ui_playerwidget.h"
 
+#include <QDebug>
+
 
 PlayerWidget::PlayerWidget(QWidget *parent):QGroupBox(parent), ui(new Ui::PlayerWidget)
 {
@@ -8,13 +10,14 @@ PlayerWidget::PlayerWidget(QWidget *parent):QGroupBox(parent), ui(new Ui::Player
 
     this->loadPath = "";
     this->Player = new AudioPlayer(this);
+    this->isPlaying = false;
 
     connect(this->Player, &AudioPlayer::durationChanged, this, &PlayerWidget::updateDuration);
     connect(this->Player, &AudioPlayer::positionChanged, this, &PlayerWidget::updatePosition);
     connect(this->Player, &AudioPlayer::titleChanged, this, &PlayerWidget::updateTitle);
 
-    ui->load_media->hide();
     this->readyLoad = false;
+    ui->load_media->hide();
 }
 
 PlayerWidget::~PlayerWidget()
