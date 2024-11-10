@@ -74,6 +74,9 @@ Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
 
     this->Files = new FilesListWidget(ui->fileslist_scroll_widget);
     connect(this->Files, &FilesListWidget::loadPlayerSignal, this, &Player::loadMediaInPlayers);
+
+    this->Hours = new HourList(ui->playlist_hours);
+    connect(this->Hours, &HourList::clicked, this, &Player::loadHour);
 }
 
 Player::~Player()
@@ -87,14 +90,13 @@ void Player::updateClock(){
 }
 
 void Player::loadMediaInPlayers(QString path){
-    // if(this->Player1->readyLoad || this->Player2->readyLoad || this->Player3->readyLoad){
-    //     playerLoaded();
-    // }else{
-
-    // }
-    this->Player1->loadPlayer(path);
-    this->Player2->loadPlayer(path);
-    this->Player3->loadPlayer(path);
+    if(this->Player1->readyLoad || this->Player2->readyLoad || this->Player3->readyLoad){
+        playerLoaded();
+    }else{
+        this->Player1->loadPlayer(path);
+        this->Player2->loadPlayer(path);
+        this->Player3->loadPlayer(path);
+    }
 }
 
 void Player::playerLoaded(){
@@ -106,6 +108,10 @@ void Player::playerLoaded(){
 void Player::loadFiles(QString folder, QString search){
     this->currentFolder = folder;
     this->Files->loadFiles(folder, search);
+}
+
+void Player::loadHour(QString hour){
+    qInfo() << hour;
 }
 
 void Player::on_search_button_clicked()

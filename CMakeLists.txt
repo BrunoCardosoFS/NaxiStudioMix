@@ -38,6 +38,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         backend/files/fileslist.h backend/files/fileslist.cpp
         UI/widgets/fileslistwidget.h UI/widgets/fileslistwidget.cpp
         UI/widgets/filewidget.h UI/widgets/filewidget.cpp
+        UI/widgets/hourlist.h UI/widgets/hourlist.cpp
+        UI/widgets/hourwidget.h UI/widgets/hourwidget.cpp
 
     )
     qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

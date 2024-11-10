@@ -4,7 +4,7 @@
 #include <QtWidgets>
 #include "../../backend/files/fileslist.h"
 
-class FilesListWidget : public QWidget
+class FilesListWidget : public QObject
 {
     Q_OBJECT
 public:

@@ -2,12 +2,9 @@
 
 #include "filewidget.h"
 
-FilesListWidget::FilesListWidget(QWidget *parent):QWidget{parent}
+FilesListWidget::FilesListWidget(QWidget *parent):QObject{parent}
 {
     this->parent = parent;
-
-    this->setFixedWidth(0);
-    this->setFixedHeight(0);
 
     this->FilesListThread = new FilesList(this);
     connect(this->FilesListThread, &FilesList::finish, this, &FilesListWidget::finishedLoad);
@@ -35,7 +32,7 @@ void FilesListWidget::finishedLoad(const QJsonArray list){
     foreach (QJsonValue item, list) {
         QJsonArray itemArray = item.toArray();
 
-        FileWidget *itemList = new FileWidget(this);
+        FileWidget *itemList = new FileWidget(this->parent);
         itemList->setInfo(itemArray[0].toString(), itemArray[1].toString(), itemArray[2].toString());
         connect(itemList, &FileWidget::clicked, this, &FilesListWidget::loadPlayer);
 

@@ -26,6 +26,8 @@
 #include "./widgets/folderswidget.h"
 #include "./widgets/fileslistwidget.h"
 
+#include "./widgets/hourlist.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class Player;
@@ -47,6 +49,8 @@ private slots:
     void playerLoaded();
     void loadFiles(QString folder, QString search);
 
+    void loadHour(QString hour);
+
     void on_search_button_clicked();
     void on_search_clear_clicked();
     void on_search_line_returnPressed();
@@ -63,6 +67,8 @@ private:
 
     FoldersWidget *Folders;
     FilesListWidget *Files;
+
+    HourList *Hours;
 
 };
 #endif // PLAYER_H
