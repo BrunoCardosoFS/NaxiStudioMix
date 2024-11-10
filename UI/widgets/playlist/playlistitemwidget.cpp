@@ -31,3 +31,18 @@ PlaylistItemWidget::PlaylistItemWidget(QWidget *parent, QString time, QString ti
     layout->addWidget(timeLabel);
     layout->addWidget(titleLabel);
 }
+
+void PlaylistItemWidget::mouseReleaseEvent(QMouseEvent *event){
+    switch (event->button()) {
+    case Qt::LeftButton:
+        emit clicked(this->path);
+        break;
+    case Qt::MiddleButton:
+        break;
+    case Qt::RightButton:
+        break;
+    default:
+        break;
+    }
+}
+

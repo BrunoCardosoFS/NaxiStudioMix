@@ -14,6 +14,10 @@ public:
     QString path;
 
 signals:
+    void clicked(QString path);
+
+protected:
+    void mouseReleaseEvent(QMouseEvent *event) override;
 };
 
 #endif // PLAYLISTITEMWIDGET_H

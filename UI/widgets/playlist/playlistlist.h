@@ -17,8 +17,13 @@ private:
 
 public slots:
     void openPlaylist(QDate date, QString hour);
+    void updatePlaylist(QDate date);
+
+private slots:
+    void loadPlayer(QString path);
 
 signals:
+    void clicked(QString path);
 };
 
 #endif // PLAYLISTLIST_H

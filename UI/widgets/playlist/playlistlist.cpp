@@ -40,10 +40,20 @@ void PlaylistList::openPlaylist(QDate date, QString hour){
 
         PlaylistItemWidget *playlistItem = new PlaylistItemWidget(this->parent, time.toString(format), itemArray[0].toString(), itemArray[1].toString(), i);
 
+        connect(playlistItem, &PlaylistItemWidget::clicked, this, &PlaylistList::loadPlayer);
+
         this->parent->layout()->addWidget(playlistItem);
 
     }
 
     QSpacerItem *spacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     this->parent->layout()->addItem(spacer);
+}
+
+void PlaylistList::updatePlaylist(QDate date){
+    this->OpenPlaylistBackend->updatePlaylist(date);
+}
+
+void PlaylistList::loadPlayer(QString path){
+    emit this->clicked(path);
 }

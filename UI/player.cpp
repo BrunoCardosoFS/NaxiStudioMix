@@ -79,6 +79,7 @@ Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
     connect(this->Hours, &HourList::clicked, this, &Player::loadHour);
 
     this->Playlist = new PlaylistList(ui->playlist_scroll_widget);
+    connect(this->Playlist, &PlaylistList::clicked, this, &Player::loadMediaInPlayers);
 
     ui->openplaylist_date->setDate(QDate::currentDate());
     this->loadHour(QTime::currentTime().toString("hh"));
@@ -122,6 +123,7 @@ void Player::loadHour(QString hour){
 
 void Player::on_openplaylist_button_clicked()
 {
+    this->Playlist->updatePlaylist(ui->openplaylist_date->date());
     this->loadHour(QTime::currentTime().toString("hh"));
 }
 
