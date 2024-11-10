@@ -2,7 +2,7 @@
 #define FILESLISTWIDGET_H
 
 #include <QtWidgets>
-#include "../../backend/files/fileslist.h"
+#include "../../../backend/files/fileslist.h"
 
 class FilesListWidget : public QObject
 {

@@ -34,6 +34,8 @@ Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
     connect(clockTimer, &QTimer::timeout, this, &Player::updateClock);
     clockTimer->start(1000);
 
+    ui->openplaylist_date->setDate(QDate::currentDate());
+
     this->Player1 = new PlayerWidget(this);
     this->Player2 = new PlayerWidget(this);
     this->Player3 = new PlayerWidget(this);
@@ -128,5 +130,11 @@ void Player::on_search_clear_clicked()
 void Player::on_search_line_returnPressed()
 {
     loadFiles(this->currentFolder, ui->search_line->text());
+}
+
+
+void Player::on_openplaylist_button_clicked()
+{
+    qInfo() << ui->openplaylist_date->date().toString("yyyy-MM-dd");
 }
 

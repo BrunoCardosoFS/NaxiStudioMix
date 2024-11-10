@@ -5,7 +5,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 
-#include "../../backend/files/folderslist.h"
+#include "../../../backend/files/folderslist.h"
 
 class FoldersWidget : public QWidget
 {

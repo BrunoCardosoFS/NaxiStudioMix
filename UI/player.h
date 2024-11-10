@@ -22,11 +22,11 @@
 #include <QtWidgets>
 #include <QSettings>
 
-#include "./widgets/playerwidget.h"
-#include "./widgets/folderswidget.h"
-#include "./widgets/fileslistwidget.h"
+#include "./widgets/player/playerwidget.h"
+#include "./widgets/files/folderswidget.h"
+#include "./widgets/files/fileslistwidget.h"
 
-#include "./widgets/hourlist.h"
+#include "./widgets/playlist/hourlist.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -54,6 +54,8 @@ private slots:
     void on_search_button_clicked();
     void on_search_clear_clicked();
     void on_search_line_returnPressed();
+
+    void on_openplaylist_button_clicked();
 
 private:
     Ui::Player *ui;

@@ -2,7 +2,7 @@
 #define PLAYERWIDGET_H
 
 #include <QtWidgets>
-#include "../../backend/audio/audioplayer.h"
+#include "../../../backend/audio/audioplayer.h"
 
 namespace Ui {
 class PlayerWidget;

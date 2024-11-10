@@ -31,15 +31,15 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         ${app_icon_resource_windows}
         UI/resources/player.qrc
-        UI/widgets/playerwidget.h UI/widgets/playerwidget.cpp UI/widgets/playerwidget.ui
+        UI/widgets/player/playerwidget.h UI/widgets/player/playerwidget.cpp UI/widgets/player/playerwidget.ui
         backend/audio/audioplayer.h backend/audio/audioplayer.cpp
-        UI/widgets/folderswidget.h UI/widgets/folderswidget.cpp
+        UI/widgets/files/folderswidget.h UI/widgets/files/folderswidget.cpp
         backend/files/folderslist.h backend/files/folderslist.cpp
         backend/files/fileslist.h backend/files/fileslist.cpp
-        UI/widgets/fileslistwidget.h UI/widgets/fileslistwidget.cpp
-        UI/widgets/filewidget.h UI/widgets/filewidget.cpp
-        UI/widgets/hourlist.h UI/widgets/hourlist.cpp
-        UI/widgets/hourwidget.h UI/widgets/hourwidget.cpp
+        UI/widgets/files/fileslistwidget.h UI/widgets/files/fileslistwidget.cpp
+        UI/widgets/files/filewidget.h UI/widgets/files/filewidget.cpp
+        UI/widgets/playlist/hourlist.h UI/widgets/playlist/hourlist.cpp
+        UI/widgets/playlist/hourwidget.h UI/widgets/playlist/hourwidget.cpp
 
     )
     qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
