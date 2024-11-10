@@ -3,7 +3,7 @@
 
 #include <QtWidgets>
 
-class FileWidget : public QGroupBox
+class FileWidget : public QWidget
 {
     Q_OBJECT
 public:

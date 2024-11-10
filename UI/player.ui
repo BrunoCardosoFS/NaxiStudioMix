@@ -1199,7 +1199,7 @@ QPushButton:hover{
 	background-color: #FFA60A;
 }</string>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1">
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
              <property name="spacing">
               <number>2</number>
              </property>
@@ -1252,7 +1252,7 @@ QPushButton:hover{
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_4">
               <property name="spacing">
-               <number>3</number>
+               <number>5</number>
               </property>
               <property name="leftMargin">
                <number>7</number>
@@ -1266,16 +1266,6 @@ QPushButton:hover{
               <property name="bottomMargin">
                <number>7</number>
               </property>
-              <item>
-               <widget class="QLabel" name="label">
-                <property name="text">
-                 <string>ToDo</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignmentFlag::AlignCenter</set>
-                </property>
-               </widget>
-              </item>
              </layout>
             </widget>
            </widget>

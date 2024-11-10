@@ -40,6 +40,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         UI/widgets/files/filewidget.h UI/widgets/files/filewidget.cpp
         UI/widgets/playlist/hourlist.h UI/widgets/playlist/hourlist.cpp
         UI/widgets/playlist/hourwidget.h UI/widgets/playlist/hourwidget.cpp
+        backend/playlist/openplaylist.h backend/playlist/openplaylist.cpp
+        UI/widgets/playlist/playlistlist.h UI/widgets/playlist/playlistlist.cpp
+        UI/widgets/playlist/playlistitemwidget.h UI/widgets/playlist/playlistitemwidget.cpp
 
     )
     qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

@@ -1,6 +1,6 @@
 #include "filewidget.h"
 
-FileWidget::FileWidget(QWidget *parent):QGroupBox{parent}
+FileWidget::FileWidget(QWidget *parent):QWidget{parent}
 {
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->setContentsMargins(10,7,10,7);
@@ -9,7 +9,7 @@ FileWidget::FileWidget(QWidget *parent):QGroupBox{parent}
     this->setFixedHeight(30);
     this->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Minimum);
     this->setCursor(Qt::PointingHandCursor);
-
+    this->setAttribute(Qt::WA_StyledBackground, true);
     this->setStyleSheet("FileWidget{background-color: #232731; border-radius: 7px} FileWidget:hover{background-color: #2D3340;} QLabel{font-weight:  bold; color: #fff;}");
 
     this->TimeLabel = new QLabel(this);

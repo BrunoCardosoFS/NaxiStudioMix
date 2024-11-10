@@ -3,6 +3,8 @@
 
 #include <QtWidgets>
 
+#include "./hourwidget.h"
+
 class HourList : public QObject
 {
     Q_OBJECT
@@ -11,9 +13,13 @@ public:
 
 private:
     QWidget *parent;
+    QList<HourWidget*> HourItems;
 
 signals:
     void clicked(QString hour);
+
+public slots:
+    void updateCurrentHour(QString hour);
 
 private slots:
     void loadHour(QString hour);

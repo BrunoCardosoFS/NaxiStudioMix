@@ -27,6 +27,7 @@
 #include "./widgets/files/fileslistwidget.h"
 
 #include "./widgets/playlist/hourlist.h"
+#include "./widgets/playlist/playlistlist.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -71,6 +72,7 @@ private:
     FilesListWidget *Files;
 
     HourList *Hours;
+    PlaylistList *Playlist;
 
 };
 #endif // PLAYER_H
