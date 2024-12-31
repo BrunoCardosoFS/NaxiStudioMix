@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    Player w;
-    w.show();
+    Player window;
+    window.show();
     return a.exec();
 }

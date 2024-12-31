@@ -30,7 +30,7 @@ void FilesList::run(){
         suffix = qfi.completeSuffix().toLower();
         fileName = qfi.fileName();
 
-        if(qfi.isFile() && (fileName.contains(search, Qt::CaseInsensitive)) && (suffix == "mp3" || suffix == "wav" || suffix == "opus" || suffix == "aac" || suffix == "flac" || suffix == "webm")){
+        if(qfi.isFile() && (fileName.contains(search, Qt::CaseInsensitive)) && (suffix == "mp3" || suffix == "wav" || suffix == "opus" || suffix == "aac" || suffix == "flac" || suffix == "webm" || suffix == "m4a")){
             decoder.setSource(QUrl::fromLocalFile(qfi.absoluteFilePath()));
             decoder.start();
 
