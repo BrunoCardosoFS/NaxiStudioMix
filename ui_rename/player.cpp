@@ -26,7 +26,7 @@ Player::Player(QWidget *parent):QMainWindow(parent), ui(new Ui::Player)
 
     this->settings = new QSettings("NaxiStudio", "NaxiStudio Player");
     if(!settings->contains("db")){
-        settings->setValue("db", QCoreApplication::applicationDirPath() + "/../DB");
+        settings->setValue("db", QCoreApplication::applicationDirPath() + "/../db");
     }
 
     QTimer *clockTimer = new QTimer(this);
