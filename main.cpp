@@ -19,12 +19,13 @@
 #include <QLocale>
 #include <QTranslator>
 
-#include "./UI/player.h"
+#include "./ui/player.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QApplication::setWindowIcon(QIcon(":/icons/logo.ico"));
+    a.setWindowIcon(QIcon(":/icons/logo.ico"));
+    a.setStyle(QStyleFactory::create("Fusion"));
 
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
