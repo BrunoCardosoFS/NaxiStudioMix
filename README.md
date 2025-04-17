@@ -1,4 +1,4 @@
-# NaxiStudio Player
+# NaxiStudio Mix
 
 Um software de automação de emissoras de rádio open source.
 
