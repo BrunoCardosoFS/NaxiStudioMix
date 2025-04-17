@@ -17,32 +17,32 @@ set(TS_FILES ./lang/NaxiStudioMix_pt_BR.ts)
 
 set(PROJECT_SOURCES
         main.cpp
-        ./ui/player.cpp
-        ./ui/player.h
-        ./ui/player.ui
+        ./frontend/player.cpp
+        ./frontend/player.h
+        ./frontend/player.ui
         ${TS_FILES}
 )
 
-set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/ui/resources/NaxiStudioMix.rc")
+set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/frontend/resources/NaxiStudioMix.rc")
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(NaxiStudioMix
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         ${app_icon_resource_windows}
-        ui/resources/player.qrc
-        ui/widgets/player/playerwidget.h ui/widgets/player/playerwidget.cpp ui/widgets/player/playerwidget.ui
+        frontend/resources/player.qrc
+        frontend/widgets/player/playerwidget.h frontend/widgets/player/playerwidget.cpp frontend/widgets/player/playerwidget.ui
         backend/audio/audioplayer.h backend/audio/audioplayer.cpp
-        ui/widgets/files/folderswidget.h ui/widgets/files/folderswidget.cpp
+        frontend/widgets/files/folderswidget.h frontend/widgets/files/folderswidget.cpp
         backend/files/folderslist.h backend/files/folderslist.cpp
         backend/files/fileslist.h backend/files/fileslist.cpp
-        ui/widgets/files/fileslistwidget.h ui/widgets/files/fileslistwidget.cpp
-        ui/widgets/files/filewidget.h ui/widgets/files/filewidget.cpp
-        ui/widgets/playlist/hourlist.h ui/widgets/playlist/hourlist.cpp
-        ui/widgets/playlist/hourwidget.h ui/widgets/playlist/hourwidget.cpp
+        frontend/widgets/files/fileslistwidget.h frontend/widgets/files/fileslistwidget.cpp
+        frontend/widgets/files/filewidget.h frontend/widgets/files/filewidget.cpp
+        frontend/widgets/playlist/hourlist.h frontend/widgets/playlist/hourlist.cpp
+        frontend/widgets/playlist/hourwidget.h frontend/widgets/playlist/hourwidget.cpp
         backend/playlist/openplaylist.h backend/playlist/openplaylist.cpp
-        ui/widgets/playlist/playlistlist.h ui/widgets/playlist/playlistlist.cpp
-        ui/widgets/playlist/playlistitemwidget.h ui/widgets/playlist/playlistitemwidget.cpp
+        frontend/widgets/playlist/playlistlist.h frontend/widgets/playlist/playlistlist.cpp
+        frontend/widgets/playlist/playlistitemwidget.h frontend/widgets/playlist/playlistitemwidget.cpp
 
     )
     qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})

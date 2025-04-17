@@ -19,7 +19,7 @@
 #include <QLocale>
 #include <QTranslator>
 
-#include "./ui/player.h"
+#include "./frontend/player.h"
 
 int main(int argc, char *argv[])
 {
