@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(NaxiStudio VERSION 0.1 LANGUAGES CXX)
+project(NaxiStudioMix VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -13,7 +13,7 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools)
 find_package(Qt6 REQUIRED COMPONENTS Multimedia Core)
 
-set(TS_FILES ./lang/NaxiStudio_pt_BR.ts)
+set(TS_FILES ./lang/NaxiStudioMix_pt_BR.ts)
 
 set(PROJECT_SOURCES
         main.cpp
@@ -23,10 +23,10 @@ set(PROJECT_SOURCES
         ${TS_FILES}
 )
 
-set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/ui/resources/icons/NaxiStudio.rc")
+set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/ui/resources/NaxiStudioMix.rc")
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(NaxiStudio
+    qt_add_executable(NaxiStudioMix
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         ${app_icon_resource_windows}
@@ -48,23 +48,23 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 
 else()
-    add_executable(NaxiStudio
+    add_executable(NaxiStudioMix
         ${PROJECT_SOURCES}
     )
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
 
-target_link_libraries(NaxiStudio PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
-target_link_libraries(NaxiStudio PRIVATE Qt6::Multimedia Qt6::Core)
+target_link_libraries(NaxiStudioMix PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(NaxiStudioMix PRIVATE Qt6::Multimedia Qt6::Core)
 
 
 if(${QT_VERSION} VERSION_LESS 6.1.0)
-  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER br.dev.NaxiStudio.Player)
+  set(BUNDLE_ID_OPTION MACOSX_BUNDLE_GUI_IDENTIFIER com.NaxiStudio.Mix)
 endif()
 
 
-set_target_properties(NaxiStudio PROPERTIES
+set_target_properties(NaxiStudioMix PROPERTIES
     ${BUNDLE_ID_OPTION}
     MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
     MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -74,7 +74,7 @@ set_target_properties(NaxiStudio PROPERTIES
 
 
 include(GNUInstallDirs)
-install(TARGETS NaxiStudio
+install(TARGETS NaxiStudioMix
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -82,5 +82,5 @@ install(TARGETS NaxiStudio
 
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(NaxiStudio)
+    qt_finalize_executable(NaxiStudioMix)
 endif()

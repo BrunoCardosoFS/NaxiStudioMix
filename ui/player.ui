@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>NaxiStudio Player</string>
+   <string>NaxiStudio Mix</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources/player.qrc">
@@ -632,8 +632,8 @@ QTabBar::tab:selected {
                   <rect>
                    <x>0</x>
                    <y>0</y>
-                   <width>337</width>
-                   <height>250</height>
+                   <width>216</width>
+                   <height>117</height>
                   </rect>
                  </property>
                  <layout class="QGridLayout" name="gridLayout_2">
